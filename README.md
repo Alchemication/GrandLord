@@ -39,7 +39,7 @@ URL mapping
 it's role is to map the URL into controller and function. This provides nice and clean URLs and 
 an easy to understand/standardised structure to our application. 
 * For example Url: login/index means that we will write the code in the LoginController and the 
-method inside it called indexAction(). indexAction() we can do whatever is required to do (connect to db, show HTML
+method inside it called indexAction(). Inside indexAction() then we can do whatever is required to do (connect to db, show HTML
 page, return XML/Json data structures or even display an error page).
 
 Team
