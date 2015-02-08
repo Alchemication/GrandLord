@@ -35,9 +35,9 @@ could be in the views/items/list.php, where list.php is whatever you want it to 
 
 URL mapping
 ======================
-The way URLs work is by using a front controller pattern. Front controller is the public/index.php file
-it's role is to map the URL into controller and function. This is actually really simple and provides clean URLs and 
-a nice structure in our application. For example Url: login/index means that we will write the code in the LoginController and the 
+The way URLs work is by using a front controller pattern. Front controller is the public/index.php file and
+it's role is to map the URL into controller and function. This will provided nice and clean URLs and 
+an easy and standardised structure to our application. For example Url: login/index means that we will write the code in the LoginController and the 
 method will become indexAction(). Inside indexAction() we can do whatever is required to do (connect to db, show static HTML
 page, return XML/Json data etc.)
 
