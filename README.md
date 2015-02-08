@@ -12,8 +12,10 @@ Setup
 
 Generic Terms (MVC)
 ======================
-1. Model handles all our database/business logic. Using the model we connect to our database and provide an abstraction layer.
-2. Single Controller represents one use case and controls relation between URLs and app logic
+1. Model handles all our database/business logic. Using the model we connect to our database and provide an abstraction layer. All models need to extend 
+AbstractModel.
+2. Single Controller represents one use case and controls relation between URLs and app logic. ALl controllers need to extend 
+the AbstractController.
 3. View represents our presentation i.e our HTML/XML/JSON code.
 
 Project Structure
