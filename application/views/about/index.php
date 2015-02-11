@@ -1,5 +1,6 @@
 <h2>About/Index page!!!</h2>
 <!--Comment-- Piotr Baran-->
+
 <table>
     <thead>
         <tr>
