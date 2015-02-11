@@ -4,7 +4,7 @@
  * Date: 11/02/15
  * Time: 18:03
  */
-//test comment by Gregory Jokiel
+
 
 class AboutController extends AbstractController
 {
