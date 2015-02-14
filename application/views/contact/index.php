@@ -6,3 +6,4 @@
  * Time: 21:39
  */
 echo ' Contact page';
+echo ' <p> will display something here</p>';
