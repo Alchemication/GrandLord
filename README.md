@@ -57,7 +57,7 @@ insert into contacts (id, lastName, firstName, birthday) values (null, 'Jokiel',
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Baran', 'Piotr', '1963-03-28 09:45:12');
 ```
 
-1. Retrieve row(s) from controller (using model)
+# Retrieve row(s) from controller using model's `find()` method
 
 * arguments -> find(array $bindParams = [], $where = '', $fields = '*')
 * returns -> dataset in the array format
@@ -81,7 +81,7 @@ try {
 }
 ```
 
-2. Insert row from controller (using model)
+# Insert row from controller using model's `insert()` method
 
 * arguments -> insert(array $bindParams)
 * returns -> dataset in the array format
@@ -102,7 +102,7 @@ try {
 }
 ```
 
-3. Update row(s) from controller (using model)
+# Update row(s) from controller using model's `update()` method
 
 * arguments -> update($fields, array $bindParams = [], $where = '')
 * returns -> number of updated rows
@@ -127,7 +127,7 @@ try {
 }
 ```
 
-4. Delete row(s) from controller (using model)
+# Delete row(s) from controller using model's `delete()` method
 
 * arguments -> delete(array $bindParams = [], $where = '')
 * returns -> number of deleted rows
