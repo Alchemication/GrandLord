@@ -12,6 +12,6 @@ class HomeController extends AbstractController
 {
     public function indexAction()
     {
-        echo '<h2>hello from index!!</h2>';
+        echo '<h2>hello from index (HomeController.php)!!</h2>';
     }
 }
