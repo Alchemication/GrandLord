@@ -125,4 +125,12 @@ abstract class AbstractModel extends PDO
 
         return $stmt->rowCount();
     }
+
+    /**
+     * @return PDO
+     */
+    public function getConnection()
+    {
+        return $this->connection;
+    }
 }
