@@ -4,11 +4,17 @@
 // Configure app
 // =======================
 
-define ('DEVELOPMENT_ENVIRONMENT', true);
-define ('DEFAULT_CONTROLLER', 'Home');
-define ('DEFAULT_ACTION', 'index');
+// change for displaying errors on/off
+define('DEVELOPMENT_ENVIRONMENT', true);
 
-define('DB_NAME', 'yourdatabasename');
-define('DB_USER', 'yourusername');
-define('DB_PASSWORD', 'yourpassword');
+// change if your default url is NOT localhost/grandlord
+define('BASE_URL', 'http://localhost/grandlord');
+
+// change if you would like to use separate 404 page
+define('NOT_FOUND_DEFAULT_ROUTE', 'home/index');
+
+// change db params
+define('DB_NAME', 'grandlord');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 define('DB_HOST', 'localhost');

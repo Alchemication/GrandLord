@@ -29,11 +29,124 @@ Project Structure
 
 Coding standards
 ======================
-1. mySQL tables will always be lowercase (with underscore as word separator) and plural e.g. items, fast_cars
+1. MySql tables will always be lowercase (with underscore as word separator) and plural e.g. items, fast_cars
 2. Models will always be singular and first letter capital and "Model" appended to them. e.g. ItemModel, BestCarModel
 3. Controllers will always have “Controller” appended to them. e.g. ItemsController, CarsController
 4. Views will sit in the views/{controller-name}/{view-name.php}. e.g. If controller is ItemsController - then example view
 could be in the views/items/list.php, where list.php is whatever you want it to be.
+
+Database CRUD examples
+======================
+
+This assumes that you have a database created 
+and one table called `contacts` created like this one:
+
+```sql
+CREATE TABLE contacts
+( 
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  lastName VARCHAR(30) NOT NULL,
+  firstName VARCHAR(25),
+  birthday DATE,
+  CONSTRAINT contacts_pk PRIMARY KEY (id)
+);
+
+--- sample contacts:
+insert into contacts (id, lastName, firstName, birthday) values (null, 'Napora', 'Adam', '1983-09-12 12:00:03');
+insert into contacts (id, lastName, firstName, birthday) values (null, 'Jokiel', 'Greg', '1973-01-11 10:00:10');
+insert into contacts (id, lastName, firstName, birthday) values (null, 'Baran', 'Piotr', '1963-03-28 09:45:12');
+```
+
+1. Retrieve row(s) from controller (using model)
+
+* arguments -> find(array $bindParams = [], $where = '', $fields = '*')
+* returns -> dataset in the array format
+
+```php
+try {
+    // instantiate model
+    $contactModel = new ContactModel();
+
+    // retrieve all contacts from db
+    $allContacts = $contactModel->find();
+
+    // load view and pass data into it
+    $this->loadView('contact/display', ['contacts' => $allContacts]);
+
+} catch (\Exception $e) {
+
+    // on any exception - apply global error handler,
+    // and display default error page
+    $this->handleError($e);
+}
+```
+
+2. Insert row from controller (using model)
+
+* arguments -> insert(array $bindParams)
+* returns -> dataset in the array format
+
+```php
+try {
+    // instantiate model
+    $contactModel = new ContactModel();
+
+    // insert a new contact (Tim)
+    $contactModel->insert([':firstName' => 'Tim', ':lastName' => 'Cook', ':birthday' => '1960-01-01 10:00:00']);
+
+} catch (\Exception $e) {
+
+    // on any exception - apply global error handler,
+    // and display default error page
+    $this->handleError($e);
+}
+```
+
+3. Update row(s) from controller (using model)
+
+* arguments -> update($fields, array $bindParams = [], $where = '')
+* returns -> number of updated rows
+
+```php
+try {
+    // instantiate model
+    $contactModel = new ContactModel();
+
+    // update all records with firstName = Adam to Chris
+    $contactModel->update(
+        ['firstName'  => ':firstName'],
+        [':firstName' => 'Chris'], 
+        "firstName = 'Adam'"
+    );
+
+} catch (\Exception $e) {
+
+    // on any exception - apply global error handler,
+    // and display default error page
+    $this->handleError($e);
+}
+```
+
+4. Delete row(s) from controller (using model)
+
+* arguments -> delete(array $bindParams = [], $where = '')
+* returns -> number of deleted rows
+
+```php
+try {
+    // instantiate model
+    $contactModel = new ContactModel();
+
+    // delete all rows with id not null and name starting with Ad
+    $noOfRowsDeleted = $myModel->delete([':name' => 'Ad%'], 'id NOT NULL AND firstName LIKE :name');
+
+} catch (\Exception $e) {
+
+    // on any exception - apply global error handler,
+    // and display default error page
+    $this->handleError($e);
+}
+```
 
 URL mapping
 ======================
@@ -49,4 +162,4 @@ Team
 1. Adam Napora <adam.napora@mycit.ie>
 2. Gregory Jokiel <grzegorz.jokiel@mycit.ie>
 3. Piotr Baran <piotr.baran@mycit.ie>
-4. Jennifer Flynn <jennifer.flynn@mycit.ie>
+

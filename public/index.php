@@ -14,13 +14,9 @@ require_once ROOT . DS . 'library' . DS . 'bootstrap.php';
 // get the URL
 $urlArray   = explode("/", isset($_GET['path']) ? $_GET['path'] : '');
 
-// figure out default controller and action
-$defaultController = stristr(DEFAULT_CONTROLLER, 'controller') ? DEFAULT_CONTROLLER : DEFAULT_CONTROLLER . 'Controller';
-$defaultAction     = stristr(DEFAULT_ACTION, 'action') ? DEFAULT_ACTION : DEFAULT_ACTION . 'Action';
-
 // figure out the controller to use
 if (!isset($urlArray[0]) || $urlArray[0] === '') {
-    sendResponse($defaultController, $defaultAction);
+    redirect(NOT_FOUND_DEFAULT_ROUTE);
 } else {
     // here we need to replace something like:
     // veggie-sandwich into VeggieSandwichController
@@ -33,19 +29,36 @@ if (!isset($urlArray[0]) || $urlArray[0] === '') {
 
 // now if class doesn't exist - use the defaults again
 if (!class_exists($controller)) {
-    sendResponse($defaultController, $defaultAction);
+    redirect(NOT_FOUND_DEFAULT_ROUTE);
 }
 
 // now figure out the action
-$action = isset($urlArray[1]) ? $urlArray[1] . 'Action' : DEFAULT_ACTION;
+$action  = isset($urlArray[1]) ? $urlArray[1] : 'index';
+$action .= 'Action';
 
 // if method doesn't exist - send to defaults again
 if (!method_exists($controller, $action)) {
-    sendResponse($defaultController, $defaultAction);
+    redirect(NOT_FOUND_DEFAULT_ROUTE);
 }
 
 // now we are all good to go
 sendResponse($controller, $action);
+
+/**
+ * @param string $location
+ */
+function redirect($location)
+{
+    $hs = headers_sent();
+
+    if (!$hs) {
+        header("301 Moved Permanently HTTP/1.1", true, 301);
+        header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        header("Location:" . BASE_URL . "/$location");
+    }
+
+    die();
+}
 
 /**
  * @param string $controller

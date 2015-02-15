@@ -8,8 +8,46 @@
 /**
  * Class AbstractController
  */
-class AbstractController
+abstract class AbstractController
 {
+    /**
+     * Redirect to path
+     *
+     * @param string $location
+     */
+    protected function redirect($location)
+    {
+        redirect($location);
+    }
+
+    /**
+     * Default error handling
+     *
+     * @param Exception $e
+     */
+    protected function handleError(\Exception $e)
+    {
+        $errorInfo     = [];
+        $exceptionType = get_class($e);
+
+        switch ($exceptionType) {
+
+            case 'PDOException':
+                $errorInfo['code'] = $e->getCode();
+                $errorInfo['msg']  = 'Database Error';
+
+                break;
+
+            default:
+
+                $errorInfo['code'] = $e->getCode();
+                $errorInfo['msg']  = $e->getMessage();
+
+        }
+
+        $this->loadView('default/error', ['error' => $errorInfo]);
+    }
+
     /**
      * Load the view.
      * Use from the controller, example:
