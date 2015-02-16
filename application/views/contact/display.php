@@ -12,6 +12,9 @@
         <link rel="stylesheet" href="<?php echo BASE_URL ?>/public/css/bootstrap.css">
     </head>
 
+
+
+
     <body>
 
         <div id="main" class="row-fluid">
