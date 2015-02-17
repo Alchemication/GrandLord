@@ -10,8 +10,11 @@
  */
 class HomeController extends AbstractController
 {
+    /**
+     * Load home view
+     */
     public function indexAction()
     {
-        echo '<h2>hello from index (HomeController.php)!!</h2>';
+        $this->loadView('home/index');
     }
 }
