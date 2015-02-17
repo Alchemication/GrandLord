@@ -1,7 +1,7 @@
 <?php
 
 // =======================
-// Configure app
+// Configure app.
 // =======================
 
 // change for displaying errors on/off
