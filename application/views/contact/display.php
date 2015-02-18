@@ -36,4 +36,3 @@
 
 <?php endif ?>
 
-<script src="js/scripts.js"></script>
