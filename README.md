@@ -9,12 +9,64 @@ Application must have functionality
 2. Login
 3. Search tenancy
 4. Tenancy 
-4.1 Add (with rate)
-4.2 Edit
-4.3 Delete
+    -  Add (with rate)
+    -  Edit
+    -  Delete
 5. About page
 6. Contact us page
 7. Update profile
+
+DB Schema
+======================
+- user
+    - id (auto increment, INT 11, primary key)
+    - roleId: (INT 11)
+    - username (VARCHAR 255)
+    - email (VARCHAR 255)
+    - password (VARCHAR 512)
+    - firstName (VARCHAR 255)
+    - secondName (VARCHAR 255)
+    - createdAt (DATETIME)
+    - updatedAt (DATETIME)
+    - active ('y' / 'n') (ENUM)
+
+- user_roles
+    - id (auto increment, INT 11, primary key)
+    - name ('tenant' / 'landlord' / 'admin') (ENUM)
+
+- property
+    - id (auto increment, INT 11, primary key)
+    - buildingNumber (INT 11)
+    - street (VARCHAR 255)
+    - county (dropdown) (VARCHAR 125)
+    - city (dropdown) (VARCHAR 125)
+    - addedBy (INT 11)
+    - addedAt (DATETIME)
+    - active ('y' / 'n')
+    
+- tenancy
+    - id (auto increment, INT 11, primary key)
+    - propertyId (INT 11)
+    - dateFrom (DATE)
+    - dateTo (DATE)
+    - rateContactWithLandlord (1 to 5) ENUM
+    - rateFlatQuality (1 to 5) ENUM
+    - rateCleanliness (1 to 5) ENUM
+    - ratePropertyState (1 to 5) ENUM
+    - rateOverallSatisfaction (1 to 5) ENUM
+    - rateAvg (1 to 5) DECIMAL
+    - comment (TEXT)
+    - addedBy (INT 11)
+    - addedAt (DATETIME)
+    - updatedAt (DATETIME)
+    - active ENUM ('y', 'n')
+
+- activity
+    - id (auto increment, INT 11, primary key)
+    - activityDesc (VARCHAR 255)
+    - addedAt (DATETIME)
+    - addedBy (INT 11)
+    
 
 Setup
 ======================
