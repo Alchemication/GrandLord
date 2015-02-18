@@ -1,60 +1,39 @@
-<!doctype html>
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
+<div class="well">
+    <h4>Display Contacts</h4>
+</div>
 
-        <title>Grandlord</title>
-        <meta name="description" content="Rate Your Landlord">
-        <meta name="author" content="CIT">
+<?php if (!count($contacts)): ?>
 
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>/public/css/styles.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>/public/css/bootstrap.css">
-    </head>
+    <div class="alert alert-warning">
+        <h2>No contacts found.</h2>
+    </div>
 
-    <body>
+<?php else: ?>
 
-        <div id="main" class="row-fluid">
+    <table class="table table-bordered table-responsive table-striped">
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date Of Birth</th>
+        </tr>
+        </thead>
+        <tbody>
 
-            <div class="well">
-                <h4>Display Contacts</h4>
-            </div>
+        <?php foreach ($contacts as $contact): ?>
 
-            <?php if (!count($contacts)): ?>
+            <tr>
+                <td><?php echo $contact['firstName'] ?></td>
+                <td><?php echo $contact['lastName'] ?></td>
+                <td><?php echo $contact['birthday'] ?></td>
+            </tr>
 
-                <div class="alert alert-warning">
-                    <h2>No contacts found.</h2>
-                </div>
+        <?php endforeach ?>
 
-            <?php else: ?>
+        </tbody>
+    </table>
 
-                <table class="table table-bordered table-responsive table-striped">
-                    <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Date Of Birth</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+<?php endif ?>
 
-                    <?php foreach ($contacts as $contact): ?>
-
-                        <tr>
-                            <td><?php echo $contact['firstName'] ?></td>
-                            <td><?php echo $contact['lastName'] ?></td>
-                            <td><?php echo $contact['birthday'] ?></td>
-                        </tr>
-
-                    <?php endforeach ?>
-
-                    </tbody>
-                </table>
-
-            <?php endif ?>
-        </div>
-
-
-        <script src="js/scripts.js"></script>
-    </body>
-</html>
+<script src="js/scripts.js"></script>

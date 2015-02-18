@@ -12,7 +12,8 @@ require_once ROOT . DS . 'application' . DS . 'config' . DS . 'config.php';
 require_once ROOT . DS . 'library' . DS . 'bootstrap.php';
 
 // get the URL
-$urlArray   = explode("/", isset($_GET['path']) ? $_GET['path'] : '');
+$urlArray = explode("/", isset($_GET['path']) ? $_GET['path'] : '');
+unset($_GET['path']);
 
 // figure out the controller to use
 if (!isset($urlArray[0]) || $urlArray[0] === '') {
