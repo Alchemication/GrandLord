@@ -3,6 +3,19 @@ CIT Software Project
 
 #### Web App for rating Landlord's performance
 
+Application must have functionality
+======================
+1. Register User
+2. Login
+3. Search tenancy
+4. Tenancy 
+4.1 Add (with rate)
+4.2 Edit
+4.3 Delete
+5. About page
+6. Contact us page
+7. Update profile
+
 Setup
 ======================
 1. Install your LAMP/MAMP environment (make sure Apache/PHP/MySQL is working on your machine)
