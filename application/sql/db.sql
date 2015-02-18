@@ -11,3 +11,12 @@ CREATE TABLE contacts
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Napora', 'Adam', '1983-09-12 12:00:03');
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Jokiel', 'Greg', '1973-01-11 10:00:10');
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Baran', 'Piotr', '1963-03-28 09:45:12');
+
+CREATE TABLE users
+( id INT(11) NOT NULL AUTO_INCREMENT,
+  username VARCHAR(255),
+  password VARCHAR(512),
+  CONSTRAINT users_pk PRIMARY KEY (id)
+);
+
+insert into users values (null, 'greg', 'greg123');
