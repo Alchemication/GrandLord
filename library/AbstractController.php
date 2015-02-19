@@ -54,14 +54,24 @@ abstract class AbstractController
      * $this->loadView('about/index') // will load view views/about/index.php
      *
      * @param string $viewName
+     * @param bool $loadHeader
+     * @param bool $loadFooter
      * @param mixed $data
      */
-    protected function loadView($viewName, $data = null)
+    protected function loadView($viewName, $data = null, $loadHeader = true, $loadFooter = true)
     {
         if ($data !== null) {
             extract($data);
         }
 
+        if ($loadHeader) {
+            include_once(ROOT . DS . 'application' . DS . 'views' . DS . 'default/header.php');
+        }
+
         include_once(ROOT . DS . 'application' . DS . 'views' . DS . $viewName . '.php');
+
+        if ($loadFooter) {
+            include_once(ROOT . DS . 'application' . DS . 'views' . DS . 'default/footer.php');
+        }
     }
 }
