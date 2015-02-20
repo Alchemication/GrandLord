@@ -25,7 +25,7 @@ CREATE TABLE user
 ( id INT(11) NOT NULL AUTO_INCREMENT,
   CONSTRAINT user_pk PRIMARY KEY (id),
   roleId INT (11),
-  FOREIGN KEY (roleId) REFERENCES user_roles(id),
+  CONSTRAINT roleId_fk FOREIGN KEY (roleId) REFERENCES user_roles(id),
   username VARCHAR(255),
   password VARCHAR(512),
   email   VARCHAR(255),
@@ -40,6 +40,46 @@ insert into user (id, roleId, username, password, email, firstName, secondName, 
 insert into user (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '1', 'anapora', 'anapora123', 'anap@mycit.ie','Adam', 'Napora', '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
 insert into user (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '1', 'pbaran', 'pbaranl123', 'pbar@mycit.ie','Piotr', 'Baran', '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
 insert into user (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '3', 'admin', 'adminl123', 'admin@mycit.ie','Admin', null, '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
+
+CREATE TABLE property
+( id INT(11) NOT NULL AUTO_INCREMENT,
+  CONSTRAINT property_pk PRIMARY KEY (id),
+  buildingNumber INT (11),
+  street VARCHAR (255),
+  county VARCHAR (125),
+  city VARCHAR (125),
+  addedBy INT (11),
+  addedAt DATETIME,
+  active ENUM('y', 'n')
+);
+
+CREATE TABLE tenancy
+( id INT(11) NOT NULL AUTO_INCREMENT,
+  CONSTRAINT tenancy_pk PRIMARY KEY (id),
+  propertyId INT (11),
+  CONSTRAINT propertyId_fk FOREIGN KEY (propertyId) REFERENCES property(id),
+  dateFrom DATE,
+  dateTo DATE,
+  rateContactWithLandlord ENUM('1', '2', '3', '4', '5'),
+  rateFlatQuality ENUM('1', '2', '3', '4', '5'),
+  rateCleanliness ENUM('1', '2', '3', '4', '5'),
+  ratePropertyState  ENUM('1', '2', '3', '4', '5'),
+  rateOverallSatisfaction ENUM('1', '2', '3', '4', '5'),
+  rateAvg DECIMAL,
+  comment TEXT,
+  addedBy INT (11),
+  addedAt DATETIME,
+  updatedAt DATETIME,
+  active ENUM('y', 'n')
+);
+
+CREATE TABLE activity
+( id INT(11) NOT NULL AUTO_INCREMENT,
+  CONSTRAINT activity_pk PRIMARY KEY (id),
+  activityDesc VARCHAR (255),
+  addedAt DATETIME,
+  addedBy INT(11)
+ );
 
 
 CREATE TABLE contacts
