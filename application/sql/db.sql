@@ -3,7 +3,7 @@
  * Date: 19/02/15
  * Time: 22:20
  */
-create database grandlord;
+CREATE  database grandlord;
 /**
 
  FOREIGN KEY (roleId) REFERENCES user_roles(id), - in user table
@@ -21,7 +21,7 @@ insert into user_roles (id, roleId, name) values (null, '2', 'landlord');
 insert into user_roles (id, roleId, name) values (null, '3', 'admin');
 
 
-CREATE TABLE user
+CREATE TABLE users
 ( id INT(11) NOT NULL AUTO_INCREMENT,
   CONSTRAINT user_pk PRIMARY KEY (id),
   roleId INT (11),
@@ -36,12 +36,12 @@ CREATE TABLE user
   active ENUM('y', 'n')
 );
 
-insert into user (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '1', 'gjokiel', 'gjokiel123', 'gjok@mycit.ie','Greg', 'Jokiel', '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
-insert into user (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '1', 'anapora', 'anapora123', 'anap@mycit.ie','Adam', 'Napora', '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
-insert into user (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '1', 'pbaran', 'pbaranl123', 'pbar@mycit.ie','Piotr', 'Baran', '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
-insert into user (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '3', 'admin', 'adminl123', 'admin@mycit.ie','Admin', null, '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
+insert into users (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '1', 'gjokiel', 'gjokiel123', 'gjok@mycit.ie','Greg', 'Jokiel', '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
+insert into users (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '1', 'anapora', 'anapora123', 'anap@mycit.ie','Adam', 'Napora', '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
+insert into users (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '1', 'pbaran', 'pbaranl123', 'pbar@mycit.ie','Piotr', 'Baran', '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
+insert into users (id, roleId, username, password, email, firstName, secondName, createdAt, updatedAt, active ) values (null, '3', 'admin', 'adminl123', 'admin@mycit.ie','Admin', null, '2015-02-19 23:59:59', '2015-02-19 23:59:59', 'y');
 
-CREATE TABLE property
+CREATE TABLE properties
 ( id INT(11) NOT NULL AUTO_INCREMENT,
   CONSTRAINT property_pk PRIMARY KEY (id),
   buildingNumber INT (11),
@@ -53,11 +53,11 @@ CREATE TABLE property
   active ENUM('y', 'n')
 );
 
-CREATE TABLE tenancy
+CREATE TABLE tenancies
 ( id INT(11) NOT NULL AUTO_INCREMENT,
   CONSTRAINT tenancy_pk PRIMARY KEY (id),
   propertyId INT (11),
-  CONSTRAINT propertyId_fk FOREIGN KEY (propertyId) REFERENCES property(id),
+  CONSTRAINT propertyId_fk FOREIGN KEY (propertyId) REFERENCES properties(id),
   dateFrom DATE,
   dateTo DATE,
   rateContactWithLandlord ENUM('1', '2', '3', '4', '5'),
@@ -73,7 +73,7 @@ CREATE TABLE tenancy
   active ENUM('y', 'n')
 );
 
-CREATE TABLE activity
+CREATE TABLE activities
 ( id INT(11) NOT NULL AUTO_INCREMENT,
   CONSTRAINT activity_pk PRIMARY KEY (id),
   activityDesc VARCHAR (255),
