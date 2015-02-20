@@ -13,7 +13,7 @@ class UserModel extends AbstractModel
     /**
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'user';
 
     /**
      * @var string
