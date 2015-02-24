@@ -22,7 +22,7 @@
         <div class="masthead">
 
             <div class="topNav">
-                <text class="text-muted">Grandlord</text>
+                <text class="text-muted"><a href="<?php echo BASE_URL ?>/home/index"> <img alt="Grandlord" src="<?php echo BASE_URL ?>/img/logoGray.png"></a></text>
                 <button type="submit" class="btn btn-success  pull-right btn-margin-left"onclick="location.href='<?php echo BASE_URL ?>/login/index'">Sign in</button>
                 <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/login/index'">Register</button>
 
