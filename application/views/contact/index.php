@@ -1,4 +1,5 @@
 
+<div class="jumbotron">
 <div class="well">
     <h4>Display Contacts</h4>
 </div>
@@ -35,3 +36,4 @@
     </table>
 
 <?php endif ?>
+ </div>

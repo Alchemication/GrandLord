@@ -13,7 +13,7 @@ class ContactController extends AbstractController
     /**
      * Display all contacts
      */
-    public function displayAction()
+    public function indexAction()
     {
         try {
             // instantiate model, this will connect to db
@@ -23,7 +23,7 @@ class ContactController extends AbstractController
             $allContacts = $contactModel->find();
 
             // load view and pass data into it
-            $this->loadView('contact/display', ['contacts' => $allContacts]);
+            $this->loadView('contact/index', ['contacts' => $allContacts]);
 
         } catch (\Exception $e) {
 
