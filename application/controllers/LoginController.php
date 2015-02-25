@@ -51,6 +51,7 @@ class LoginController extends AbstractController
 
             // on any exception - apply global error handler,
             // and display default error page
+
             $this->handleError($e);
         }
 

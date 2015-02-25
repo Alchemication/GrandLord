@@ -20,7 +20,7 @@ DB Schema
 ======================
 - user
     - id (auto increment, INT 11, primary key)
-    - roleId: (INT 11)
+    - roleId: (INT 11) FOREIGN KEY (roleId) REFERENCES user_roles(id),
     - username (VARCHAR 255)
     - email (VARCHAR 255)
     - password (VARCHAR 512)
