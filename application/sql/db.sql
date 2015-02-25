@@ -12,13 +12,12 @@ CREATE  database grandlord;
 CREATE TABLE user_roles
 ( id INT(11) NOT NULL AUTO_INCREMENT,
   CONSTRAINT user_roles_pk PRIMARY KEY (id),
-  roleId INT (11),
   name ENUM('tenant', 'landlord', 'admin')
 );
 
-insert into user_roles (id, roleId, name) values (null, '1', 'tenant');
-insert into user_roles (id, roleId, name) values (null, '2', 'landlord');
-insert into user_roles (id, roleId, name) values (null, '3', 'admin');
+insert into user_roles (id, name) values (null, 'tenant');
+insert into user_roles (id, name) values (null, 'landlord');
+insert into user_roles (id, name) values (null, 'admin');
 
 
 CREATE TABLE users
