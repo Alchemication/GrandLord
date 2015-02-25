@@ -60,6 +60,10 @@ class RegisterController extends AbstractController
                 echo 'user not found, good to add new user </br>';
                 // @todo
 
+                $numberOfRowsAdded = $userModel->save();
+
+                echo 'Added ' . $numberOfRowsAdded . ' row(s)';
+
             } else {
                 echo 'user name already in use </br>';
                 // @todo

@@ -101,4 +101,18 @@ class UserModel extends AbstractModel
     }
 
 
+    /**
+     * Save new user
+     *
+     * @return int
+     */
+    public function save()
+    {
+        return $this->insert([
+            ':username' => $this->getUsername(),
+            ':password' => hash('sha512', $this->getPassword())
+        ]);
+    }
+
+
 }
