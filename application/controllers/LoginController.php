@@ -39,16 +39,19 @@ class LoginController extends AbstractController
         try {
             // check with db
             $userModel = new UserModel($username, $password);
+            $numberOfRowsAdded = $userModel->save();
 
-            $foundUser = $userModel->findUser($userModel);
+            echo 'Added ' . $numberOfRowsAdded . 'row(s)';
 
-            echo 'result:';
-            print_r($foundUser);
+            //$foundUser = $userModel->findUser($userModel);
+
+
 
         } catch (\Exception $e) {
 
             // on any exception - apply global error handler,
             // and display default error page
+
             $this->handleError($e);
         }
 
