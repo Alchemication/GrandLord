@@ -246,7 +246,8 @@ class UserModel extends AbstractModel
     {
         return $this->find('*','username = :username AND password = :password',[
             ':username' => $user->getUsername(), // bind username
-            ':password' => $user->getPassword()  // bind password
+            ':password' => hash('sha512', $user->getPassword())  // bind password
+            //':password' => $user->getPassword()  // bind password
         ]);
     }
 
