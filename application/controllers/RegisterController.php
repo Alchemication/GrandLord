@@ -16,61 +16,80 @@ class RegisterController extends AbstractController
      */
     public function indexAction()
     {
-        $this->loadView('register/index');
+        $this->loadView('register/index',['user' => null,'message' => ""]);
     }
 
     /**
-     * Validate username and password and redirect to home on success
+     * Show thank you page
+     */
+    public function thankYouAction()
+    {
+        $this->loadView('register/thankYou');
+    }
+
+
+    /**
+     * Validate username and all details and redirect to home on success
      */
     public function validateAction()
     {
         // retrieve username
         $username = $_POST['username'];
-
         // validate username
         // @todo
 
         // retrieve password
         $password = $_POST['password'];
-
         // validate password
         // @todo
 
-        // retrieve firstName
-        $password = $_POST['firstName'];
+        // retrieve email
+        $email = $_POST['email'];
+        // validate email
+        // @todo
 
+        // retrieve firstName
+        $firstName = $_POST['firstName'];
         // validate firstName
         // @todo
 
         // retrieve lastName
-        $password = $_POST['lastName'];
-
+        $secondName = $_POST['secondName'];
         // validate lastName
         // @todo
 
+        // retrieve accountType
+        $roleId = $_POST['roleId'];
+        // validate accountType
+        // @todo
+
+
 
         try {
-            // check with db if userName is already in use
-            $userModel = new UserModel($username, $password);
+            // check with db if username is already in use
+            $date = date('Y-m-d H:i:s');
+            $active = "y";
+            $userModel = new UserModel($username, $password, $roleId, $email, $firstName, $secondName, $date, $date, $active);
 
+            //print_r($userModel);
             $foundUser = $userModel->checkUserName($userModel);
 
-
             if ($foundUser == null) {
-                echo 'user not found, good to add new user </br>';
                 // @todo
 
                 $numberOfRowsAdded = $userModel->save();
 
-                echo 'Added ' . $numberOfRowsAdded . ' row(s)';
+                if ($numberOfRowsAdded >= 1) {
+                    $this->thankYouAction();
+                }
 
             } else {
-                echo 'user name already in use </br>';
                 // @todo
-
+                $message = "Username \"" . $userModel->getUserName() . "\" is already taken. Please try again.";
+                $this->loadView('register/index', ['user' => $userModel, 'message' => $message]);
             }
 
-            print_r($foundUser);
+            //print_r($foundUser);
 
         } catch (\Exception $e) {
 

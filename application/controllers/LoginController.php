@@ -1,8 +1,9 @@
 <?php
 /**
- * Created by: Adam Napora <anapora@apple.com>
- * Date: 18/02/15
- * Time: 19:20
+ * Created by PhpStorm.
+ * User: piotrbaran
+ * Date: 24/02/2015
+ * Time: 10:10
  */
 
 /**
@@ -15,7 +16,15 @@ class LoginController extends AbstractController
      */
     public function indexAction()
     {
-        $this->loadView('login/index');
+        $this->loadView('login/index',['message' => ""]);
+    }
+
+    /**
+     * Show thank you page
+     */
+    public function thankYouAction()
+    {
+        $this->loadView('login/thankYou');
     }
 
     /**
@@ -25,13 +34,11 @@ class LoginController extends AbstractController
     {
         // retrieve username
         $username = $_POST['username'];
-
         // validate username
         // @todo
 
         // retrieve password
         $password = $_POST['password'];
-
         // validate password
         // @todo
 
@@ -39,12 +46,22 @@ class LoginController extends AbstractController
         try {
             // check with db
             $userModel = new UserModel($username, $password);
-            $numberOfRowsAdded = $userModel->save();
 
-            echo 'Added ' . $numberOfRowsAdded . 'row(s)';
+            //print_r($userModel);
+            $foundUser = $userModel->findUser($userModel);
 
-            //$foundUser = $userModel->findUser($userModel);
+            if ($foundUser != null) {
+                // @todo
 
+                $this->thankYouAction();
+
+            } else {
+                // @todo
+                $message = "Incorrect details. Please try again.";
+                $this->loadView('login/index', ['user' => $userModel, 'message' => $message]);
+            }
+
+            //print_r($foundUser);
 
 
         } catch (\Exception $e) {
