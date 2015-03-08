@@ -36,7 +36,7 @@ class PropertyModel extends AbstractModel
         $data = [];
 
         $query  = "SELECT * FROM $this->table WHERE MATCH(street,county,city) AGAINST (:term IN BOOLEAN MODE)";
-        $term   = $this->figureOutTerm($term);
+        $term   = $this->prepareTerm($term);
         $params = [':term' => $term];
 
         // get the results
@@ -44,7 +44,10 @@ class PropertyModel extends AbstractModel
 
         // create results in the required format
         foreach ($results as $result) {
-            $data[] = ['value' => $this->stringifyAddress($result), 'raw' => $result];
+            $data[] = [
+                'value' => $this->stringifyAddress($result),
+                'raw'   => $result
+            ];
         }
 
         return $data;
@@ -71,7 +74,7 @@ class PropertyModel extends AbstractModel
      * @param string $term
      * @return string
      */
-    private function figureOutTerm($term)
+    private function prepareTerm($term)
     {
         $terms = explode(' ', $term);
 
