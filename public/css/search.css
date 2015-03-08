@@ -1,0 +1,32 @@
+#search-bar {
+    font-size: 75px;
+    border: none;
+    box-shadow: #EEE 0 0 6px;
+    border-radius: 60px;
+    text-align:center;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+#search-bar,
+#search-bar:focus,
+#search-bar:hover,
+#search-bar:active {
+    outline:0 !important;
+    -webkit-appearance:none;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #DDD;
+    font-size: 30px;
+    line-height: 105px;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #DDD;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #DDD;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #909;
+}
