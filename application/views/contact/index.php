@@ -23,6 +23,7 @@
         <div class="form-group">
             <label for="inputPhone3" class="col-sm-2 control-label">Your Phone Number</label>
             <div class="col-sm-10">
+
                 <input type="text" class="form-control" id="inputPhone3" placeholder="Phone Number">
             </div>
         </div>
