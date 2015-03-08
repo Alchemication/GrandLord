@@ -22,7 +22,7 @@
         <div class="masthead">
 
             <div class="topNav">
-                <text class="text-muted"><a href="<?php echo BASE_URL ?>/home/index"> <img alt="Grandlord" src="<?php echo BASE_URL ?>/img/logoGray.png"></a></text>
+                <text class="text-muted"><a href="<?php echo BASE_URL ?>/home/index"> <img alt="Grandlord" src="<?php echo BASE_URL ?>/img/logoGr.png"></a></text>
                 <button type="submit" class="btn btn-success  pull-right btn-margin-left"onclick="location.href='<?php echo BASE_URL ?>/login/index'">Sign in</button>
                 <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/login/index'">Register</button>
 
@@ -33,11 +33,12 @@
         <nav>
             <ul class="nav nav-justified">
                 <!-- class="active" to be defined -->
-                <li><a href="<?php echo BASE_URL ?>/home/index">Home</a></li>
-                <li><a href="<?php echo BASE_URL ?>/search/index">Search</a></li>
-                <li><a href="<?php echo BASE_URL ?>/myTenancies/index">My Tenancies</a></li>
-                <li><a href="<?php echo BASE_URL ?>/about/index">About</a></li>
-                <li><a href="<?php echo BASE_URL ?>/contact/index">Contact</a></li>
+                
+                <li class="<?php if ($currentView === 'home/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/home/index">Home</a></li>
+                <li class="<?php if ($currentView === 'search/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/search/index">Search</a></li>
+                <li class="<?php if ($currentView === 'myTenancies/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/myTenancies/index">My Tenancies</a></li>
+                <li class="<?php if ($currentView === 'about/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/about/index">About</a></li>
+                <li class="<?php if ($currentView === 'contact/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/contact/index">Contact</a></li>
             </ul>
         </nav>
     </div>

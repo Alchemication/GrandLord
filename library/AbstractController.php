@@ -60,6 +60,12 @@ abstract class AbstractController
      */
     protected function loadView($viewName, $data = null, $loadHeader = true, $loadFooter = true)
     {
+        /**
+         * Keep track of viewName to activate active page in navbar
+         */
+        $currentView = $viewName;
+
+
         if ($data !== null) {
             extract($data);
         }
