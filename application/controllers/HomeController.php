@@ -17,4 +17,21 @@ class HomeController extends AbstractController
     {
         $this->loadView('home/index');
     }
+
+    /**
+     * Search for properties in the database
+     * based on the user's search term
+     */
+    public function searchAction()
+    {
+        // get search term from URL
+        $term = isset($_GET['term']) && $_GET['term'] ? $_GET['term'] : '';
+
+        // find properties
+        $propertyModel = new PropertyModel();
+        $properties    = $propertyModel->findByPartialAddress($term);
+
+        // send back response
+        $this->sendJson($properties);
+    }
 }

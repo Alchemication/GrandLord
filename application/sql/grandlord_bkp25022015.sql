@@ -86,6 +86,12 @@ CREATE TABLE `properties` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+ALTER TABLE properties ADD FULLTEXT KEY `fullAddress` (`street`,`county`,`city`);
+
+insert into properties values (null, 115, 'Grange', 'cork', 'Douglas', 2, now(), 'y');
+insert into properties values (null, 11, 'Elk Grove', 'dublin', 'Dublin', 2, now(), 'y');
+insert into properties values (null, 41, 'douglas house, maryborough hill', 'cork', 'cork', 1, now(), 'y');
+
 --
 -- Dumping data for table `properties`
 --

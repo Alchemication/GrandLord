@@ -49,6 +49,19 @@ abstract class AbstractController
     }
 
     /**
+     * Return data as Json
+     *
+     * @param mixed $data
+     */
+    protected function sendJson($data)
+    {
+        header("HTTP/1.1 200 OK");
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit();
+    }
+
+    /**
      * Load the view.
      * Use from the controller, example:
      * $this->loadView('about/index') // will load view views/about/index.php

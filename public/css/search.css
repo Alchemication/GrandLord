@@ -1,25 +1,30 @@
-#search-bar {
-    font-size: 75px;
+.not-displayed {
+    display: none;
+}
+
+#search-text-box {
+    font-size: 45px;
     border: none;
     box-shadow: #EEE 0 0 6px;
     border-radius: 60px;
     text-align:center;
     color: #777;
     margin-bottom: 20px;
+    min-width: 100%;
 }
 
-#search-bar,
-#search-bar:focus,
-#search-bar:hover,
-#search-bar:active {
+#search-text-box,
+#search-text-box:focus,
+#search-text-box:hover,
+#search-text-box:active {
     outline:0 !important;
     -webkit-appearance:none;
 }
 
 ::-webkit-input-placeholder { /* WebKit browsers */
     color:    #DDD;
-    font-size: 30px;
-    line-height: 105px;
+    font-size: 20px;
+    line-height: 65px;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
     color:    #DDD;
@@ -29,4 +34,64 @@
 }
 :-ms-input-placeholder { /* Internet Explorer 10+ */
     color:    #909;
+}
+
+span.twitter-typeahead .tt-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+    width: 100%;
+}
+span.twitter-typeahead .tt-suggestion > p {
+    display: block;
+    padding: 3px 20px;
+    margin-bottom: 0px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333333;
+    white-space: nowrap;
+}
+span.twitter-typeahead .tt-suggestion > p:hover,
+span.twitter-typeahead .tt-suggestion > p:focus {
+    color: #666;
+    text-decoration: none;
+    outline: 0;
+    background-color: #CCC;
+    cursor: pointer;
+}
+span.twitter-typeahead .tt-suggestion.tt-cursor {
+    color: #666;
+    background-color: #CCC;
+}
+span.twitter-typeahead {
+    width: 100%;
+}
+.input-group span.twitter-typeahead {
+    display: block !important;
+}
+.input-group span.twitter-typeahead .tt-dropdown-menu {
+    top: 32px !important;
+}
+.input-group.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
+    top: 44px !important;
+}
+.input-group.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
+    top: 28px !important;
 }
