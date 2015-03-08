@@ -42,7 +42,7 @@ class PropertyModel extends AbstractModel
         // get the results
         $results =  $this->select($query, $params);
 
-        // contact results
+        // create results in the required format
         foreach ($results as $result) {
             $data[] = ['value' => $this->stringifyAddress($result), 'raw' => $result];
         }
@@ -81,8 +81,6 @@ class PropertyModel extends AbstractModel
             }
         }, $terms);
 
-        $term = implode(' ', $terms);
-
-        return $term;
+        return implode(' ', $terms);
     }
 }
