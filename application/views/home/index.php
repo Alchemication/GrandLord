@@ -7,6 +7,10 @@
         <input id="search-text-box" class="typeahead" type="text" placeholder="Enter address ...">
     </div>
 
+    <h4 id="no-results-found" class="not-displayed">
+        No results found.
+    </h4>
+
     <div class="not-found alert alert-warning not-displayed">
         Sorry, no tenancies found for this property.
     </div>

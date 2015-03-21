@@ -9,6 +9,13 @@ $(function () {
                 dataType: 'JSON',
                 async: true,
                 success: function (response) {
+
+                    if (!response.length) {
+                        $('#no-results-found').show();
+                    } else {
+                        $('#no-results-found').hide();
+                    }
+
                     process(response);
                 }
             });
