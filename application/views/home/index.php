@@ -4,7 +4,7 @@
 <div class="jumbotron" xmlns="http://www.w3.org/1999/html">
 
     <div id="search-wrap" class="row">
-        <input id="search-text-box" class="typeahead" type="text" placeholder="Enter address ...">
+        <input id="search-text-box" class="typeahead" type="text" placeholder="Enter property address ...">
     </div>
 
     <h4 id="no-results-found" class="not-displayed">

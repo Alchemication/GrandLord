@@ -35,14 +35,13 @@
             </div>
         </div>
 
-
         <nav>
             <ul class="nav nav-justified">
                 <!-- class="active" to be defined -->
 
                 <li class="<?php if ($currentView === 'home/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/home/index">Home</a></li>
                 <li class="<?php if ($currentView === 'search/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/search/index">Search</a></li>
-                <li class="<?php if ($currentView === 'myTenancies/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/myTenancies/index">My Tenancies</a></li>
+                <li class="<?php if ($currentView === 'tenancy/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/tenancy/index">My Tenancies</a></li>
                 <li class="<?php if ($currentView === 'about/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/about/index">About</a></li>
                 <li class="<?php if ($currentView === 'contact/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/contact/index">Contact</a></li>
             </ul>
