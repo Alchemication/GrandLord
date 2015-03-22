@@ -269,7 +269,7 @@ class PropertyModel extends AbstractModel
 
         $terms = array_map(function ($term) {
             if (!is_numeric($term)) { // make sure numbers are excluded, otherwise search won't work
-                return $term;
+                return '+' . $term . '*';
             }
         }, $terms);
 

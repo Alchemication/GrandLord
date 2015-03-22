@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/search.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/add-tenancy.css"/>
 
 <div class="jumbotron">
 
@@ -6,6 +8,11 @@
     </div>
 
     <form class="form-horizontal">
+
+        <h4>Rating 1: <span class="count-stars" id="count-stars-accessibility">0</span></h4>
+        <h4>Rating 2: <span class="count-stars" id="count-stars-quality">0</span></h4>
+        <h4>Rating 3: <span class="count-stars" id="count-stars-clean">0</span></h4>
+        <h4>Avg: <span id="count-stars-avg">0</span></h4>
 
         <div class="form-group">
             <label for="property" class="col-sm-2 control-label">Property</label>
@@ -28,21 +35,21 @@
         <div class="form-group">
             <label for="accessibility" class="col-sm-2 control-label">Landlord's Accessibility</label>
             <div class="col-sm-10">
-                <input type="range" min="1" max="5" step="1" class="" id="accessibility">
+                <div id="stars-accessibility" class="starrr"></div>
             </div>
         </div>
 
         <div class="form-group">
             <label for="quality" class="col-sm-2 control-label">Flat Quality</label>
             <div class="col-sm-10">
-                <input type="range" min="1" max="5" step="1" class="" id="quality">
+                <div id="stars-quality" class="starrr"></div>
             </div>
         </div>
 
         <div class="form-group">
             <label for="clean" class="col-sm-2 control-label">How Clean Place Was</label>
             <div class="col-sm-10">
-                <input type="range" min="1" max="5" step="1" class="" id="clean">
+                <div id="stars-clean" class="starrr"></div>
             </div>
         </div>
 
@@ -66,3 +73,6 @@
         </div>
     </form>
 </div>
+
+<script src="<?php echo BASE_URL; ?>/public/js/search.js"></script>
+<script src="<?php echo BASE_URL; ?>/public/js/add-tenancy.js"></script>
