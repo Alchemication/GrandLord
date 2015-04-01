@@ -37,22 +37,54 @@ abstract class AbstractModel extends PDO
      * Get data from db.
      * Example:
      *     $data = $myModel->find(); // get all data from table
-     *     $data = $myModel->find([':lastName' => 'Napora'],
-     *         'name IS NULL OR lastName = :lastName); // get data where name: is null or last_name: Napora
      *
-     *
-     * @param array $bindParams
-     * @param string $where
      * @param string $fields
+     * @param string $where
+     * @param array $bindParams
      * @return array
      */
-    public function find(array $bindParams = [], $where = '', $fields = '*')
+    public function find($fields = '*', $where = '', array $bindParams = [])
     {
-        $where = $where ? "WHERE $where" : '';
-        $stmt  = $this->connection->prepare("SELECT $fields FROM $this->table $where");
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
 
-        $stmt->execute($bindParams);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $where = $where ? "WHERE $where" : '';
+        $query = "SELECT $fields FROM $this->table $where";
+
+        return $this->getResults($query, $bindParams);
+    }
+
+    /**
+     * Find one by primary key
+     * @param $id
+     * @return array
+     */
+    public function findOneById($id)
+    {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
+        $result = $this->getResults("SELECT * FROM $this->table WHERE id = :id", [':id' => $id]);
+
+        if (!count($result)) {
+            return null;
+        }
+
+        return $result[0];
+    }
+
+    /**
+     * Execute SQL statement
+     *
+     * @param string $query
+     * @param array $bindParams
+     * @return mixed
+     */
+    public function select($query, array $bindParams = [])
+    {
+        return $this->getResults($query, $bindParams);
     }
 
     /**
@@ -68,6 +100,10 @@ abstract class AbstractModel extends PDO
      */
     public function insert(array $bindParams)
     {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
         $fields = [];
 
         foreach ($bindParams as $key => $val) {
@@ -88,17 +124,21 @@ abstract class AbstractModel extends PDO
      * Example:
      *     $noOfUpdatedRows = $myModel->update(
      *         ['firstName' => ':firstName'],
-     *         [':firstName' => 'Chris', ':oldName' = 'Adam'],
      *         'firstName = :oldName'
+     *         [':firstName' => 'Chris', ':oldName' = 'Adam']
      *     );
      *
      * @param $fields
-     * @param array $bindParams
      * @param string $where
+     * @param array $bindParams
      * @return int
      */
-    public function update($fields, array $bindParams = [], $where = '')
+    public function update($fields, $where = '', array $bindParams = [])
     {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
         $where = $where ? "WHERE $where" : '';
         $stmt  = $this->connection->prepare("UPDATE $this->table SET $fields $where");
 
@@ -110,14 +150,18 @@ abstract class AbstractModel extends PDO
     /**
      * Delete row(s) from db.
      * Example:
-     *     $noOfRowsDeleted = $myModel->delete([':name' => '%Ad'], 'id NOT NULL AND firstName LIKE :name');
+     *     $noOfRowsDeleted = $myModel->delete('id NOT NULL AND firstName LIKE :name', [':name' => '%Ad']);
      *
-     * @param array $bindParams
      * @param string $where
+     * @param array $bindParams
      * @return bool
      */
-    public function delete(array $bindParams = [], $where = '')
+    public function delete($where = '', array $bindParams = [])
     {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
         $where = $where ? "WHERE $where" : '';
         $stmt  = $this->connection->prepare("DELETE FROM $this->table $where");
 
@@ -132,5 +176,20 @@ abstract class AbstractModel extends PDO
     public function getConnection()
     {
         return $this->connection;
+    }
+
+    /**
+     * Fetch results
+     *
+     * @param string $query
+     * @param array $bindParams
+     * @return mixed
+     */
+    private function getResults($query, array $bindParams)
+    {
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute($bindParams);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

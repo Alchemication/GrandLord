@@ -1,7 +1,7 @@
 <?php
 
 // =======================
-// Configure app
+// Configure app.
 // =======================
 
 // change for displaying errors on/off
@@ -16,5 +16,5 @@ define('NOT_FOUND_DEFAULT_ROUTE', 'home/index');
 // change db params
 define('DB_NAME', 'grandlord');
 define('DB_USER', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'xyz');
 define('DB_HOST', 'localhost');

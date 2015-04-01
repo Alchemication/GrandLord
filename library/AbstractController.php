@@ -24,9 +24,14 @@ abstract class AbstractController
      * Default error handling
      *
      * @param Exception $e
+     * @param string $type request type, use JSON for Ajax requests
      */
-    protected function handleError(\Exception $e)
+    protected function handleError(\Exception $e, $type = 'HTTP')
     {
+        if (strtoupper($type) === 'JSON') {
+            $this->sendJson($e->getMessage(), 500);
+        }
+
         $errorInfo     = [];
         $exceptionType = get_class($e);
 
@@ -49,6 +54,20 @@ abstract class AbstractController
     }
 
     /**
+     * Return data as Json
+     *
+     * @param mixed $data
+     * @param string $statusCode
+     */
+    protected function sendJson($data, $statusCode = '200')
+    {
+        header("HTTP/1.1 $statusCode OK");
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit();
+    }
+
+    /**
      * Load the view.
      * Use from the controller, example:
      * $this->loadView('about/index') // will load view views/about/index.php
@@ -64,7 +83,6 @@ abstract class AbstractController
          * Keep track of viewName to activate active page in navbar
          */
         $currentView = $viewName;
-
 
         if ($data !== null) {
             extract($data);
