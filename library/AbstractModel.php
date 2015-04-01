@@ -45,12 +45,12 @@ abstract class AbstractModel extends PDO
      */
     public function find($fields = '*', $where = '', array $bindParams = [])
     {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
         $where = $where ? "WHERE $where" : '';
         $query = "SELECT $fields FROM $this->table $where";
-
-        if (!$this->table) {
-            throw new BadMethodCallException('Property table is not defined in the model, SQL created: ' . $query);
-        }
 
         return $this->getResults($query, $bindParams);
     }
@@ -63,7 +63,7 @@ abstract class AbstractModel extends PDO
     public function findOneById($id)
     {
         if (!$this->table) {
-            throw new BadMethodCallException('Property table is not defined in the model, SQL created: ' . $query);
+            throw new BadMethodCallException('Property table is not defined in the model');
         }
 
         $result = $this->getResults("SELECT * FROM $this->table WHERE id = :id", [':id' => $id]);
@@ -101,7 +101,7 @@ abstract class AbstractModel extends PDO
     public function insert(array $bindParams)
     {
         if (!$this->table) {
-            throw new BadMethodCallException('Property table is not defined in the model, SQL created: ' . $query);
+            throw new BadMethodCallException('Property table is not defined in the model');
         }
 
         $fields = [];
@@ -136,7 +136,7 @@ abstract class AbstractModel extends PDO
     public function update($fields, $where = '', array $bindParams = [])
     {
         if (!$this->table) {
-            throw new BadMethodCallException('Property table is not defined in the model, SQL created: ' . $query);
+            throw new BadMethodCallException('Property table is not defined in the model');
         }
 
         $where = $where ? "WHERE $where" : '';
@@ -159,7 +159,7 @@ abstract class AbstractModel extends PDO
     public function delete($where = '', array $bindParams = [])
     {
         if (!$this->table) {
-            throw new BadMethodCallException('Property table is not defined in the model, SQL created: ' . $query);
+            throw new BadMethodCallException('Property table is not defined in the model');
         }
 
         $where = $where ? "WHERE $where" : '';
