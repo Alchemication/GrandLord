@@ -45,8 +45,34 @@ abstract class AbstractModel extends PDO
      */
     public function find($fields = '*', $where = '', array $bindParams = [])
     {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
         $where = $where ? "WHERE $where" : '';
-        return $this->getResults("SELECT $fields FROM $this->table $where", $bindParams);
+        $query = "SELECT $fields FROM $this->table $where";
+
+        return $this->getResults($query, $bindParams);
+    }
+
+    /**
+     * Find one by primary key
+     * @param $id
+     * @return array
+     */
+    public function findOneById($id)
+    {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
+        $result = $this->getResults("SELECT * FROM $this->table WHERE id = :id", [':id' => $id]);
+
+        if (!count($result)) {
+            return null;
+        }
+
+        return $result[0];
     }
 
     /**
@@ -74,6 +100,10 @@ abstract class AbstractModel extends PDO
      */
     public function insert(array $bindParams)
     {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
         $fields = [];
 
         foreach ($bindParams as $key => $val) {
@@ -105,6 +135,10 @@ abstract class AbstractModel extends PDO
      */
     public function update($fields, $where = '', array $bindParams = [])
     {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
         $where = $where ? "WHERE $where" : '';
         $stmt  = $this->connection->prepare("UPDATE $this->table SET $fields $where");
 
@@ -124,6 +158,10 @@ abstract class AbstractModel extends PDO
      */
     public function delete($where = '', array $bindParams = [])
     {
+        if (!$this->table) {
+            throw new BadMethodCallException('Property table is not defined in the model');
+        }
+
         $where = $where ? "WHERE $where" : '';
         $stmt  = $this->connection->prepare("DELETE FROM $this->table $where");
 

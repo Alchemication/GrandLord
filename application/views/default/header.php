@@ -10,6 +10,12 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL ?>/public/css/bootstrap.css" />
 
+    <!-- JS Lib -->
+    <script src="<?php echo BASE_URL; ?>/public/js/jquery.min.js"></script>
+    <script src="<?php echo BASE_URL; ?>/public/js/underscore.js"></script>
+    <script src="<?php echo BASE_URL; ?>/public/js/bootstrap.js"></script>
+    <script src="<?php echo BASE_URL; ?>/public/js/typehead.js"></script>
+
     <!-- Custom styles -->
     <link href="<?php echo BASE_URL ?>/public/css/justified-nav.css" rel="stylesheet">
     <link href="<?php echo BASE_URL ?>/public/css/stylesG.css" rel="stylesheet" type="text/css">
@@ -29,15 +35,15 @@
             </div>
         </div>
 
-
         <nav>
             <ul class="nav nav-justified">
                 <!-- class="active" to be defined -->
-                <li><a href="<?php echo BASE_URL ?>/home/index">Home</a></li>
-                <li><a href="<?php echo BASE_URL ?>/search/index">Search</a></li>
-                <li><a href="<?php echo BASE_URL ?>/myTenancies/index">My Tenancies</a></li>
-                <li><a href="<?php echo BASE_URL ?>/about/index">About</a></li>
-                <li><a href="<?php echo BASE_URL ?>/contact/index">Contact</a></li>
+
+                <li class="<?php if ($currentView === 'home/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/home/index">Home</a></li>
+                <li class="<?php if ($currentView === 'search/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/search/index">Search</a></li>
+                <li class="<?php if ($currentView === 'tenancy/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/tenancy/index">My Tenancies</a></li>
+                <li class="<?php if ($currentView === 'about/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/about/index">About</a></li>
+                <li class="<?php if ($currentView === 'contact/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/contact/index">Contact</a></li>
             </ul>
         </nav>
     </div>

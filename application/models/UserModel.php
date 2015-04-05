@@ -130,6 +130,7 @@ class UserModel extends AbstractModel
     }
 
     /**
+     * Retrieve user data by username
      * @param string $roleId
      */
     public function setRoleId($roleId)
@@ -233,9 +234,6 @@ class UserModel extends AbstractModel
         $this->active = $active;
     }
 
-
-
-
     /**
      * Retrieve user data by username and password
      *
@@ -270,7 +268,6 @@ class UserModel extends AbstractModel
             ':active' => $this->getActive()
         ]);
     }
-
 
     /**
      * Retrieve user data by username
