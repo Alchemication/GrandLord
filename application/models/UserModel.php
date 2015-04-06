@@ -272,13 +272,15 @@ class UserModel extends AbstractModel
     /**
      * Retrieve user data by username
      *
-     * @param UserModel $user
+     * @param string
      * @return array
      */
-    public function checkUserName(UserModel $user)
+    public function userExists($userName)
     {
         return $this->find("*",'username = :username', [
-            ':username' => $user->getUsername() // bind username
+            ':username' => $userName // bind username
         ]);
     }
+
+
 }

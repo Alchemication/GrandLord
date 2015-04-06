@@ -23,7 +23,7 @@ abstract class AbstractModel extends PDO
     protected $table;
 
     /**
-     * Connect to db when model is instantiated
+     * Connect to the db when model is instantiated
      */
     public function __construct()
     {
@@ -35,8 +35,6 @@ abstract class AbstractModel extends PDO
 
     /**
      * Get data from db.
-     * Example:
-     *     $data = $myModel->find(); // get all data from table
      *
      * @param string $fields
      * @param string $where
@@ -89,11 +87,6 @@ abstract class AbstractModel extends PDO
 
     /**
      * Insert into db.
-     * Example:
-     *     $noOfRows = $myModel->insert([':firstName' => 'Adam']);
-     *
-     * For details:
-     * @see http://php.net/manual/en/pdo.prepared-statements.php
      *
      * @param array $bindParams
      * @return int
@@ -121,12 +114,6 @@ abstract class AbstractModel extends PDO
 
     /**
      * Update row(s) in db.
-     * Example:
-     *     $noOfUpdatedRows = $myModel->update(
-     *         ['firstName' => ':firstName'],
-     *         'firstName = :oldName'
-     *         [':firstName' => 'Chris', ':oldName' = 'Adam']
-     *     );
      *
      * @param $fields
      * @param string $where
@@ -149,8 +136,6 @@ abstract class AbstractModel extends PDO
 
     /**
      * Delete row(s) from db.
-     * Example:
-     *     $noOfRowsDeleted = $myModel->delete('id NOT NULL AND firstName LIKE :name', [':name' => '%Ad']);
      *
      * @param string $where
      * @param array $bindParams

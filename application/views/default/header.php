@@ -29,9 +29,14 @@
 
             <div class="topNav">
                 <text class="text-muted"><a href="<?php echo BASE_URL ?>/home/index"> <img alt="Grandlord" src="<?php echo BASE_URL ?>/img/logoGr.png"></a></text>
-                <button type="submit" class="btn btn-success  pull-right btn-margin-left"onclick="location.href='<?php echo BASE_URL ?>/login/index'">Sign in</button>
-                <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/register/index'">Register</button>
-
+                <?php if (!isset($_SESSION['user_name'])): ?>
+                    <?php print_r($_SESSION); ?>
+                    <button type="submit" class="btn btn-success  pull-right btn-margin-left" onclick="location.href='<?php echo BASE_URL ?>/login/index'">Sign in</button>
+                    <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/register/index'">Register</button>
+                <?php else: ?>
+                    <?php print_r($_SESSION); ?>
+                    <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/login/logout'">Log out</button>
+                <?php endif ?>
             </div>
         </div>
 

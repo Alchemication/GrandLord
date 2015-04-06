@@ -14,9 +14,14 @@ class LoginController extends AbstractController
     /**
      * Show default login page
      */
-    public function indexAction()
-    {
-        $this->loadView('login/index',['message' => ""]);
+    public function indexAction() {
+        if (isset($_SESSION['user_name'])) {
+            // user already logged in
+            // redirect to home page
+            $this->loadView('home/index');
+        } else {
+            $this->loadView('login/index',['message' => ""]);
+        }
     }
 
     /**
@@ -25,6 +30,14 @@ class LoginController extends AbstractController
     public function thankYouAction()
     {
         $this->loadView('login/thankYou');
+    }
+
+    /**
+     * Log user out
+     */
+    public function logoutAction() {
+        session_destroy();
+        $this->loadView('login/index', ['message' => ""]);
     }
 
     /**
@@ -77,4 +90,5 @@ class LoginController extends AbstractController
         // on failure
 
     }
+
 }

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // =========================================
 // Front controller,
 // all requests need to go through this file
