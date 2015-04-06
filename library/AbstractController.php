@@ -57,14 +57,24 @@ abstract class AbstractController
      * Return data as Json
      *
      * @param mixed $data
-     * @param string $statusCode
      */
-    protected function sendJson($data, $statusCode = '200')
+    protected function sendJson($data)
     {
-        header("HTTP/1.1 $statusCode OK");
+        header("HTTP/1.1 200 OK");
         header('Content-Type: application/json');
         echo json_encode($data);
         exit();
+    }
+
+    /**
+     * Escape value before dumping on the screen,
+     * this prevents XSS attacks.
+     * @see http://www.sitepoint.com/php-security-cross-site-scripting-attacks-xss/
+     * @param string $string
+     */
+    protected function escape($string)
+    {
+        echo htmlspecialchars($string, ENT_QUOTES, 'utf-8');
     }
 
     /**
