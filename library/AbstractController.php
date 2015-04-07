@@ -78,13 +78,12 @@ abstract class AbstractController
      * @param bool $loginStatus
      * @param mixed $data
      */
-    protected function loadView($viewName, $data = null, $loadHeader = true, $loadFooter = true, $loginStatus = false)
+    protected function loadView($viewName, $data = null, $loadHeader = true, $loadFooter = true)
     {
         /**
          * Keep track of viewName to activate active page in navbar
          */
         $currentView = $viewName;
-        $loggedIn = $loginStatus;
 
         if ($data !== null) {
             extract($data);

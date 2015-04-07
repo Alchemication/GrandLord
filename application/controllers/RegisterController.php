@@ -14,11 +14,12 @@ class RegisterController extends AbstractController {
      * Show default register page
      */
     public function indexAction() {
+        // check if user already logged in
         if (isset($_SESSION['user_name'])) {
-            // user already logged in
             // redirect to home page
             $this->loadView('home/index');
         } else {
+            // display register page
             $this->loadView('register/index',['user' => null,'message' => ""]);
         }
     }
@@ -32,7 +33,7 @@ class RegisterController extends AbstractController {
 
 
     /**
-     * Validate username and all details and redirect to home on success
+     * Validate username and all details
      */
     public function validateAction() {
 
@@ -90,14 +91,8 @@ class RegisterController extends AbstractController {
                 $message .= $error . "<br/>";
             }
             $userModel = new UserModel($username, $password, $roleId, $email, $firstName, $secondName);
-            // check with db if username is already in use
             $this->loadView('register/index', ['user' => $userModel, 'message' => $message]);
         }
-
-
-
-        // redirect to home on success or back to register/index
-        // on failure
 
     }
 

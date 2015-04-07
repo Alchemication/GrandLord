@@ -240,12 +240,11 @@ class UserModel extends AbstractModel
      * @param UserModel $user
      * @return array
      */
-    public function findUser(UserModel $user)
+    public function findUser()
     {
         return $this->find('*','username = :username AND password = :password',[
-            ':username' => $user->getUsername(), // bind username
-            ':password' => hash('sha512', $user->getPassword())  // bind password
-            //':password' => $user->getPassword()  // bind password
+            ':username' => $this->getUsername(), // bind username
+            ':password' => hash('sha512', $this->getPassword())  // bind password
         ]);
     }
 
