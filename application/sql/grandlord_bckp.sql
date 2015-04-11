@@ -196,6 +196,35 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (1,1,'gjokiel','gjokiel123','gjok@mycit.ie','Greg','Jokiel','2015-02-19 23:59:59','2015-02-19 23:59:59','y'),(2,1,'anapora','anapora123','anap@mycit.ie','Adam','Napora','2015-02-19 23:59:59','2015-02-19 23:59:59','y'),(3,1,'pbaran','pbaranl123','pbar@mycit.ie','Piotr','Baran','2015-02-19 23:59:59','2015-02-19 23:59:59','y'),(4,3,'admin','adminl123','admin@mycit.ie','Admin',NULL,'2015-02-19 23:59:59','2015-02-19 23:59:59','y');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `lookups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lookups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lookupType` varchar(25) DEFAULT NULL,
+  `lookupValue` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+insert into lookups (id, lookupType, lookupValue) values (null, 'city',  'Cork'), (null, 'city',  'Galway'), (null, 'city',  'Tralee'), (null, 'city',  'Tallaght'), (null, 'city',  'Naas'), (null, 'city',  'Limerick'), (null, 'city',  'Ennis'), (null, 'city',  'Waterford'), (null, 'city',  'Balbriggan'), (null, 'city',  'Swords'), (null, 'city',  'Sligo'), (null, 'city',  'Dundalk'), (null, 'city',  'Newbridge'), (null, 'city',  'Drogheda'), (null, 'city',  'Clonmel'), (null, 'city',  'Navan'), (null, 'city',  'Athlone');
+insert into lookups (id, lookupType, lookupValue) values (null, 'county',  'Antrim'), (null, 'county',  'Armagh'), (null, 'county',  'Carlow'), (null, 'county',  'Cavan'), (null, 'county',  'Clare'), (null, 'county',  'Cork'), (null, 'county',  'Derry'), (null, 'county',  'Donegal'), (null, 'county',  'Down'), (null, 'county',  'Dublin'), (null, 'county',  'Fermanagh'), (null, 'county',  'Galway'), (null, 'county',  'Kerry'), (null, 'county',  'Kildare'), (null, 'county',  'Kilkenny'), (null, 'county',  'Laois'), (null, 'county',  'Leitrim'), (null, 'county',  'Limerick'), (null, 'county',  'Longford'), (null, 'county',  'Louth'), (null, 'county',  'Mayo'), (null, 'county',  'Meath'), (null, 'county',  'Monaghan'), (null, 'county',  'Offaly'), (null, 'county',  'Roscommon'), (null, 'county',  'Sligo'), (null, 'county',  'Tipperary'), (null, 'county',  'Tyrone'), (null, 'county',  'Waterford'), (null, 'county',  'Westmeath'), (null, 'county',  'Wexford'), (null, 'county',  'Wicklow');
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,1,'gjokiel','gjokiel123','gjok@mycit.ie','Greg','Jokiel','2015-02-19 23:59:59','2015-02-19 23:59:59','y'),(2,1,'anapora','anapora123','anap@mycit.ie','Adam','Napora','2015-02-19 23:59:59','2015-02-19 23:59:59','y'),(3,1,'pbaran','pbaranl123','pbar@mycit.ie','Piotr','Baran','2015-02-19 23:59:59','2015-02-19 23:59:59','y'),(4,3,'admin','adminl123','admin@mycit.ie','Admin',NULL,'2015-02-19 23:59:59','2015-02-19 23:59:59','y');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

@@ -16,9 +16,29 @@ spl_autoload_register(function ($className) {
         require_once(ROOT . DS . 'application' . DS . 'controllers' . DS . $className . '.php');
     } else if (file_exists(ROOT . DS . 'application' . DS . 'models' . DS . $className . '.php')) {
         require_once(ROOT . DS . 'application' . DS . 'models' . DS . $className . '.php');
-    } else {
     }
 });
+
+// =====================================
+// Autoload vendors (3rd party libraries
+// =====================================
+
+require_once(ROOT . DS . 'vendor/autoload.php');
+
+// ================================
+// Global helper functions
+// ================================
+
+/**
+ * Escape value before dumping on the screen,
+ * this prevents XSS attacks.
+ * @see http://www.sitepoint.com/php-security-cross-site-scripting-attacks-xss/
+ * @param string $string
+ */
+function escape($string)
+{
+    echo htmlspecialchars($string, ENT_QUOTES, 'utf-8');
+}
 
 // ================================
 // Error displaying section

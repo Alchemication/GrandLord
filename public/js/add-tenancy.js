@@ -1,4 +1,7 @@
 (function($, window) {
+
+    // define star functionality
+
     var Starrr;
 
     Starrr = (function() {
@@ -76,7 +79,8 @@
         return Starrr;
 
     })();
-    return $.fn.extend({
+
+    $.fn.extend({
         starrr: function() {
             var args, option;
 
@@ -94,28 +98,84 @@
             });
         }
     });
-})(window.jQuery, window);
 
-$(function() {
-    return $(".starrr").starrr();
-});
+    // add custom features to the star
+    $(function () {
+        $(".starrr").starrr().on('starrr:change', function(e, value) {
+            var id  = $(this).attr('id'),
+                sum = 0,
+                avg = 0,
+                counts = $('.count-stars');
 
-$( document ).ready(function() {
+            $('#count-' + id).html(value);
 
-    $('.starrr').on('starrr:change', function(e, value) {
-        var id  = $(this).attr('id'),
-            sum = 0,
-            avg = 0,
-            counts = $('.count-stars');
+            counts.each(function (i, el) {
+                sum += parseInt($(el).text());
+            });
 
-        $('#count-' + id).html(value);
+            avg = (sum / counts.length).toFixed(1);
 
-        counts.each(function (i, el) {
-            sum += parseInt($(el).text());
+            $('#count-stars-avg').html(avg);
         });
 
-        avg = (sum / counts.length).toFixed(1);
+        $('#search-text-box').focus();
 
-        $('#count-stars-avg').html(avg);
+        // show modal add new property
+        $('.not-in-list').on('click', function () {
+            $('.add-new-property-wrap').modal();
+        });
+
+        // add datepicker to the from-to input box
+        $('#from-to').dateRangePicker();
+
+        // submit form with new property
+        $(document).on('click', '.btn-add-property', function (e) {
+
+            // prevent default form submission
+            e.preventDefault();
+
+            // get data from the form
+            var formData = $('.add-new-property-form').serialize();
+
+            var errorHandler = function (errors) {
+                console.log(errors);
+            };
+
+            var modalErrorHandler = function (errors) {
+                console.log(errors);
+            };
+
+            var successHandler = function (msg) {
+                console.log(msg);
+            };
+
+            $.ajax({
+                url: '../property/add',
+                type: 'POST',
+                dataType: 'JSON',
+                data: formData,
+                async: true,
+                success: function (response) {
+
+                    if (response.status === 'error') {
+                        modalErrorHandler(response.errors);
+                        return;
+                    }
+
+                    $('.add-new-property-wrap').modal('hide');
+                    $('#search-text-box').val(response.property);
+                    $('#from-to').focus();
+                    successHandler(response.msg);
+                },
+                error: function (xhr, textStatus, error) {
+
+                    console.log('Error:');
+                    console.log(xhr);
+                    console.log(textStatus);
+                    console.log(error);
+                }
+            });
+        });
     });
-});
+
+})(window.jQuery, window);

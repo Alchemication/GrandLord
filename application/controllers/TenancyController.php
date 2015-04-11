@@ -17,8 +17,12 @@ class TenancyController extends AbstractController
     {
         $loggedInUserId = 1;
 
-        $tenancyModel = new TenancyModel();
-        $myTenancies  = $tenancyModel->find('*', 'id = :id', [':id' => $loggedInUserId]);
+        try {
+            $tenancyModel = new TenancyModel();
+            $myTenancies  = $tenancyModel->find('*', 'id = :id', [':id' => $loggedInUserId]);
+        } catch (\Exception $e) {
+            $this->handleError($e);
+        }
 
         $this->loadView('tenancy/index', ['tenancies' => $myTenancies]);
     }
@@ -28,7 +32,29 @@ class TenancyController extends AbstractController
      */
     public function addAction()
     {
-        $this->loadView('tenancy/add');
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            $params = $request->getParams();
+
+            $buildingNumber = $params['buildingNumber'];
+            $street         = $params['street'];
+            $city           = $params['city'];
+            $county         = $params['county'];
+
+
+
+        }
+
+        // get lookup values
+        try {
+            $appModel = new AppModel();
+            $lookups  = $appModel->getLookups();
+        } catch (\Exception $e) {
+            $this->handleError($e);
+        }
+
+        $this->loadView('tenancy/add', ['lookups' => $lookups]);
     }
 
     /**

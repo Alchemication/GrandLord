@@ -18,3 +18,12 @@ define('DB_NAME', 'grandlord');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'xyz');
 define('DB_HOST', 'localhost');
+
+// add app global constants here
+define('MYSQL_DATE_TIME_FORMAT', 'Y-m-d H:i:s');
+define('MYSQL_DATE_FORMAT', 'Y-m-d');
+define('MYSQL_TIME_FORMAT', 'H:i:s');
+
+// highly recommended to set to true,
+// global input sanitizing method
+define('GLOBAL_XSS_PROTECTION', true);

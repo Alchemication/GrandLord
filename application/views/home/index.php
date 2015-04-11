@@ -51,3 +51,4 @@
 </div>
 
 <script src="<?php echo BASE_URL; ?>/public/js/search.js"></script>
+<script src="<?php echo BASE_URL; ?>/public/js/home.js"></script>
