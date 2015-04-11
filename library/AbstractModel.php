@@ -116,7 +116,7 @@ abstract class AbstractModel extends PDO
 
         $stmt->execute($bindParams);
 
-        return $stmt->rowCount();
+        return $this->connection->lastInsertId();
     }
 
     /**
