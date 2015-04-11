@@ -7,7 +7,7 @@
         <h2>Add Tenancy</h2>
     </div>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal add-tenancy-form">
 
         <div class="form-group">
             <label for="property" class="col-sm-2 control-label">Property</label>
@@ -21,13 +21,13 @@
                     <i class="glyphicon glyphicon-plus-sign"></i> Not in list
                 </button>
             </div>
-            <input type="hidden" name="prop-id" id="prop-id"/>
+            <input type="hidden" name="propertyId" id="prop-id"/>
         </div>
 
         <div class="form-group">
             <label for="from-to" class="col-sm-2 control-label">Time you stayed there</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="from-to" placeholder="Time of stay">
+                <input type="text" class="form-control" name="fromTo" id="from-to" placeholder="Time of stay">
             </div>
         </div>
 
@@ -37,19 +37,19 @@
             <div class="col-sm-2">
                 <div id="stars-landlord" class="starrr"></div>
             </div>
-            <input type="hidden" id="stars-landlord" name="stars-landlord"/>
+            <input type="hidden" id="stars-landlord-value" name="rateLandlordApproach"/>
 
             <label for="quality" class="col-sm-2 control-label">Quality of equipment</label>
             <div class="col-sm-2">
                 <div id="stars-quality" class="starrr"></div>
             </div>
-            <input type="hidden" id="stars-quality" name="stars-quality"/>
+            <input type="hidden" id="stars-quality-value" name="rateQualityOfEquipment"/>
 
             <label for="accessibility" class="col-sm-2 control-label">Utility charges</label>
             <div class="col-sm-2">
                 <div id="stars-utility" class="starrr"></div>
             </div>
-            <input type="hidden" id="stars-utility" name="stars-utility"/>
+            <input type="hidden" id="stars-utility-value" name="rateUtilityCharges"/>
         </div>
 
         <div class="form-group">
@@ -58,26 +58,26 @@
             <div class="col-sm-2">
                 <div id="stars-broadband" class="starrr"></div>
             </div>
-            <input type="hidden" id="stars-broadband" name="stars-broadband"/>
+            <input type="hidden" id="stars-broadband-value" name="rateBroadbandAccessibility"/>
 
             <label for="clean" class="col-sm-2 control-label">Neighbours</label>
             <div class="col-sm-2">
                 <div id="stars-neighbours" class="starrr"></div>
             </div>
-            <input type="hidden" id="stars-neighbours" name="stars-neighbours"/>
+            <input type="hidden" id="stars-neighbours-value" name="rateNeighbours"/>
 
             <label for="quality" class="col-sm-2 control-label">Carpark spaces</label>
             <div class="col-sm-2">
                 <div id="stars-carpark" class="starrr"></div>
             </div>
-            <input type="hidden" id="stars-carpark" name="stars-carpark"/>
+            <input type="hidden" id="stars-carpark-value" name="rateCarParkSpaces"/>
 
         </div>
 
         <div  class="form-group">
             <label for="inputQuery3" class="col-sm-2 control-label">Comment</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="3"></textarea>
+                <textarea class="form-control" name="comment" rows="3"></textarea>
             </div>
         </div>
 
@@ -96,7 +96,7 @@
                     <h4 class="modal-title">Add Property</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal add-new-property-form" action="post">
+                    <form class="form-horizontal add-property-form" action="post">
 
                         <div class="form-group">
                             <label for="building-no" class="col-sm-2 control-label">Building number</label>

@@ -101,10 +101,22 @@
 
     // add custom features to the star
     $(function () {
+
+        var errorHandler = function (errors) {
+            console.log(errors);
+        };
+
+        var modalErrorHandler = function (errors) {
+            console.log(errors);
+        };
+
+        var successHandler = function (msg) {
+            console.log(msg);
+        };
+
         $(".starrr").starrr().on('starrr:change', function(e, value) {
             var id  = $(this).attr('id');
-
-            $('#count-' + id).val(value);
+            $('#' + id + '-value').val(value);
         });
 
         $('#search-text-box').focus();
@@ -118,29 +130,45 @@
         $('#from-to').dateRangePicker({});
 
         // submit form with new tenancy
-        $(document).on('click', '.btn-add-tenancy', function () {
+        $(document).on('click', '.btn-add-tenancy', function (e) {
 
-            console.log('clicked');
+            e.preventDefault();
 
+            // get data from the form
+            var formData = $('.add-tenancy-form').serialize();
+
+            $.ajax({
+                url: '../tenancy/add',
+                type: 'POST',
+                dataType: 'JSON',
+                data: formData,
+                async: true,
+                success: function (response) {
+
+                    if (response.status === 'error') {
+                        modalErrorHandler(response.errors);
+                        return;
+                    }
+
+                    successHandler(response.msg);
+                },
+                error: function (xhr, textStatus, error) {
+
+                    console.log('Error:');
+                    console.log(xhr);
+                    console.log(textStatus);
+                    console.log(error);
+                }
+            });
         });
 
         // submit form with new property
-        $(document).on('click', '.btn-add-property', function () {
+        $(document).on('click', '.btn-add-property', function (e) {
+
+            e.preventDefault();
 
             // get data from the form
-            var formData = $('.add-new-property-form').serialize();
-
-            var errorHandler = function (errors) {
-                console.log(errors);
-            };
-
-            var modalErrorHandler = function (errors) {
-                console.log(errors);
-            };
-
-            var successHandler = function (msg) {
-                console.log(msg);
-            };
+            var formData = $('.add-property-form').serialize();
 
             $.ajax({
                 url: '../property/add',

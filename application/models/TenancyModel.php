@@ -38,27 +38,32 @@ class TenancyModel extends AbstractModel
     /**
      * @var int
      */
-    private $rateContactWithLandlord;
+    private $rateLandlordApproach;
 
     /**
      * @var int
      */
-    private $rateFlatQuality;
+    private $rateQualityOfEquipment;
 
     /**
      * @var int
      */
-    private $rateCleanliness;
+    private $rateUtilityCharges;
 
     /**
      * @var int
      */
-    private $ratePropertyState;
+    private $rateBroadbandAccessibility;
 
     /**
      * @var int
      */
-    private $rateAvg;
+    private $rateNeighbours;
+
+    /**
+     * @var int
+     */
+    private $rateCarParkSpaces;
 
     /**
      * @var string
@@ -81,11 +86,68 @@ class TenancyModel extends AbstractModel
     private $active;
 
     /**
+     * Check same user has already entered tenancy
+     * for same property within same time period
+     *
+     * @return bool
+     */
+    public function exists()
+    {
+        $where = implode(' AND ', [
+            'addedBy = :addedBy',
+            'propertyId = :propertyId',
+            '((dateFrom < :dateFrom AND dateTo > :dateFrom) OR (dateFrom < :dateTo AND dateTo > :dateTo))'
+        ]);
+
+        $params = [
+            ':addedBy'    => $this->addedBy,
+            ':propertyId' => $this->propertyId,
+            ':dateFrom'   => $this->dateFrom,
+            ':dateTo'     => $this->dateTo,
+        ];
+
+        $result = $this->find('*', $where, $params);
+
+        return count($result) > 0;
+    }
+
+        /**
+         * Save new tenancy
+         *
+         * @return int
+         */
+        public function save()
+        {
+            return $this->insert([
+                ':propertyId'                 => $this->propertyId,
+                ':dateFrom'                   => $this->dateFrom,
+                ':dateTo'                     => $this->dateTo,
+                ':rateLandlordApproach'       => $this->rateLandlordApproach,
+                ':rateQualityOfEquipment'     => $this->rateQualityOfEquipment,
+                ':rateUtilityCharges'         => $this->rateUtilityCharges,
+                ':rateBroadbandAccessibility' => $this->rateBroadbandAccessibility,
+                ':rateNeighbours'             => $this->rateNeighbours,
+                ':rateCarParkSpaces'          => $this->rateCarParkSpaces,
+                ':comment'                    => $this->comment,
+                ':addedAt'                    => $this->addedAt,
+                ':active'                     => $this->active,
+            ]);
+        }
+
+    /**
      * @return int
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -139,81 +201,97 @@ class TenancyModel extends AbstractModel
     /**
      * @return int
      */
-    public function getRateContactWithLandlord()
+    public function getRateLandlordApproach()
     {
-        return $this->rateContactWithLandlord;
+        return $this->rateLandlordApproach;
     }
 
     /**
-     * @param int $rateContactWithLandlord
+     * @param int $rateLandlordApproach
      */
-    public function setRateContactWithLandlord($rateContactWithLandlord)
+    public function setRateLandlordApproach($rateLandlordApproach)
     {
-        $this->rateContactWithLandlord = $rateContactWithLandlord;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRateFlatQuality()
-    {
-        return $this->rateFlatQuality;
-    }
-
-    /**
-     * @param int $rateFlatQuality
-     */
-    public function setRateFlatQuality($rateFlatQuality)
-    {
-        $this->rateFlatQuality = $rateFlatQuality;
+        $this->rateLandlordApproach = $rateLandlordApproach;
     }
 
     /**
      * @return int
      */
-    public function getRateCleanliness()
+    public function getRateQualityOfEquipment()
     {
-        return $this->rateCleanliness;
+        return $this->rateQualityOfEquipment;
     }
 
     /**
-     * @param int $rateCleanliness
+     * @param int $rateQualityOfEquipment
      */
-    public function setRateCleanliness($rateCleanliness)
+    public function setRateQualityOfEquipment($rateQualityOfEquipment)
     {
-        $this->rateCleanliness = $rateCleanliness;
-    }
-
-    /**
-     * @return int
-     */
-    public function getRatePropertyState()
-    {
-        return $this->ratePropertyState;
-    }
-
-    /**
-     * @param int $ratePropertyState
-     */
-    public function setRatePropertyState($ratePropertyState)
-    {
-        $this->ratePropertyState = $ratePropertyState;
+        $this->rateQualityOfEquipment = $rateQualityOfEquipment;
     }
 
     /**
      * @return int
      */
-    public function getRateAvg()
+    public function getRateUtilityCharges()
     {
-        return $this->rateAvg;
+        return $this->rateUtilityCharges;
     }
 
     /**
-     * @param int $rateAvg
+     * @param int $rateUtilityCharges
      */
-    public function setRateAvg($rateAvg)
+    public function setRateUtilityCharges($rateUtilityCharges)
     {
-        $this->rateAvg = $rateAvg;
+        $this->rateUtilityCharges = $rateUtilityCharges;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRateBroadbandAccessibility()
+    {
+        return $this->rateBroadbandAccessibility;
+    }
+
+    /**
+     * @param int $rateBroadbandAccessibility
+     */
+    public function setRateBroadbandAccessibility($rateBroadbandAccessibility)
+    {
+        $this->rateBroadbandAccessibility = $rateBroadbandAccessibility;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRateNeighbours()
+    {
+        return $this->rateNeighbours;
+    }
+
+    /**
+     * @param int $rateNeighbours
+     */
+    public function setRateNeighbours($rateNeighbours)
+    {
+        $this->rateNeighbours = $rateNeighbours;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRateCarParkSpaces()
+    {
+        return $this->rateCarParkSpaces;
+    }
+
+    /**
+     * @param int $rateCarParkSpaces
+     */
+    public function setRateCarParkSpaces($rateCarParkSpaces)
+    {
+        $this->rateCarParkSpaces = $rateCarParkSpaces;
     }
 
     /**
@@ -279,4 +357,6 @@ class TenancyModel extends AbstractModel
     {
         $this->active = $active;
     }
+
+
 }

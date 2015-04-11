@@ -24,28 +24,8 @@ class PropertyController extends AbstractController
             // retrieve sanitised params from the request
             $params = $request->getParams();
 
-            // validate params
-            $errors = [];
-
-            if (!v::int()->notEmpty()->between(1, 50000)->validate($params['buildingNumber'])) {
-                $errors[] = 'Building number must be a valid integer between 1 and 50000';
-            }
-
-            if (!v::string()->notEmpty()->length(3, 125)->validate($params['street'])) {
-                $errors[] = 'Street should contain from 3 to 125 characters';
-            }
-
-            if (!v::string()->notEmpty()->length(3, 125)->validate($params['city'])) {
-                $errors[] = 'City should contain from 3 to 125 characters';
-            }
-
-            if (!v::string()->notEmpty()->length(3, 125)->validate($params['county'])) {
-                $errors[] = 'County should contain from 3 to 125 characters';
-            }
-
-            if (count($errors)) {
-                $this->handleJsonError($errors);
-            }
+            // validate params, this will exit and send errors if any detected
+            $this->validateParams($params);
 
             // create new property
             try {
@@ -78,6 +58,34 @@ class PropertyController extends AbstractController
                 'property' => $property->toString(),
                 'id'       => $id,
             ]);
+        }
+    }
+
+    /**
+     * @param array $params
+     */
+    private function validateParams(array $params)
+    {
+        $errors = [];
+
+        if (!v::int()->notEmpty()->between(1, 50000)->validate($params['buildingNumber'])) {
+            $errors[] = 'Building number must be a valid integer between 1 and 50000';
+        }
+
+        if (!v::string()->notEmpty()->length(3, 125)->validate($params['street'])) {
+            $errors[] = 'Street should contain from 3 to 125 characters';
+        }
+
+        if (!v::string()->notEmpty()->length(3, 125)->validate($params['city'])) {
+            $errors[] = 'City should contain from 3 to 125 characters';
+        }
+
+        if (!v::string()->notEmpty()->length(3, 125)->validate($params['county'])) {
+            $errors[] = 'County should contain from 3 to 125 characters';
+        }
+
+        if (count($errors)) {
+            $this->handleJsonError($errors);
         }
     }
 }
