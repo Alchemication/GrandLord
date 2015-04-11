@@ -96,7 +96,7 @@ class TenancyModel extends AbstractModel
         $where = implode(' AND ', [
             'addedBy = :addedBy',
             'propertyId = :propertyId',
-            '((dateFrom < :dateFrom AND dateTo > :dateFrom) OR (dateFrom < :dateTo AND dateTo > :dateTo))'
+            '((dateFrom <= :dateFrom AND dateTo >= :dateFrom) OR (dateFrom <= :dateTo AND dateTo >= :dateTo))'
         ]);
 
         $params = [
@@ -130,6 +130,7 @@ class TenancyModel extends AbstractModel
                 ':rateCarParkSpaces'          => $this->rateCarParkSpaces,
                 ':comment'                    => $this->comment,
                 ':addedAt'                    => $this->addedAt,
+                ':addedBy'                    => $this->addedBy,
                 ':active'                     => $this->active,
             ]);
         }

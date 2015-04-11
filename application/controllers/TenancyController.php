@@ -61,7 +61,8 @@ class TenancyController extends AbstractController
                 // now check if tenancy already exist for
                 // this property within this time period
                 if ($tenancy->exists()) {
-                    $this->handleJsonError('Property already exists');
+                    $this->handleJsonError(sprintf('Your stay at this place between %s and %s has already been registered',
+                        $params['dateFrom'], $params['dateTo']));
                 }
 
                 // tenancy is good to be saved into the db
