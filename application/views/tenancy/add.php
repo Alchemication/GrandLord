@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/search.css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/add-tenancy.css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/daterangepicker.css"/>
 
@@ -10,16 +9,11 @@
 
     <form class="form-horizontal">
 
-        <h4>Rating 1: <span class="count-stars" id="count-stars-accessibility">0</span></h4>
-        <h4>Rating 2: <span class="count-stars" id="count-stars-quality">0</span></h4>
-        <h4>Rating 3: <span class="count-stars" id="count-stars-clean">0</span></h4>
-        <h4>Avg: <span id="count-stars-avg">0</span></h4>
-
         <div class="form-group">
             <label for="property" class="col-sm-2 control-label">Property</label>
-            <div class="col-sm-8">
-                <div id="search-wrap">
-                    <input id="search-text-box" class="typeahead" type="text" placeholder="Enter property address ...">
+            <div id="search-wrap">
+                <div class="col-sm-8">
+                    <input id="search-text-box" class="form-control typeahead" type="text" placeholder="Enter property address ...">
                 </div>
             </div>
             <div class="col-sm-2">
@@ -27,6 +21,7 @@
                     <i class="glyphicon glyphicon-plus-sign"></i> Not in list
                 </button>
             </div>
+            <input type="hidden" name="prop-id" id="prop-id"/>
         </div>
 
         <div class="form-group">
@@ -37,32 +32,46 @@
         </div>
 
         <div class="form-group">
-            <h2>Rate Tenancy (1 poor, 5 excellent)</h2>
-        </div>
 
-        <div class="form-group">
-            <label for="accessibility" class="col-sm-2 control-label">Landlord's Accessibility</label>
-            <div class="col-sm-10">
-                <div id="stars-accessibility" class="starrr"></div>
+            <label for="quality" class="col-sm-2 control-label">Landlord's approach</label>
+            <div class="col-sm-2">
+                <div id="stars-landlord" class="starrr"></div>
             </div>
-        </div>
+            <input type="hidden" id="stars-landlord" name="stars-landlord"/>
 
-        <div class="form-group">
-            <label for="quality" class="col-sm-2 control-label">Flat Quality</label>
-            <div class="col-sm-10">
+            <label for="quality" class="col-sm-2 control-label">Quality of equipment</label>
+            <div class="col-sm-2">
                 <div id="stars-quality" class="starrr"></div>
             </div>
-        </div>
+            <input type="hidden" id="stars-quality" name="stars-quality"/>
 
-        <div class="form-group">
-            <label for="clean" class="col-sm-2 control-label">How Clean Place Was</label>
-            <div class="col-sm-10">
-                <div id="stars-clean" class="starrr"></div>
+            <label for="accessibility" class="col-sm-2 control-label">Utility charges</label>
+            <div class="col-sm-2">
+                <div id="stars-utility" class="starrr"></div>
             </div>
+            <input type="hidden" id="stars-utility" name="stars-utility"/>
         </div>
 
         <div class="form-group">
-            <h2>More info</h2>
+
+            <label for="clean" class="col-sm-2 control-label">Broadband accessibility</label>
+            <div class="col-sm-2">
+                <div id="stars-broadband" class="starrr"></div>
+            </div>
+            <input type="hidden" id="stars-broadband" name="stars-broadband"/>
+
+            <label for="clean" class="col-sm-2 control-label">Neighbours</label>
+            <div class="col-sm-2">
+                <div id="stars-neighbours" class="starrr"></div>
+            </div>
+            <input type="hidden" id="stars-neighbours" name="stars-neighbours"/>
+
+            <label for="quality" class="col-sm-2 control-label">Carpark spaces</label>
+            <div class="col-sm-2">
+                <div id="stars-carpark" class="starrr"></div>
+            </div>
+            <input type="hidden" id="stars-carpark" name="stars-carpark"/>
+
         </div>
 
         <div  class="form-group">
@@ -74,7 +83,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn btn-success btn-add-tenancy">Submit</button>
             </div>
         </div>
     </form>
@@ -127,7 +136,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button class="btn btn-default btn-sm btn-add-property" type="submit">
+                    <button class="btn btn-success btn-add-property" type="submit">
                         <i class="glyphicon glyphicon-plus-sign"></i> Add property
                     </button>
                 </div>

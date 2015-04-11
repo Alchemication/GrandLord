@@ -66,7 +66,7 @@ class PropertyController extends AbstractController
                 $property->setAddedAt(date(MYSQL_DATE_TIME_FORMAT));
                 $property->setAddedBy(0);
                 $property->setActive('y');
-                $property->save();
+                $id = $property->save();
             } catch (\Exception $e) {
                 $this->handleJsonError($e->getMessage());
             }
@@ -76,6 +76,7 @@ class PropertyController extends AbstractController
                 'status'   => 'ok',
                 'msg'      => 'Property added successfully',
                 'property' => $property->toString(),
+                'id'       => $id,
             ]);
         }
     }

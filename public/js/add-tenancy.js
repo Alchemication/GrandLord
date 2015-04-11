@@ -102,20 +102,9 @@
     // add custom features to the star
     $(function () {
         $(".starrr").starrr().on('starrr:change', function(e, value) {
-            var id  = $(this).attr('id'),
-                sum = 0,
-                avg = 0,
-                counts = $('.count-stars');
+            var id  = $(this).attr('id');
 
-            $('#count-' + id).html(value);
-
-            counts.each(function (i, el) {
-                sum += parseInt($(el).text());
-            });
-
-            avg = (sum / counts.length).toFixed(1);
-
-            $('#count-stars-avg').html(avg);
+            $('#count-' + id).val(value);
         });
 
         $('#search-text-box').focus();
@@ -126,13 +115,17 @@
         });
 
         // add datepicker to the from-to input box
-        $('#from-to').dateRangePicker();
+        $('#from-to').dateRangePicker({});
+
+        // submit form with new tenancy
+        $(document).on('click', '.btn-add-tenancy', function () {
+
+            console.log('clicked');
+
+        });
 
         // submit form with new property
-        $(document).on('click', '.btn-add-property', function (e) {
-
-            // prevent default form submission
-            e.preventDefault();
+        $(document).on('click', '.btn-add-property', function () {
 
             // get data from the form
             var formData = $('.add-new-property-form').serialize();
@@ -164,6 +157,7 @@
 
                     $('.add-new-property-wrap').modal('hide');
                     $('#search-text-box').val(response.property);
+                    $('#prop-id').val(response.id);
                     $('#from-to').focus();
                     successHandler(response.msg);
                 },
@@ -175,6 +169,15 @@
                     console.log(error);
                 }
             });
+        });
+
+        // add event when search is accepted
+        $('#search-text-box').on('typeahead:selected', function (event, selected) {
+
+            var el = selected.raw,
+                id = el.id;
+
+            $('#prop-id').val(id);
         });
     });
 
