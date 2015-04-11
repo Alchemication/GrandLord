@@ -90,7 +90,7 @@ abstract class AbstractModel extends PDO
     /**
      * Insert into db.
      * Example:
-     *     $noOfRows = $myModel->insert([':firstName' => 'Adam']);
+     *     $lastInsertId = $myModel->insert([':firstName' => 'Adam']);
      *
      * For details:
      * @see http://php.net/manual/en/pdo.prepared-statements.php
