@@ -168,6 +168,7 @@ class TenancyModel extends AbstractModel
                     ]),
                     'id = :id',
                     [
+                        ':id'                         => $this->id,
                         ':rateLandlordApproach'       => $this->rateLandlordApproach,
                         ':rateQualityOfEquipment'     => $this->rateQualityOfEquipment,
                         ':rateUtilityCharges'         => $this->rateUtilityCharges,

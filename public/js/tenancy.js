@@ -27,6 +27,8 @@
             // refresh ratings
             editedData = $(this).data();
 
+            console.log(editedData);
+
             _.each(editedData, function (val, key) {
 
                 var el = $('input#' + key);
@@ -38,6 +40,9 @@
 
             // update selected tenancy id
             $('#tenancy-id').val(editedData.id);
+
+            // update comment
+            $('#comment').val(editedData.comment);
 
             // update dates
             $('#dateFrom').html(editedData.dateFrom);
@@ -62,8 +67,12 @@
                 async: true,
                 success: function (response) {
 
-                    var rowToUpdate = $('tr#row-' + currentTenancyId),
-                        editButton  = rowToUpdate.find('.btn-edit-tenancy');
+                    console.log(response);
+
+                    var rowToUpdate = $('tr#row-' + response.dataToUpdate.id),
+                        editButton  = rowToUpdate.children('.btn-edit-tenancy');
+
+                    console.log(rowToUpdate);
 
                     if (response.status === 'error') {
                         modalErrorHandler(response.errors);
@@ -71,14 +80,17 @@
                     }
 
                     // hide modal
-                    $('.remove-tenancy-wrap').modal('hide');
+                    $('.edit-tenancy-wrap').modal('hide');
 
-                    // update row with new values
-                    rowToUpdate.find('.avg').html(response.newAvg);
+                    // update row with new avg
+                    rowToUpdate.children('td.avg').html(response.newAvg);
 
+                    // update edit button data attributes with new values
                     _.each(response.dataToUpdate, function (val, key) {
                         editButton.data(key, val);
                     });
+
+                    console.log(response.dataToUpdate);
 
                     // trigger standard success handler
                     successHandler(response.msg);

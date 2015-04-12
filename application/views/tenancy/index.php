@@ -22,7 +22,7 @@
                 <tr id="row-<?php escape($tenancy['id']); ?>">
                     <td><?php escape($tenancy['dateFrom']) ?> to <?php escape($tenancy['dateTo']) ?></td>
                     <td><?php escape($tenancy['address']) ?></td>
-                    <td><?php escape($tenancy['avgRate']) ?></td>
+                    <td class="avg"><?php escape($tenancy['avgRate']) ?></td>
                     <td>
                         <a href="" data-id="<?php escape($tenancy['id']); ?>"
                            data-date-from="<?php escape($tenancy['dateFrom']); ?>"
@@ -100,7 +100,7 @@
                         <div  class="form-group">
                             <label for="inputQuery3" class="col-sm-2 control-label">Comment</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" name="comment" rows="3"></textarea>
+                                <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
                             </div>
                         </div>
 
