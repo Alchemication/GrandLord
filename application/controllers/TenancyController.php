@@ -194,7 +194,7 @@ class TenancyController extends AbstractController
         $errors = [];
 
         if (isset($params['propertyId'])) {
-            if (!v::int()->notEmpty()->min(1)->validate($params['propertyId'])) {
+            if (!v::int()->notEmpty()->validate($params['propertyId'])) {
                 $errors[] = 'Property id must be a number';
             }
         }

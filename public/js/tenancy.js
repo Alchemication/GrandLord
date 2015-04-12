@@ -173,7 +173,7 @@
                     GrandLord.flashMessage('success', response.msg);
 
                     // clear form
-                    $(this).closest('form').find("input[type=text], textarea").val("");
+                    $('.add-tenancy-form').find("input[type=text], textarea").val("");
                 },
                 error: function (xhr, textStatus, error) {
 
@@ -216,7 +216,7 @@
                     GrandLord.flashMessage('success', response.msg);
 
                     // clear form
-                    $(this).closest('form').find("input[type=text], textarea").val("");
+                    $('.add-property-form').find("input[type=text], textarea").val("");
                 },
                 error: function (xhr, textStatus, error) {
 
