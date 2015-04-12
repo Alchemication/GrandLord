@@ -26,6 +26,7 @@
 
             // refresh ratings
             editedData = $(this).data();
+
             _.each(editedData, function (val, key) {
 
                 var el = $('input#' + key);
@@ -35,9 +36,12 @@
                 }
             });
 
+            // update selected tenancy id
+            $('#tenancy-id').val(editedData.id);
+
             // update dates
-            $('#dateFrom').html(editedData['dateFrom']);
-            $('#dateTo').html(editedData['dateTo']);
+            $('#dateFrom').html(editedData.dateFrom);
+            $('#dateTo').html(editedData.dateTo);
 
             // show dialog box
             $('.edit-tenancy-wrap').modal();
@@ -58,6 +62,9 @@
                 async: true,
                 success: function (response) {
 
+                    var rowToUpdate = $('tr#row-' + currentTenancyId),
+                        editButton  = rowToUpdate.find('.btn-edit-tenancy');
+
                     if (response.status === 'error') {
                         modalErrorHandler(response.errors);
                         return;
@@ -66,8 +73,12 @@
                     // hide modal
                     $('.remove-tenancy-wrap').modal('hide');
 
-                    // remove row from the UI
-                    $('tr#row-' + currentTenancyId).remove();
+                    // update row with new values
+                    rowToUpdate.find('.avg').html(response.newAvg);
+
+                    _.each(response.dataToUpdate, function (val, key) {
+                        editButton.data(key, val);
+                    });
 
                     // trigger standard success handler
                     successHandler(response.msg);
@@ -89,6 +100,7 @@
             e.preventDefault();
 
             currentTenancyId = $(this).data('id');
+
             $('.remove-tenancy-wrap').modal();
         });
 

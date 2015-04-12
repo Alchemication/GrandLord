@@ -104,6 +104,8 @@
                             </div>
                         </div>
 
+                        <input type="hidden" id="tenancy-id" name="id"/>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -144,6 +146,8 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <input type="text" class="form-control not-displayed" name="fromTo" id="from-to" placeholder="Time of stay">
 
     <script src="<?php echo BASE_URL; ?>/public/js/star-rating.min.js"></script>
     <script src="<?php echo BASE_URL; ?>/public/js/moment.min.js"></script>

@@ -83,6 +83,11 @@ class TenancyModel extends AbstractModel
     /**
      * @var string
      */
+    private $updatedAt;
+
+    /**
+     * @var string
+     */
     private $active;
 
     public function findAll($userId)
@@ -141,12 +146,39 @@ class TenancyModel extends AbstractModel
     }
 
         /**
-         * Save new tenancy
+         * Save new tenancy, here we are performing an "upsert".
+         * If an id is set - then we are updating current record,
+         * if not - then it's an insert of a new one.
          *
          * @return int
          */
         public function save()
         {
+            if ($this->id) {
+
+                return $this->update(
+                    implode(', ', [
+                        'rateLandlordApproach = :rateLandlordApproach',
+                        'rateQualityOfEquipment = :rateQualityOfEquipment',
+                        'rateUtilityCharges = :rateUtilityCharges',
+                        'rateBroadbandAccessibility = :rateBroadbandAccessibility',
+                        'rateNeighbours = :rateNeighbours',
+                        'rateCarParkSpaces = :rateCarParkSpaces',
+                        'comment = :comment'
+                    ]),
+                    'id = :id',
+                    [
+                        ':rateLandlordApproach'       => $this->rateLandlordApproach,
+                        ':rateQualityOfEquipment'     => $this->rateQualityOfEquipment,
+                        ':rateUtilityCharges'         => $this->rateUtilityCharges,
+                        ':rateBroadbandAccessibility' => $this->rateBroadbandAccessibility,
+                        ':rateNeighbours'             => $this->rateNeighbours,
+                        ':rateCarParkSpaces'          => $this->rateCarParkSpaces,
+                        ':comment'                    => $this->comment,
+                    ]
+                );
+            }
+
             return $this->insert([
                 ':propertyId'                 => $this->propertyId,
                 ':dateFrom'                   => $this->dateFrom,
@@ -388,5 +420,30 @@ class TenancyModel extends AbstractModel
         $this->active = $active;
     }
 
+    /**
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
 
+    /**
+     * @param string $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * Calculate average rating for current tenancy
+     *
+     * @return float
+     */
+    public function getAverageRating()
+    {
+        return round(($this->rateBroadbandAccessibility + $this->rateCarParkSpaces + $this->rateLandlordApproach +
+            $this->rateNeighbours + $this->rateQualityOfEquipment + $this->rateUtilityCharges) / 6, 2);
+    }
 }
