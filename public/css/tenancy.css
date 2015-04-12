@@ -2,15 +2,6 @@
     display: none;
 }
 
-.starrr span.glyphicon {
-    font-size: 21px;
-    color: #f4e7a8;
-}
-
-.starrr span.glyphicon-star {
-    color: #ecd861;
-}
-
 span.twitter-typeahead .tt-dropdown-menu {
     position: absolute;
     top: 100%;

@@ -21,7 +21,7 @@ class TenancyController extends AbstractController
 
         try {
             $tenancyModel = new TenancyModel();
-            $myTenancies  = $tenancyModel->find('*', 'id = :id', [':id' => $loggedInUserId]);
+            $myTenancies  = $tenancyModel->findAll($loggedInUserId);
         } catch (\Exception $e) {
             $this->handleError($e);
         }
@@ -43,7 +43,6 @@ class TenancyController extends AbstractController
             $params = $this->validateParams($params);
 
             // input validation passed the tests
-
             try {
                 $tenancy = new TenancyModel();
                 $tenancy->setPropertyId($params['propertyId']);
@@ -57,6 +56,8 @@ class TenancyController extends AbstractController
                 $tenancy->setRateCarParkSpaces($params['rateCarParkSpaces']);
                 $tenancy->setComment($params['comment']);
                 $tenancy->setAddedBy(1);
+                $tenancy->setAddedAt(date(MYSQL_DATE_TIME_FORMAT));
+                $tenancy->setActive('y');
 
                 // now check if tenancy already exist for
                 // this property within this time period
@@ -66,8 +67,6 @@ class TenancyController extends AbstractController
                 }
 
                 // tenancy is good to be saved into the db
-                $tenancy->setAddedAt(date(MYSQL_DATE_TIME_FORMAT));
-                $tenancy->setActive('y');
                 $tenancy->save();
             } catch (\Exception $e) {
                 $this->handleJsonError($e->getMessage());
@@ -96,7 +95,33 @@ class TenancyController extends AbstractController
      */
     public function removeAction()
     {
+        $request = $this->getRequest();
 
+        if ($request->isPost()) {
+
+            // get tenancy id from POST
+            $id = $request->getParam('id');
+
+            try {
+                // make sure tenancy for that id exists
+                $tenancyModel = new TenancyModel();
+                $foundTenancy = $tenancyModel->findOneById($id);
+
+                // return error JSON if tenancy not found
+                if (!$foundTenancy) {
+                    $this->handleJsonError('Tenancy not found.');
+                }
+
+                // go ahead and delete tenancy
+                $tenancyModel->delete('id = :id', [':id' => $id]);
+            } catch (Exception $e) {
+                $this->handleJsonError($e->getMessage());
+            }
+
+            $this->sendJson([
+                'msg' => 'Tenancy removed successfully'
+            ]);
+        }
     }
 
     /**

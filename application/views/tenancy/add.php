@@ -1,5 +1,6 @@
-<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/add-tenancy.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/tenancy.css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/daterangepicker.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/star-rating.min.css"/>
 
 <div class="jumbotron">
 
@@ -33,44 +34,44 @@
 
         <div class="form-group">
 
-            <label for="quality" class="col-sm-2 control-label">Landlord's approach</label>
+            <label for="rateLandlordApproach" class="col-sm-2 control-label">Landlord's approach</label>
             <div class="col-sm-2">
-                <div id="stars-landlord" class="starrr"></div>
+                <input id="rateLandlordApproach" name="rateLandlordApproach" data-show-clear="false" data-show-caption="false"
+                       data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
             </div>
-            <input type="hidden" id="stars-landlord-value" name="rateLandlordApproach"/>
 
-            <label for="quality" class="col-sm-2 control-label">Quality of equipment</label>
+            <label for="rateQualityOfEquipment" class="col-sm-2 control-label">Quality of equipment</label>
             <div class="col-sm-2">
-                <div id="stars-quality" class="starrr"></div>
+                <input id="rateQualityOfEquipment" name="rateQualityOfEquipment" data-show-clear="false" data-show-caption="false"
+                       data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
             </div>
-            <input type="hidden" id="stars-quality-value" name="rateQualityOfEquipment"/>
 
-            <label for="accessibility" class="col-sm-2 control-label">Utility charges</label>
+            <label for="rateUtilityCharges" class="col-sm-2 control-label">Utility charges</label>
             <div class="col-sm-2">
-                <div id="stars-utility" class="starrr"></div>
+                <input id="rateUtilityCharges" name="rateUtilityCharges" data-show-clear="false" data-show-caption="false"
+                       data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
             </div>
-            <input type="hidden" id="stars-utility-value" name="rateUtilityCharges"/>
         </div>
 
         <div class="form-group">
 
-            <label for="clean" class="col-sm-2 control-label">Broadband accessibility</label>
+            <label for="rateBroadbandAccessibility" class="col-sm-2 control-label">Broadband accessibility</label>
             <div class="col-sm-2">
-                <div id="stars-broadband" class="starrr"></div>
+                <input id="rateBroadbandAccessibility" name="rateBroadbandAccessibility" data-show-clear="false" data-show-caption="false"
+                       data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
             </div>
-            <input type="hidden" id="stars-broadband-value" name="rateBroadbandAccessibility"/>
 
-            <label for="clean" class="col-sm-2 control-label">Neighbours</label>
+            <label for="rateNeighbours" class="col-sm-2 control-label">Neighbours</label>
             <div class="col-sm-2">
-                <div id="stars-neighbours" class="starrr"></div>
+                <input id="rateNeighbours" name="rateNeighbours" data-show-clear="false" data-show-caption="false"
+                       data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
             </div>
-            <input type="hidden" id="stars-neighbours-value" name="rateNeighbours"/>
 
-            <label for="quality" class="col-sm-2 control-label">Carpark spaces</label>
+            <label for="rateCarParkSpaces" class="col-sm-2 control-label">CarPark spaces</label>
             <div class="col-sm-2">
-                <div id="stars-carpark" class="starrr"></div>
+                <input id="rateCarParkSpaces" name="rateCarParkSpaces" data-show-clear="false" data-show-caption="false"
+                       data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
             </div>
-            <input type="hidden" id="stars-carpark-value" name="rateCarParkSpaces"/>
 
         </div>
 
@@ -91,12 +92,12 @@
     <div class="modal fade add-new-property-wrap">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Add Property</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal add-property-form" action="post">
+                <form class="form-horizontal add-property-form" action="post">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Add Property</h4>
+                    </div>
+                    <div class="modal-body">
 
                         <div class="form-group">
                             <label for="building-no" class="col-sm-2 control-label">Building number</label>
@@ -132,21 +133,22 @@
                                 </select>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button class="btn btn-success btn-add-property" type="submit">
-                        <i class="glyphicon glyphicon-plus-sign"></i> Add property
-                    </button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button class="btn btn-success btn-add-property" type="submit">
+                            <i class="glyphicon glyphicon-plus-sign"></i> Add property
+                        </button>
+                    </div>
+                </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
 </div>
 
+<script src="<?php echo BASE_URL; ?>/public/js/star-rating.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/moment.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/jquery.daterangepicker.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/search.js"></script>
-<script src="<?php echo BASE_URL; ?>/public/js/add-tenancy.js"></script>
+<script src="<?php echo BASE_URL; ?>/public/js/tenancy.js"></script>

@@ -85,6 +85,35 @@ class TenancyModel extends AbstractModel
      */
     private $active;
 
+    public function findAll($userId)
+    {
+        $query = "
+            SELECT
+              t.id,
+              t.dateFrom,
+              t.dateTo,
+              t.rateLandlordApproach,
+              t.rateQualityOfEquipment,
+              t.rateUtilityCharges,
+              t.rateBroadbandAccessibility,
+              t.rateNeighbours,
+              t.rateCarParkSpaces,
+              CAST((t.rateLandlordApproach +
+                    t.rateQualityOfEquipment +
+                    t.rateUtilityCharges +
+                    t.rateBroadbandAccessibility +
+                    t.rateNeighbours +
+                    t.rateCarParkSpaces) / 6 as DECIMAL(12, 2)) as avgRate,
+              t.comment,
+              concat(p.buildingNumber, ', ', p.street, ', ', p.city) as address
+            FROM $this->table t
+            JOIN properties p
+            ON t.propertyId = p.id
+            WHERE t.addedBy = $userId";
+
+        return $this->select($query);
+    }
+
     /**
      * Check same user has already entered tenancy
      * for same property within same time period
