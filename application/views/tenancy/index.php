@@ -3,6 +3,10 @@
 
 <?php $newTenancyInfo = !count($tenancies) ? 'Your first' : 'New'; ?>
 
+    <div class="form-group">
+        <h2>Add Tenancy</h2>
+    </div>
+
 <br/>
 <a href="<?php echo BASE_URL ?>/tenancy/add"><i class="glyphicon glyphicon-plus-sign"></i> Add <?php echo $newTenancyInfo; ?> Tenancy</a>
 
@@ -159,3 +163,4 @@
     <script src="<?php echo BASE_URL; ?>/public/js/tenancy.js"></script>
 
 <?php endif ?>
+

@@ -2,8 +2,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/daterangepicker.css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/star-rating.min.css"/>
 
-<div class="jumbotron">
-
     <div class="form-group">
         <h2>Add Tenancy</h2>
     </div>
@@ -147,7 +145,6 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-</div>
 
 <script src="<?php echo BASE_URL; ?>/public/js/star-rating.min.js"></script>
 <script src="<?php echo BASE_URL; ?>/public/js/moment.min.js"></script>
