@@ -53,6 +53,8 @@
                     </div>
                     <div class="modal-body" style="padding-right: 55px !important;">
 
+                        <div class="flash-modal alert alert-info not-displayed">Processing...</div>
+
                         <div class="form-group">
 
                             <label for="rateLandlordApproach" class="col-sm-2 control-label">Landlord's approach</label>
@@ -129,6 +131,8 @@
                     <h4 class="modal-title">Remove your stay</h4>
                 </div>
                 <div class="modal-body">
+
+                    <div class="flash-modal alert alert-info not-displayed">Processing...</div>
 
                     <h4><i class="glyphicon glyphicon-warning-sign"></i> Are you sure you want to remove that stay?</h4>
                     <h5>This action will be permanent.</h5>

@@ -99,6 +99,8 @@
                     </div>
                     <div class="modal-body">
 
+                        <div class="flash-modal alert alert-info not-displayed">Processing...</div>
+
                         <div class="form-group">
                             <label for="building-no" class="col-sm-2 control-label">Building number</label>
                             <div class="col-sm-10">

@@ -3,18 +3,6 @@
     // add custom features when document is ready
     $(function () {
 
-        var errorHandler = function (errors) {
-            console.log(errors);
-        };
-
-        var modalErrorHandler = function (errors) {
-            console.log(errors);
-        };
-
-        var successHandler = function (msg) {
-            console.log(msg);
-        };
-
         var currentTenancyId,
             editedData;
 
@@ -26,8 +14,6 @@
 
             // refresh ratings
             editedData = $(this).data();
-
-            console.log(editedData);
 
             _.each(editedData, function (val, key) {
 
@@ -59,6 +45,8 @@
 
             e.preventDefault();
 
+            GrandLord.flashMessage('modal-process');
+
             $.ajax({
                 url: '../tenancy/edit',
                 type: 'POST',
@@ -67,15 +55,12 @@
                 async: true,
                 success: function (response) {
 
-                    console.log(response);
-
                     var rowToUpdate = $('tr#row-' + response.dataToUpdate.id),
                         editButton  = rowToUpdate.children('.btn-edit-tenancy');
 
-                    console.log(rowToUpdate);
-
                     if (response.status === 'error') {
-                        modalErrorHandler(response.errors);
+                        // trigger standard modal error handler
+                        GrandLord.flashMessage('modal-error', response.errors);
                         return;
                     }
 
@@ -90,17 +75,13 @@
                         editButton.data(key, val);
                     });
 
-                    console.log(response.dataToUpdate);
-
                     // trigger standard success handler
-                    successHandler(response.msg);
+                    GrandLord.flashMessage('success', response.msg);
                 },
                 error: function (xhr, textStatus, error) {
 
-                    console.log('Error:');
-                    console.log(xhr);
-                    console.log(textStatus);
-                    console.log(error);
+                    // trigger standard error handler
+                    GrandLord.flashMessage('modal-error', textStatus);
                 }
             });
         });
@@ -121,6 +102,8 @@
 
             e.preventDefault();
 
+            GrandLord.flashMessage('modal-process');
+
             $.ajax({
                 url: '../tenancy/remove',
                 type: 'POST',
@@ -130,7 +113,8 @@
                 success: function (response) {
 
                     if (response.status === 'error') {
-                        modalErrorHandler(response.errors);
+                        // trigger standard modal error handler
+                        GrandLord.flashMessage('modal-error', response.errors);
                         return;
                     }
 
@@ -141,14 +125,12 @@
                     $('tr#row-' + currentTenancyId).remove();
 
                     // trigger standard success handler
-                    successHandler(response.msg);
+                    GrandLord.flashMessage('success', response.msg);
                 },
                 error: function (xhr, textStatus, error) {
 
-                    console.log('Error:');
-                    console.log(xhr);
-                    console.log(textStatus);
-                    console.log(error);
+                    // trigger standard modal error handler
+                    GrandLord.flashMessage('modal-error', textStatus);
                 }
             });
         });
@@ -168,6 +150,8 @@
 
             e.preventDefault();
 
+            GrandLord.flashMessage('process');
+
             // get data from the form
             var formData = $('.add-tenancy-form').serialize();
 
@@ -180,18 +164,21 @@
                 success: function (response) {
 
                     if (response.status === 'error') {
-                        modalErrorHandler(response.errors);
+                        // trigger standard modal error handler
+                        GrandLord.flashMessage('error', response.errors);
                         return;
                     }
 
-                    successHandler(response.msg);
+                    // trigger standard success handler
+                    GrandLord.flashMessage('success', response.msg);
+
+                    // clear form
+                    $(this).closest('form').find("input[type=text], textarea").val("");
                 },
                 error: function (xhr, textStatus, error) {
 
-                    console.log('Error:');
-                    console.log(xhr);
-                    console.log(textStatus);
-                    console.log(error);
+                    // trigger standard error handler
+                    GrandLord.flashMessage('error', textStatus);
                 }
             });
         });
@@ -200,6 +187,8 @@
         $(document).on('click', '.btn-add-property', function (e) {
 
             e.preventDefault();
+
+            GrandLord.flashMessage('modal-process');
 
             // get data from the form
             var formData = $('.add-property-form').serialize();
@@ -213,7 +202,8 @@
                 success: function (response) {
 
                     if (response.status === 'error') {
-                        modalErrorHandler(response.errors);
+                        // trigger standard modal error handler
+                        GrandLord.flashMessage('modal-error', response.errors);
                         return;
                     }
 
@@ -221,14 +211,17 @@
                     $('#search-text-box').val(response.property);
                     $('#prop-id').val(response.id);
                     $('#from-to').focus();
-                    successHandler(response.msg);
+
+                    // trigger standard success handler
+                    GrandLord.flashMessage('success', response.msg);
+
+                    // clear form
+                    $(this).closest('form').find("input[type=text], textarea").val("");
                 },
                 error: function (xhr, textStatus, error) {
 
-                    console.log('Error:');
-                    console.log(xhr);
-                    console.log(textStatus);
-                    console.log(error);
+                    // trigger standard error handler
+                    GrandLord.flashMessage('modal-error', textStatus);
                 }
             });
         });

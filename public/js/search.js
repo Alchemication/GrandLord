@@ -20,10 +20,10 @@
 
                         process(response);
                     },
-                    error: function (response) {
+                    error: function (xhr, textStatus, error) {
 
-                        console.log('Error:');
-                        console.log(response);
+                        // trigger standard error handler
+                        GrandLord.flashMessage('error', textStatus);
                     }
                 });
             }
