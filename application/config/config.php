@@ -16,8 +16,8 @@ define('NOT_FOUND_DEFAULT_ROUTE', 'home/index');
 // change db params
 define('DB_NAME', 'grandlord');
 define('DB_USER', 'root');
-define('DB_PASSWORD', 'xyz');
-define('DB_HOST', 'localhost');
+define('DB_PASSWORD', '');
+define('DB_HOST', '127.0.0.1');
 
 // add app global constants here
 define('MYSQL_DATE_TIME_FORMAT', 'Y-m-d H:i:s');
