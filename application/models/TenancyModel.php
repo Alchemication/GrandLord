@@ -107,7 +107,7 @@ class TenancyModel extends AbstractModel
 
         return $this->find(
             'YEAR(t.dateFrom) yearFrom, YEAR(t.dateTo) yearTo, t.*' . ', ' . $avgRate,
-            'propertyId = :propertyId',
+            'propertyId = :propertyId ORDER BY t.dateFrom DESC',
             [':propertyId' => $id]
         );
     }
