@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `activities`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `activities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `activityDesc` varchar(255),
-  `addedAt` datetime,
-  `addedBy` int(11),
+  `activityDesc` varchar(255) NOT NULL,
+  `addedAt` datetime NOT NULL,
+  `addedBy` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,8 +50,8 @@ DROP TABLE IF EXISTS `contacts`;
 CREATE TABLE `contacts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `lastName` varchar(30) NOT NULL,
-  `firstName` varchar(25),
-  `birthday` date,
+  `firstName` varchar(25) NOT NULL,
+  `birthday` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -75,13 +75,13 @@ DROP TABLE IF EXISTS `properties`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `properties` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `buildingNumber` int(11),
-  `street` varchar(255),
-  `county` varchar(125),
-  `city` varchar(125),
-  `addedBy` int(11),
-  `addedAt` datetime,
-  `active` enum('y','n'),
+  `buildingNumber` int(11) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `county` varchar(125) NOT NULL,
+  `city` varchar(125) NOT NULL,
+  `addedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL,
+  `active` enum('y','n') NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -110,20 +110,20 @@ DROP TABLE IF EXISTS `tenancies`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tenancies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `propertyId` int(11),
-  `dateFrom` date,
-  `dateTo` date,
-  `rateLandlordApproach` enum('1','2','3','4','5'),
-  `rateQualityOfEquipment` enum('1','2','3','4','5'),
-  `rateUtilityCharges` enum('1','2','3','4','5'),
-  `rateBroadbandAccessibility` enum('1','2','3','4','5'),
-  `rateNeighbours` enum('1','2','3','4','5'),
-  `rateCarParkSpaces` enum('1','2','3','4','5'),
-  `comment` text,
-  `addedBy` int(11),
-  `addedAt` datetime,
-  `updatedAt` datetime,
-  `active` enum('y','n'),
+  `propertyId` int(11) NOT NULL,
+  `dateFrom` date NOT NULL,
+  `dateTo` date NOT NULL,
+  `rateLandlordApproach` enum('1','2','3','4','5') NOT NULL,
+  `rateQualityOfEquipment` enum('1','2','3','4','5') NOT NULL,
+  `rateUtilityCharges` enum('1','2','3','4','5') NOT NULL,
+  `rateBroadbandAccessibility` enum('1','2','3','4','5') NOT NULL,
+  `rateNeighbours` enum('1','2','3','4','5') NOT NULL,
+  `rateCarParkSpaces` enum('1','2','3','4','5') NOT NULL,
+  `comment` text DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `active` enum('y','n') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `propertyId_fk` (`propertyId`),
   CONSTRAINT `propertyId_fk` FOREIGN KEY (`propertyId`) REFERENCES `properties` (`id`)
@@ -148,7 +148,7 @@ DROP TABLE IF EXISTS `user_roles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` enum('tenant','landlord','admin'),
+  `name` enum('tenant','landlord','admin') NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -172,15 +172,15 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `roleId` int(11),
-  `username` varchar(255),
-  `password` varchar(512),
-  `email` varchar(255),
-  `firstName` varchar(255),
-  `secondName` varchar(255),
-  `createdAt` datetime,
-  `updatedAt` datetime,
-  `active` enum('y','n'),
+  `roleId` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(512) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `secondName` varchar(255) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `active` enum('y','n') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `roleId_fk` (`roleId`),
   CONSTRAINT `roleId_fk` FOREIGN KEY (`roleId`) REFERENCES `user_roles` (`id`)
@@ -207,23 +207,14 @@ DROP TABLE IF EXISTS `lookups`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `lookups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `lookupType` varchar(25),
-  `lookupValue` varchar(255),
+  `lookupType` varchar(25) NOT NULL,
+  `lookupValue` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 insert into lookups (id, lookupType, lookupValue) values (null, 'city',  'Cork'), (null, 'city',  'Galway'), (null, 'city',  'Tralee'), (null, 'city',  'Tallaght'), (null, 'city',  'Naas'), (null, 'city',  'Limerick'), (null, 'city',  'Ennis'), (null, 'city',  'Waterford'), (null, 'city',  'Balbriggan'), (null, 'city',  'Swords'), (null, 'city',  'Sligo'), (null, 'city',  'Dundalk'), (null, 'city',  'Newbridge'), (null, 'city',  'Drogheda'), (null, 'city',  'Clonmel'), (null, 'city',  'Navan'), (null, 'city',  'Athlone');
 insert into lookups (id, lookupType, lookupValue) values (null, 'county',  'Antrim'), (null, 'county',  'Armagh'), (null, 'county',  'Carlow'), (null, 'county',  'Cavan'), (null, 'county',  'Clare'), (null, 'county',  'Cork'), (null, 'county',  'Derry'), (null, 'county',  'Donegal'), (null, 'county',  'Down'), (null, 'county',  'Dublin'), (null, 'county',  'Fermanagh'), (null, 'county',  'Galway'), (null, 'county',  'Kerry'), (null, 'county',  'Kildare'), (null, 'county',  'Kilkenny'), (null, 'county',  'Laois'), (null, 'county',  'Leitrim'), (null, 'county',  'Limerick'), (null, 'county',  'Longford'), (null, 'county',  'Louth'), (null, 'county',  'Mayo'), (null, 'county',  'Meath'), (null, 'county',  'Monaghan'), (null, 'county',  'Offaly'), (null, 'county',  'Roscommon'), (null, 'county',  'Sligo'), (null, 'county',  'Tipperary'), (null, 'county',  'Tyrone'), (null, 'county',  'Waterford'), (null, 'county',  'Westmeath'), (null, 'county',  'Wexford'), (null, 'county',  'Wicklow');
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,1,'gjokiel','gjokiel123','gjok@mycit.ie','Greg','Jokiel','2015-02-19 23:59:59','2015-02-19 23:59:59','y'),(2,1,'anapora','anapora123','anap@mycit.ie','Adam','Napora','2015-02-19 23:59:59','2015-02-19 23:59:59','y'),(3,1,'pbaran','pbaranl123','pbar@mycit.ie','Piotr','Baran','2015-02-19 23:59:59','2015-02-19 23:59:59','y'),(4,3,'admin','adminl123','admin@mycit.ie','Admin',NULL,'2015-02-19 23:59:59','2015-02-19 23:59:59','y');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
