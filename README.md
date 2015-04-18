@@ -98,9 +98,6 @@ CREATE TABLE `lookups` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
-
-
-
 ```
 
 Setup
