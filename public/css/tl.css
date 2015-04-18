@@ -1,0 +1,203 @@
+
+.line {
+    font-size: 0;
+    height: 2px;
+    margin: 10px 0;
+    overflow: hidden;
+    width: 100%;
+    background-color: #2e3344;
+}
+
+.title {
+    background-color: #34495e;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 5px;
+}
+
+.btn-success, .panel-success {
+    background-color: #27c24c !important;
+    border-color: #27c24c !important;
+    color: #fff !important;
+}
+.btn-primary, .panel-primary {
+    background-color: #7266ba;
+    border-color: #7266ba;
+    color: #fff !important;
+}
+.btn-info, .panel-info {
+    background-color: #23b7e5;
+    border-color: #23b7e5;
+    color: #fff !important;
+}
+.btn-warning, .panel-warning {
+    background-color: #fad733;
+    border-color: #fad733;
+    color: #fff !important;
+}
+.btn-danger, .panel-danger {
+    background-color: #f05050;
+    border-color: #f05050;
+    color: #fff !important;
+}
+.btn-dark, .panel-dark {
+    background-color: #3a3f51;
+    border-color: #3a3f51;
+    color: #fff !important;
+}
+
+
+.timeline{
+    background-image: url("../img/line-1.png");
+    opacity: .9;
+    background-position: center;
+    background-repeat: repeat-y;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    height: auto;
+    padding: 0px;
+    clear: both;
+    overflow: hidden;
+}
+.timeline li.year, .timeline li.event{
+    list-style-type: none;
+    z-index: 999;
+}
+.timeline li.year{
+    clear: both;
+    width: 4em;
+    margin: 0 auto;
+    line-height: 4em;
+    background-color: #fff;
+    border-radius:50%;
+    text-align: center;
+    margin-bottom: 25px;
+    border: 1px solid #f39c12;
+    box-shadow: 2px 2px 2px #888888;
+    -moz-box-shadow: 2px 2px 2px #888888;
+    -webkit-box-shadow: 2px 2px 2px #888888;
+}
+.timeline li.year:first-child{
+    margin-top:0px;
+}
+
+.timeline li.event{
+    width: 45%;
+    background-color: #fff;
+    margin-bottom: 20px;
+    padding: 20px;
+    position: relative;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.timeline li.event .glyphicon.glyphicon-comment {
+    position: absolute;
+    font-size: 54px;
+    opacity: .5;
+    right: 12px;
+    top: 10px;
+}
+
+li.event:nth-child(odd) {
+    color: steelblue;
+    background-color: #F4F4F4;
+    clear:left;
+    float: left;
+}
+li.event:nth-child(even) {
+    color: steelblue;
+    clear: right;
+    float: right;
+    background-color: #FDFDFD;
+    margin-top:100px;
+    margin-bottom:50px;
+}
+
+.timeline li.event:nth-child(odd)::after {
+    background:#DDD;
+    content: "";
+    height: 2px;
+    position: absolute;
+    right: -11.2%;
+    top: 30px;
+    width: 11.2%;
+
+}
+li.event:nth-child(even)::before{
+    background:#EEE;
+    content: "";
+    height: 2px;
+    position: absolute;
+    top: 30px;
+    width: 11.2%;
+    left: -11.2%;
+}
+
+@media (max-width: 640px) {
+    .timeline li.event{
+        width: 80%;
+        background-color: #fff;
+        border: 1px solid #ff0000;
+        margin: 20px auto;
+        padding: 20px;
+        position: relative;
+    }
+
+    li.event:nth-child(odd) {
+        color: green;
+        clear: both;
+        float: none;
+    }
+    li.event:nth-child(even) {
+        color: red;
+        clear: both;
+        float: none;
+    }
+
+    .timeline li.event:nth-child(odd)::after, li.event:nth-child(even)::before {
+        width: 0px;
+    }
+}
+
+
+@media (max-width: 350px) {
+    .timeline li.event{
+        width: 98%;
+        background-color: #fff;
+        border: 1px solid #ff0000;
+        margin: 20px auto;
+        padding: 20px;
+        position: relative;
+    }
+
+    li.event:nth-child(odd) {
+        color: green;
+        clear: both;
+        float: none;
+    }
+    li.event:nth-child(even) {
+        color: red;
+        clear: both;
+        float: none;
+    }
+
+    .timeline li.event:nth-child(odd)::after, li.event:nth-child(even)::before {
+        width: 0px;
+    }
+}
+
+img{
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+.event .star-rating, .event .rating-container {
+    z-index: 99999999999 !important;
+}

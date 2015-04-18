@@ -30,6 +30,32 @@ class TenancyController extends AbstractController
     }
 
     /**
+     * Display list of tenancies for property
+     */
+    public function findAction()
+    {
+        $request = $this->getRequest();
+
+        if ($request->isGet()) {
+
+            // get id from $_GET
+            $propertyId = $request->getParam('id');
+
+            try {
+                $tenancyModel = new TenancyModel();
+                $tenancyList  = $tenancyModel->findForProperty($propertyId);
+            } catch (\Exception $e) {
+                $this->handleJsonError($e->getMessage());
+            }
+
+            $this->sendJson([
+                'status' => 'ok',
+                'data'   => $tenancyList,
+            ]);
+        }
+    }
+
+    /**
      * Add new tenancy
      */
     public function addAction()

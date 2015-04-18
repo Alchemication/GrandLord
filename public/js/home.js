@@ -4,6 +4,50 @@
 
 (function($, window) {
 
+    var yearsAppended = [];
+
+    var addYearElement = function (year) {
+
+        var link = '';
+
+        if (_.indexOf(yearsAppended, year) === -1) {
+            yearsAppended.push(year);
+            link = '<li class="year">' + year + '</li>';
+        }
+
+        return link;
+    };
+
+    var addEventElement = function (tenancy) {
+        return '<li class="event">' +
+                    '<h3>' +
+                        '<input id="id_' + tenancy.id + '" name="rateUtilityCharges" data-show-clear="false" data-show-caption="false"' +
+                            'data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">' +
+                    '</h3>' +
+                    '<h4>From ' + tenancy.dateFrom + ' to ' + tenancy.dateTo + '<i class="glyphicon glyphicon-comment"></i></h4>' +
+                    '<p>' + tenancy.comment + '</p>' +
+                '</li>';
+    };
+
+    var makeListElements = function (years, tenancy) {
+
+        var html      = '',
+            firstPass = true;
+
+        _.each(years, function (year) {
+            if (firstPass) {
+                html += addYearElement(year);
+                html += addEventElement(tenancy);
+
+                firstPass = false;
+            } else {
+                html += '<li class="event"><h4>...</h4></li>';
+            }
+        });
+
+        return html;
+    };
+
     $(function () {
 
         // focus on search automatically
@@ -16,41 +60,47 @@
                 id = el.id;
 
             // get tenancies for this property
-            var tenancies = [
-                {"dateFrom": "12-12-2009", "dateTo": "12-12-2010", "rateAvg": 2},
-                {"dateFrom": "12-12-2010", "dateTo": "12-12-2011", "rateAvg": 1},
-                {"dateFrom": "12-12-2011", "dateTo": "12-12-2012", "rateAvg": 1},
-                {"dateFrom": "12-12-2014", "dateTo": "12-12-2015", "rateAvg": 2}
-            ];
+            $.ajax({
+                url: '../tenancy/find?id=' + id,
+                type: 'GET',
+                dataType: 'JSON',
+                async: true,
+                success: function (response) {
 
-            var html = '';
+                    var html = '';
 
-            // create info for this property
-            if (!tenancies.length) {
-                $('.found').hide();
-                $('.not-found').show();
-            } else {
-                $('.not-found').hide();
+                    if (!response.data.length) {
+                        $('#no-results-found').show();
+                    } else {
+                        $('#no-results-found').hide();
 
-                // update property info
-                $('#building-number').text(el.buildingNumber);
-                $('#street').text(el.street);
-                $('#county').text(el.county);
-                $('#city').text(el.city);
-                $('#tenancy-count').text(tenancies.length);
+                        _.each(response.data, function (tenancy) {
+                            var years = tenancy.yearFrom === tenancy.yearTo ? [tenancy.yearFrom] : _.range(tenancy.yearFrom, tenancy.yearTo);
+                            html     += makeListElements(years, tenancy);
+                        });
 
-                // update tenancies info
-                _.each(tenancies, function (tenancy) {
-                    html += '<tr>';
-                    html += '<td>' + tenancy.dateFrom + '</td>';
-                    html += '<td>' + tenancy.dateTo + '</td>';
-                    html += '<td>' + tenancy.rateAvg + '</td>';
-                    html += '</tr>';
-                });
+                        // add html to timelime
+                        $('.timeline').html(html).fadeIn();
 
-                $('.found table tbody').html(html);
-                $('.found').show();
-            }
+                        // trigger stars
+                        $('.rating').rating('create');
+
+                        // update star values
+                        _.each(response.data, function (tenancy) {
+
+                            var avgRate = Math.round(tenancy.avgRate),
+                                elId    = 'id_' + tenancy.id;
+
+                            $('#' + elId).rating('update', avgRate);
+                        });
+                    }
+                },
+                error: function (xhr, textStatus, error) {
+
+                    // trigger standard error handler
+                    GrandLord.flashMessage('error', textStatus);
+                }
+            });
         });
 
     });

@@ -90,6 +90,32 @@ class TenancyModel extends AbstractModel
      */
     private $active;
 
+    /**
+     * Find all tenancies for property
+     *
+     * @param int $id
+     * @return array
+     */
+    public function findForProperty($id)
+    {
+        $avgRate = 'CAST((t.rateLandlordApproach +
+                    t.rateQualityOfEquipment +
+                    t.rateUtilityCharges +
+                    t.rateBroadbandAccessibility +
+                    t.rateNeighbours +
+                    t.rateCarParkSpaces) / 6 as DECIMAL(12, 2)) as avgRate';
+
+        return $this->find(
+            'YEAR(t.dateFrom) yearFrom, YEAR(t.dateTo) yearTo, t.*' . ', ' . $avgRate,
+            'propertyId = :propertyId',
+            [':propertyId' => $id]
+        );
+    }
+
+    /**
+     * @param int $userId
+     * @return array
+     */
     public function findAll($userId)
     {
         $query = "
@@ -145,57 +171,57 @@ class TenancyModel extends AbstractModel
         return count($result) > 0;
     }
 
-        /**
-         * Save new tenancy, here we are performing an "upsert".
-         * If an id is set - then we are updating current record,
-         * if not - then it's an insert of a new one.
-         *
-         * @return int
-         */
-        public function save()
-        {
-            if ($this->id) {
+    /**
+     * Save new tenancy, here we are performing an "upsert".
+     * If an id is set - then we are updating current record,
+     * if not - then it's an insert of a new one.
+     *
+     * @return int
+     */
+    public function save()
+    {
+        if ($this->id) {
 
-                return $this->update(
-                    implode(', ', [
-                        'rateLandlordApproach = :rateLandlordApproach',
-                        'rateQualityOfEquipment = :rateQualityOfEquipment',
-                        'rateUtilityCharges = :rateUtilityCharges',
-                        'rateBroadbandAccessibility = :rateBroadbandAccessibility',
-                        'rateNeighbours = :rateNeighbours',
-                        'rateCarParkSpaces = :rateCarParkSpaces',
-                        'comment = :comment'
-                    ]),
-                    'id = :id',
-                    [
-                        ':id'                         => $this->id,
-                        ':rateLandlordApproach'       => $this->rateLandlordApproach,
-                        ':rateQualityOfEquipment'     => $this->rateQualityOfEquipment,
-                        ':rateUtilityCharges'         => $this->rateUtilityCharges,
-                        ':rateBroadbandAccessibility' => $this->rateBroadbandAccessibility,
-                        ':rateNeighbours'             => $this->rateNeighbours,
-                        ':rateCarParkSpaces'          => $this->rateCarParkSpaces,
-                        ':comment'                    => $this->comment,
-                    ]
-                );
-            }
-
-            return $this->insert([
-                ':propertyId'                 => $this->propertyId,
-                ':dateFrom'                   => $this->dateFrom,
-                ':dateTo'                     => $this->dateTo,
-                ':rateLandlordApproach'       => $this->rateLandlordApproach,
-                ':rateQualityOfEquipment'     => $this->rateQualityOfEquipment,
-                ':rateUtilityCharges'         => $this->rateUtilityCharges,
-                ':rateBroadbandAccessibility' => $this->rateBroadbandAccessibility,
-                ':rateNeighbours'             => $this->rateNeighbours,
-                ':rateCarParkSpaces'          => $this->rateCarParkSpaces,
-                ':comment'                    => $this->comment,
-                ':addedAt'                    => $this->addedAt,
-                ':addedBy'                    => $this->addedBy,
-                ':active'                     => $this->active,
-            ]);
+            return $this->update(
+                implode(', ', [
+                    'rateLandlordApproach = :rateLandlordApproach',
+                    'rateQualityOfEquipment = :rateQualityOfEquipment',
+                    'rateUtilityCharges = :rateUtilityCharges',
+                    'rateBroadbandAccessibility = :rateBroadbandAccessibility',
+                    'rateNeighbours = :rateNeighbours',
+                    'rateCarParkSpaces = :rateCarParkSpaces',
+                    'comment = :comment'
+                ]),
+                'id = :id',
+                [
+                    ':id'                         => $this->id,
+                    ':rateLandlordApproach'       => $this->rateLandlordApproach,
+                    ':rateQualityOfEquipment'     => $this->rateQualityOfEquipment,
+                    ':rateUtilityCharges'         => $this->rateUtilityCharges,
+                    ':rateBroadbandAccessibility' => $this->rateBroadbandAccessibility,
+                    ':rateNeighbours'             => $this->rateNeighbours,
+                    ':rateCarParkSpaces'          => $this->rateCarParkSpaces,
+                    ':comment'                    => $this->comment,
+                ]
+            );
         }
+
+        return $this->insert([
+            ':propertyId'                 => $this->propertyId,
+            ':dateFrom'                   => $this->dateFrom,
+            ':dateTo'                     => $this->dateTo,
+            ':rateLandlordApproach'       => $this->rateLandlordApproach,
+            ':rateQualityOfEquipment'     => $this->rateQualityOfEquipment,
+            ':rateUtilityCharges'         => $this->rateUtilityCharges,
+            ':rateBroadbandAccessibility' => $this->rateBroadbandAccessibility,
+            ':rateNeighbours'             => $this->rateNeighbours,
+            ':rateCarParkSpaces'          => $this->rateCarParkSpaces,
+            ':comment'                    => $this->comment,
+            ':addedAt'                    => $this->addedAt,
+            ':addedBy'                    => $this->addedBy,
+            ':active'                     => $this->active,
+        ]);
+    }
 
     /**
      * @return int

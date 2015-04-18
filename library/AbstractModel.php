@@ -50,7 +50,7 @@ abstract class AbstractModel extends PDO
         }
 
         $where = $where ? "WHERE $where" : '';
-        $query = "SELECT $fields FROM $this->table $where";
+        $query = "SELECT $fields FROM $this->table t $where";
 
         return $this->getResults($query, $bindParams);
     }
@@ -66,7 +66,7 @@ abstract class AbstractModel extends PDO
             throw new BadMethodCallException('Property table is not defined in the model');
         }
 
-        $result = $this->getResults("SELECT * FROM $this->table WHERE id = :id", [':id' => $id]);
+        $result = $this->getResults("SELECT * FROM $this->table t WHERE id = :id", [':id' => $id]);
 
         if (!count($result)) {
             return null;
@@ -140,7 +140,7 @@ abstract class AbstractModel extends PDO
         }
 
         $where = $where ? "WHERE $where" : '';
-        $stmt  = $this->connection->prepare("UPDATE $this->table SET $fields $where");
+        $stmt  = $this->connection->prepare("UPDATE $this->table t SET $fields $where");
 
         $stmt->execute($bindParams);
 
@@ -163,7 +163,7 @@ abstract class AbstractModel extends PDO
         }
 
         $where = $where ? "WHERE $where" : '';
-        $stmt  = $this->connection->prepare("DELETE FROM $this->table $where");
+        $stmt  = $this->connection->prepare("DELETE FROM $this->table t $where");
 
         $stmt->execute($bindParams);
 
