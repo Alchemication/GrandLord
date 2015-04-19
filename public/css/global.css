@@ -1,0 +1,19 @@
+.rel {
+    position: relative;
+}
+
+.abs {
+    position: absolute;
+}
+
+.flash {
+    z-index: 999999;
+    right: 0;
+    width: 350px;
+    top: 100px;
+    opacity: .9;
+}
+
+.close-btn {
+    cursor: pointer;
+}

@@ -19,12 +19,16 @@
     <!-- Custom styles -->
     <link href="<?php echo BASE_URL ?>/public/css/justified-nav.css" rel="stylesheet">
     <link href="<?php echo BASE_URL ?>/public/css/stylesG.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo BASE_URL ?>/public/css/global.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
 <div class="container">
-    <div class="wrapper">
+    <div class="wrapper rel">
+
+        <div class="abs flash alert not-displayed"></div>
+
         <div class="masthead">
 
             <div class="topNav">

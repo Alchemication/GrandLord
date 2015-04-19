@@ -11,6 +11,11 @@
 abstract class AbstractController
 {
     /**
+     * @var Request
+     */
+    private $request;
+
+    /**
      * Redirect to path
      *
      * @param string $location
@@ -21,17 +26,29 @@ abstract class AbstractController
     }
 
     /**
+     * Get access to $_GET and $_POST super globals,
+     * please always use this class as it will contain all
+     * required security mechanisms.
+     * Singleton.
+     *
+     * @return Request
+     */
+    protected function getRequest()
+    {
+        if (!$this->request) {
+            $this->request = new Request();
+        }
+
+        return $this->request;
+    }
+
+    /**
      * Default error handling
      *
      * @param Exception $e
-     * @param string $type request type, use JSON for Ajax requests
      */
-    protected function handleError(\Exception $e, $type = 'HTTP')
+    protected function handleError(\Exception $e)
     {
-        if (strtoupper($type) === 'JSON') {
-            $this->sendJson($e->getMessage(), 500);
-        }
-
         $errorInfo     = [];
         $exceptionType = get_class($e);
 
@@ -48,20 +65,33 @@ abstract class AbstractController
                 $errorInfo['code'] = $e->getCode();
                 $errorInfo['msg']  = $e->getMessage();
 
+                break;
         }
 
         $this->loadView('default/error', ['error' => $errorInfo]);
+        exit();
+    }
+
+    /**
+     * @param mixed $errors
+     */
+    protected function handleJsonError($errors)
+    {
+        if (!is_array($errors)) {
+            $errors = [$errors];
+        }
+
+        $this->sendJson(['status' => 'error', 'errors' => $errors]);
     }
 
     /**
      * Return data as Json
      *
      * @param mixed $data
-     * @param string $statusCode
      */
-    protected function sendJson($data, $statusCode = '200')
+    protected function sendJson($data)
     {
-        header("HTTP/1.1 $statusCode OK");
+        header("HTTP/1.1 200 OK");
         header('Content-Type: application/json');
         echo json_encode($data);
         exit();
