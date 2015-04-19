@@ -153,8 +153,8 @@ insert into contacts (id, lastName, firstName, birthday) values (null, 'Napora',
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Jokiel', 'Greg', '1973-01-11 10:00:10');
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Baran', 'Piotr', '1963-03-28 09:45:12');
 ```
-Selenium integration testing
-============================
+Selenium acceptance testing
+===========================
 Set up Selenium (Mac, Linux ... should be similar on Windows boxes)
 * download selenium: http://docs.seleniumhq.org/download/
 * copy jar file somewhere safe cp ~/Downloads/chromedriver /usr/local/bin
