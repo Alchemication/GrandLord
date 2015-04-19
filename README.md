@@ -153,95 +153,45 @@ insert into contacts (id, lastName, firstName, birthday) values (null, 'Napora',
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Jokiel', 'Greg', '1973-01-11 10:00:10');
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Baran', 'Piotr', '1963-03-28 09:45:12');
 ```
-
-# Retrieve row(s) from controller using model's `find()` method
-
-* arguments -> find(array $bindParams = [], $where = '', $fields = '*')
-* returns -> dataset in the array format
-
-```php
-try {
-    // instantiate model
-    $contactModel = new ContactModel();
-
-    // retrieve all contacts from db
-    $allContacts = $contactModel->find();
-
-    // load view and pass data into it
-    $this->loadView('contact/display', ['contacts' => $allContacts]);
-
-} catch (\Exception $e) {
-
-    // on any exception - apply global error handler,
-    // and display default error page
-    $this->handleError($e);
-}
+Selenium integration testing
+============================
+Set up Selenium (Mac, Linux ... should be similar on Windows boxes)
+* download selenium: http://docs.seleniumhq.org/download/
+* copy jar file somewhere safe cp ~/Downloads/chromedriver /usr/local/bin
+* download Chrome Web Driver: http://chromedriver.storage.googleapis.com/index.html?path=2.15/
+* copy driver somewhere safe cp ~/Downloads/chromedriver /usr/local/bin
+* start Selecium server:
+```shell
+java -jar /usr/local/bin/selenium-server* -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
 ```
-
-# Insert row from controller using model's `insert()` method
-
-* arguments -> insert(array $bindParams)
-* returns -> dataset in the array format
-
-```php
-try {
-    // instantiate model
-    $contactModel = new ContactModel();
-
-    // insert a new contact (Tim)
-    $contactModel->insert([':firstName' => 'Tim', ':lastName' => 'Cook', ':birthday' => '1960-01-01 10:00:00']);
-
-} catch (\Exception $e) {
-
-    // on any exception - apply global error handler,
-    // and display default error page
-    $this->handleError($e);
-}
+* execute PHP tests from the root of projects:
+```shell
+php phpunit.phar
 ```
-
-# Update row(s) from controller using model's `update()` method
-
-* arguments -> update($fields, array $bindParams = [], $where = '')
-* returns -> number of updated rows
-
+* sample test class:
 ```php
-try {
-    // instantiate model
-    $contactModel = new ContactModel();
 
-    // update all records with firstName = Adam to Chris
-    $contactModel->update(
-        ['firstName'  => ':firstName'],
-        [':firstName' => 'Chris'],
-        "firstName = 'Adam'"
-    );
+<?php
+class HomeControllerTest extends PHPUnit_Extensions_SeleniumTestCase
+{
+    protected function setUp()
+    {
+        /**
+         * '*firefox' => Firefox 1 or 2
+         * '*iexplore' => Internet Explorer (all)
+         * '*custom /path/to/browser/binary => Other browsers (incl. Firefox on Linux)
+         * '*iehta' => Experimental Embedded IE
+         * '*chrome' => Experimental Firefox profile
+         */
+        $this->setBrowser('*chrome');
+        $this->setBrowserUrl('http://localhost/Grandlord/'); // set website being tested
+    }
 
-} catch (\Exception $e) {
-
-    // on any exception - apply global error handler,
-    // and display default error page
-    $this->handleError($e);
-}
-```
-
-# Delete row(s) from controller using model's `delete()` method
-
-* arguments -> delete(array $bindParams = [], $where = '')
-* returns -> number of deleted rows
-
-```php
-try {
-    // instantiate model
-    $contactModel = new ContactModel();
-
-    // delete all rows with id not null and name starting with Ad
-    $noOfRowsDeleted = $myModel->delete([':name' => 'Ad%'], 'id NOT NULL AND firstName LIKE :name');
-
-} catch (\Exception $e) {
-
-    // on any exception - apply global error handler,
-    // and display default error page
-    $this->handleError($e);
+    public function testTitle()
+    {
+        $this->open('http://localhost/Grandlord/home/index'); // open the index page
+        $this->assertTitle('Grandlord'); // make sure title matches expectation
+    }
 }
 ```
 
