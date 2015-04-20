@@ -19,11 +19,16 @@ class TenancyController extends AbstractController
     {
         // check if user already logged in
         if (isset($_SESSION['user_name'])) {
+
             // display user tenancies
             $loggedInUserId = 1;
 
-            $tenancyModel = new TenancyModel();
-            $myTenancies  = $tenancyModel->find('*', 'id = :id', [':id' => $loggedInUserId]);
+            try {
+                $tenancyModel = new TenancyModel();
+                $myTenancies  = $tenancyModel->findAll($loggedInUserId);
+            } catch (\Exception $e) {
+                $this->handleError($e);
+            }
 
             $this->loadView('tenancy/index', ['tenancies' => $myTenancies]);
         } else {
@@ -31,18 +36,7 @@ class TenancyController extends AbstractController
             $message = "Please login to view your tenancies.";
             $this->loadView('login/index',['message' => $message]);
         }
-        /*
-        $loggedInUserId = 1;
 
-        try {
-            $tenancyModel = new TenancyModel();
-            $myTenancies  = $tenancyModel->findAll($loggedInUserId);
-        } catch (\Exception $e) {
-            $this->handleError($e);
-        }
-
-        $this->loadView('tenancy/index', ['tenancies' => $myTenancies]);
-        */
     }
 
     /**

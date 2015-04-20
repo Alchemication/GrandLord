@@ -39,8 +39,10 @@
                            data-rate-neighbours="<?php escape($tenancy['rateNeighbours']); ?>"
                            data-rate-car-park-spaces="<?php escape($tenancy['rateCarParkSpaces']); ?>"
                            class="btn-edit-tenancy btn btn-primary btn-sm"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+
                         <a href="" data-id="<?php escape($tenancy['id']); ?>" class="btn-remove-tenancy btn btn-danger btn-sm">
                             <i class="glyphicon glyphicon-remove"></i> Remove</a>
+
                     </td>
                 </tr>
             <?php endforeach ?>

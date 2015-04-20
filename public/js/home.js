@@ -19,7 +19,10 @@
     };
 
     var addEventElement = function (tenancy) {
-        return '<li class="event">' +
+
+        console.log(tenancy);
+
+        return '<li class="event" data-date-from="' + tenancy.dateFrom + '" data-date-to="' + tenancy.dateTo + '">' +
                     '<h3>' +
                         '<input id="id_' + tenancy.id + '" name="rateUtilityCharges" data-show-clear="false" data-show-caption="false"' +
                             'data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">' +
@@ -49,6 +52,23 @@
     };
 
     $(function () {
+
+        $(document).on('click', '.event', function () {
+
+            var dateFrom = $(this).data('dateFrom'),
+                dateTo = $(this).data('dateTo');
+
+            $('#info-date-from').text(dateFrom);
+            $('#info-date-to').text(dateTo);
+
+            $('#info-rate-parking').rating('update', 4);
+            $('#info-neighbours').rating('update', 1);
+
+
+
+            $('.show-tenancy-detail').modal();
+
+        });
 
         // focus on search automatically
         $('#search-text-box').focus();
