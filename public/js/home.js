@@ -89,6 +89,8 @@
 
                     var html = '';
 
+                    yearsAppended = [];
+
                     if (!response.data.length) {
                         $('#no-results-found').show();
                     } else {
