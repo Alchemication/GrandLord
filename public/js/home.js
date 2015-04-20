@@ -19,6 +19,9 @@
     };
 
     var addEventElement = function (tenancy) {
+
+        console.log(tenancy);
+
         return '<li class="event">' +
                     '<h3>' +
                         '<input id="id_' + tenancy.id + '" name="rateUtilityCharges" data-show-clear="false" data-show-caption="false"' +
