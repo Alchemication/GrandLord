@@ -1,10 +1,9 @@
 <?php
-
 // =========================================
 // Front controller,
 // all requests need to go through this file
 // =========================================
-
+session_start();
 define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(dirname(__FILE__)));
 

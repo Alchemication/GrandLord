@@ -1,6 +1,4 @@
 
-<div class="jumbotron">
-
     <div class="form-group">
         <h2>Contact Us</h2>
     </div>
@@ -41,5 +39,3 @@
             </div>
         </div>
     </form>
-
-</div>

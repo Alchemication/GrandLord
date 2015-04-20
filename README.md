@@ -8,7 +8,7 @@ Application must have functionality
 1. Register User
 2. Login
 3. Search tenancy
-4. Tenancy 
+4. Tenancy
     -  Add (with rate)
     -  Edit
     -  Delete
@@ -18,55 +18,87 @@ Application must have functionality
 
 DB Schema
 ======================
-- user
-    - id (auto increment, INT 11, primary key)
-    - roleId: (INT 11) FOREIGN KEY (roleId) REFERENCES user_roles(id),
-    - username (VARCHAR 255)
-    - email (VARCHAR 255)
-    - password (VARCHAR 512)
-    - firstName (VARCHAR 255)
-    - secondName (VARCHAR 255)
-    - createdAt (DATETIME)
-    - updatedAt (DATETIME)
-    - active ('y' / 'n') (ENUM)
+```sql
 
-- user_roles
-    - id (auto increment, INT 11, primary key)
-    - name ('tenant' / 'landlord' / 'admin') (ENUM)
+CREATE TABLE `activities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `activityDesc` varchar(255) NOT NULL,
+  `addedAt` datetime NOT NULL,
+  `addedBy` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-- property
-    - id (auto increment, INT 11, primary key)
-    - buildingNumber (INT 11)
-    - street (VARCHAR 255)
-    - county (dropdown) (VARCHAR 125)
-    - city (dropdown) (VARCHAR 125)
-    - addedBy (INT 11)
-    - addedAt (DATETIME)
-    - active ('y' / 'n')
-    
-- tenancy
-    - id (auto increment, INT 11, primary key)
-    - propertyId (INT 11)
-    - dateFrom (DATE)
-    - dateTo (DATE)
-    - rateContactWithLandlord (1 to 5) ENUM
-    - rateFlatQuality (1 to 5) ENUM
-    - rateCleanliness (1 to 5) ENUM
-    - ratePropertyState (1 to 5) ENUM
-    - rateOverallSatisfaction (1 to 5) ENUM
-    - rateAvg (1 to 5) DECIMAL
-    - comment (TEXT)
-    - addedBy (INT 11)
-    - addedAt (DATETIME)
-    - updatedAt (DATETIME)
-    - active ENUM ('y', 'n')
+CREATE TABLE `contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lastName` varchar(30) NOT NULL,
+  `firstName` varchar(25) NOT NULL,
+  `birthday` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
-- activity
-    - id (auto increment, INT 11, primary key)
-    - activityDesc (VARCHAR 255)
-    - addedAt (DATETIME)
-    - addedBy (INT 11)
-    
+CREATE TABLE `properties` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `buildingNumber` int(11) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `county` varchar(125) NOT NULL,
+  `city` varchar(125) NOT NULL,
+  `addedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL,
+  `active` enum('y','n') NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `tenancies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `propertyId` int(11) NOT NULL,
+  `dateFrom` date NOT NULL,
+  `dateTo` date NOT NULL,
+  `rateLandlordApproach` enum('1','2','3','4','5') NOT NULL,
+  `rateQualityOfEquipment` enum('1','2','3','4','5') NOT NULL,
+  `rateUtilityCharges` enum('1','2','3','4','5') NOT NULL,
+  `rateBroadbandAccessibility` enum('1','2','3','4','5') NOT NULL,
+  `rateNeighbours` enum('1','2','3','4','5') NOT NULL,
+  `rateCarParkSpaces` enum('1','2','3','4','5') NOT NULL,
+  `comment` text DEFAULT NULL,
+  `addedBy` int(11) NOT NULL,
+  `addedAt` datetime NOT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `active` enum('y','n') NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `propertyId_fk` (`propertyId`),
+  CONSTRAINT `propertyId_fk` FOREIGN KEY (`propertyId`) REFERENCES `properties` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `user_roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` enum('tenant','landlord','admin') NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roleId` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(512) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `secondName` varchar(255) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `active` enum('y','n') NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `roleId_fk` (`roleId`),
+  CONSTRAINT `roleId_fk` FOREIGN KEY (`roleId`) REFERENCES `user_roles` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `lookups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lookupType` varchar(25) NOT NULL,
+  `lookupValue` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+```
 
 Setup
 ======================
@@ -77,15 +109,15 @@ Setup
 
 Generic Terms (MVC)
 ======================
-1. Model handles all our database/business logic. Using the model we connect to our database and provide an abstraction layer. All models need to extend 
+1. Model handles all our database/business logic. Using the model we connect to our database and provide an abstraction layer. All models need to extend
 AbstractModel.
-2. Single Controller represents one use case and controls relation between URLs and app logic. ALl controllers need to extend 
+2. Single Controller represents one use case and controls relation between URLs and app logic. ALl controllers need to extend
 the AbstractController.
 3. View represents our presentation i.e our HTML/XML/JSON code.
 
 Project Structure
 ======================
-* application – application specific code 
+* application – application specific code
 * application/config – database/server configuration
 * library – re-usable items (framework code)
 * public – application specific js/css/images
@@ -103,12 +135,12 @@ could be in the views/items/list.php, where list.php is whatever you want it to 
 Database CRUD examples
 ======================
 
-This assumes that you have a database created 
+This assumes that you have a database created
 and one table called `contacts` created like this one:
 
 ```sql
 CREATE TABLE contacts
-( 
+(
   id INT(11) NOT NULL AUTO_INCREMENT,
   lastName VARCHAR(30) NOT NULL,
   firstName VARCHAR(25),
@@ -121,104 +153,54 @@ insert into contacts (id, lastName, firstName, birthday) values (null, 'Napora',
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Jokiel', 'Greg', '1973-01-11 10:00:10');
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Baran', 'Piotr', '1963-03-28 09:45:12');
 ```
-
-# Retrieve row(s) from controller using model's `find()` method
-
-* arguments -> find(array $bindParams = [], $where = '', $fields = '*')
-* returns -> dataset in the array format
-
-```php
-try {
-    // instantiate model
-    $contactModel = new ContactModel();
-
-    // retrieve all contacts from db
-    $allContacts = $contactModel->find();
-
-    // load view and pass data into it
-    $this->loadView('contact/display', ['contacts' => $allContacts]);
-
-} catch (\Exception $e) {
-
-    // on any exception - apply global error handler,
-    // and display default error page
-    $this->handleError($e);
-}
+Selenium acceptance testing
+===========================
+Set up Selenium (Mac, Linux ... should be similar on Windows boxes)
+* download selenium: http://docs.seleniumhq.org/download/
+* copy jar file somewhere safe cp ~/Downloads/chromedriver /usr/local/bin
+* download Chrome Web Driver: http://chromedriver.storage.googleapis.com/index.html?path=2.15/
+* copy driver somewhere safe cp ~/Downloads/chromedriver /usr/local/bin
+* start Selecium server:
+```shell
+java -jar /usr/local/bin/selenium-server* -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
 ```
-
-# Insert row from controller using model's `insert()` method
-
-* arguments -> insert(array $bindParams)
-* returns -> dataset in the array format
-
-```php
-try {
-    // instantiate model
-    $contactModel = new ContactModel();
-
-    // insert a new contact (Tim)
-    $contactModel->insert([':firstName' => 'Tim', ':lastName' => 'Cook', ':birthday' => '1960-01-01 10:00:00']);
-
-} catch (\Exception $e) {
-
-    // on any exception - apply global error handler,
-    // and display default error page
-    $this->handleError($e);
-}
+* execute PHP tests from the root of projects:
+```shell
+php phpunit.phar
 ```
-
-# Update row(s) from controller using model's `update()` method
-
-* arguments -> update($fields, array $bindParams = [], $where = '')
-* returns -> number of updated rows
-
+* sample test class:
 ```php
-try {
-    // instantiate model
-    $contactModel = new ContactModel();
 
-    // update all records with firstName = Adam to Chris
-    $contactModel->update(
-        ['firstName'  => ':firstName'],
-        [':firstName' => 'Chris'], 
-        "firstName = 'Adam'"
-    );
+<?php
+class HomeControllerTest extends PHPUnit_Extensions_SeleniumTestCase
+{
+    protected function setUp()
+    {
+        /**
+         * '*firefox' => Firefox 1 or 2
+         * '*iexplore' => Internet Explorer (all)
+         * '*custom /path/to/browser/binary => Other browsers (incl. Firefox on Linux)
+         * '*iehta' => Experimental Embedded IE
+         * '*chrome' => Experimental Firefox profile
+         */
+        $this->setBrowser('*chrome');
+        $this->setBrowserUrl('http://localhost/Grandlord/'); // set website being tested
+    }
 
-} catch (\Exception $e) {
-
-    // on any exception - apply global error handler,
-    // and display default error page
-    $this->handleError($e);
-}
-```
-
-# Delete row(s) from controller using model's `delete()` method
-
-* arguments -> delete(array $bindParams = [], $where = '')
-* returns -> number of deleted rows
-
-```php
-try {
-    // instantiate model
-    $contactModel = new ContactModel();
-
-    // delete all rows with id not null and name starting with Ad
-    $noOfRowsDeleted = $myModel->delete([':name' => 'Ad%'], 'id NOT NULL AND firstName LIKE :name');
-
-} catch (\Exception $e) {
-
-    // on any exception - apply global error handler,
-    // and display default error page
-    $this->handleError($e);
+    public function testTitle()
+    {
+        $this->open('http://localhost/Grandlord/home/index'); // open the index page
+        $this->assertTitle('Grandlord'); // make sure title matches expectation
+    }
 }
 ```
 
 URL mapping
 ======================
 * The way URLs work is by using a front controller pattern. Front controller is the public/index.php file and
-it's role is to map the URL into controller and function. This provides nice and clean URLs and 
-an easy to understand/standardised structure to our application. 
-* For example Url: login/index means that we will write the code in the LoginController and the 
+it's role is to map the URL into controller and function. This provides nice and clean URLs and
+an easy to understand/standardised structure to our application.
+* For example Url: login/index means that we will write the code in the LoginController and the
 method inside it called indexAction(). Inside indexAction() then we can do whatever is required to do (connect to db, show HTML
 page, return XML/Json data structures or even display an error page).
 

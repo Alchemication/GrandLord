@@ -19,26 +19,31 @@
     <!-- Custom styles -->
     <link href="<?php echo BASE_URL ?>/public/css/justified-nav.css" rel="stylesheet">
     <link href="<?php echo BASE_URL ?>/public/css/stylesG.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo BASE_URL ?>/public/css/global.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
 <div class="container">
-    <div class="wrapper">
+    <div class="wrapper rel">
+
+        <div class="abs flash alert not-displayed"></div>
+
         <div class="masthead">
 
             <div class="topNav">
                 <text class="text-muted"><a href="<?php echo BASE_URL ?>/home/index"> <img alt="Grandlord" src="<?php echo BASE_URL ?>/img/logoGr.png"></a></text>
-                <button type="submit" class="btn btn-success  pull-right btn-margin-left"onclick="location.href='<?php echo BASE_URL ?>/login/index'">Sign in</button>
-                <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/register/index'">Register</button>
-
+                <?php if (!isset($_SESSION['user_name'])): ?>
+                    <button type="submit" class="btn btn-success  pull-right btn-margin-left" onclick="location.href='<?php echo BASE_URL ?>/login/index'">Sign in</button>
+                    <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/register/index'">Register</button>
+                <?php else: ?>
+                    <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/login/logout'">Log out</button>
+                <?php endif ?>
             </div>
         </div>
 
         <nav>
             <ul class="nav nav-justified">
-                <!-- class="active" to be defined -->
-
                 <li class="<?php if ($currentView === 'home/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/home/index">Home</a></li>
                 <li class="<?php if ($currentView === 'search/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/search/index">Search</a></li>
                 <li class="<?php if ($currentView === 'tenancy/index') { echo 'active'; } ?>"><a href="<?php echo BASE_URL ?>/tenancy/index">My Tenancies</a></li>

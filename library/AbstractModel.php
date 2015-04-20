@@ -23,20 +23,18 @@ abstract class AbstractModel extends PDO
     protected $table;
 
     /**
-     * Connect to db when model is instantiated
+     * Connect to the db when model is instantiated
      */
     public function __construct()
     {
         if (!$this->connection) {
-            $this->connection = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
+            $this->connection = @new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASSWORD);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
     }
 
     /**
      * Get data from db.
-     * Example:
-     *     $data = $myModel->find(); // get all data from table
      *
      * @param string $fields
      * @param string $where
@@ -50,7 +48,7 @@ abstract class AbstractModel extends PDO
         }
 
         $where = $where ? "WHERE $where" : '';
-        $query = "SELECT $fields FROM $this->table $where";
+        $query = "SELECT $fields FROM $this->table t $where";
 
         return $this->getResults($query, $bindParams);
     }
@@ -66,7 +64,7 @@ abstract class AbstractModel extends PDO
             throw new BadMethodCallException('Property table is not defined in the model');
         }
 
-        $result = $this->getResults("SELECT * FROM $this->table WHERE id = :id", [':id' => $id]);
+        $result = $this->getResults("SELECT * FROM $this->table t WHERE id = :id", [':id' => $id]);
 
         if (!count($result)) {
             return null;
@@ -90,11 +88,11 @@ abstract class AbstractModel extends PDO
     /**
      * Insert into db.
      * Example:
-     *     $noOfRows = $myModel->insert([':firstName' => 'Adam']);
+     *     $lastInsertId = $myModel->insert([':firstName' => 'Adam']);
      *
      * For details:
-     * @see http://php.net/manual/en/pdo.prepared-statements.php
      *
+     * @see http://php.net/manual/en/pdo.prepared-statements.php
      * @param array $bindParams
      * @return int
      */
@@ -116,17 +114,11 @@ abstract class AbstractModel extends PDO
 
         $stmt->execute($bindParams);
 
-        return $stmt->rowCount();
+        return $this->connection->lastInsertId();
     }
 
     /**
      * Update row(s) in db.
-     * Example:
-     *     $noOfUpdatedRows = $myModel->update(
-     *         ['firstName' => ':firstName'],
-     *         'firstName = :oldName'
-     *         [':firstName' => 'Chris', ':oldName' = 'Adam']
-     *     );
      *
      * @param $fields
      * @param string $where
@@ -140,7 +132,7 @@ abstract class AbstractModel extends PDO
         }
 
         $where = $where ? "WHERE $where" : '';
-        $stmt  = $this->connection->prepare("UPDATE $this->table SET $fields $where");
+        $stmt  = $this->connection->prepare("UPDATE $this->table t SET $fields $where");
 
         $stmt->execute($bindParams);
 
@@ -149,8 +141,6 @@ abstract class AbstractModel extends PDO
 
     /**
      * Delete row(s) from db.
-     * Example:
-     *     $noOfRowsDeleted = $myModel->delete('id NOT NULL AND firstName LIKE :name', [':name' => '%Ad']);
      *
      * @param string $where
      * @param array $bindParams
@@ -163,7 +153,7 @@ abstract class AbstractModel extends PDO
         }
 
         $where = $where ? "WHERE $where" : '';
-        $stmt  = $this->connection->prepare("DELETE FROM $this->table $where");
+        $stmt  = $this->connection->prepare("DELETE FROM $this->table t $where");
 
         $stmt->execute($bindParams);
 

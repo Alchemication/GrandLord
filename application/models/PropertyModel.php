@@ -224,6 +224,32 @@ class PropertyModel extends AbstractModel
     }
 
     /**
+     * Check if property already exists
+     *
+     * @return bool
+     */
+    public function exists()
+    {
+        $where = implode(' AND ', [
+            'buildingNumber = :buildingNumber',
+            'street = :street',
+            'county = :county',
+            'city = :city'
+        ]);
+
+        $params = [
+            ':buildingNumber' => $this->buildingNumber,
+            ':street'         => $this->street,
+            ':county'         => $this->county,
+            ':city'           => $this->city,
+        ];
+
+        $result = $this->find('*', $where, $params);
+
+        return count($result) > 0;
+    }
+
+    /**
      * Save new property
      *
      * @return int
@@ -247,7 +273,7 @@ class PropertyModel extends AbstractModel
      * @param array $property
      * @return string
      */
-    private function stringifyAddress(array $property)
+    public function stringifyAddress(array $property)
     {
         return $property['buildingNumber'] . ', ' . ucfirst($property['street']) . ', ' . ucfirst($property['city']);
     }
@@ -274,5 +300,13 @@ class PropertyModel extends AbstractModel
         }, $terms);
 
         return implode(' ', $terms);
+    }
+
+    /**
+     * @return string
+     */
+    public function toString()
+    {
+        return $this->buildingNumber . ', ' . ucfirst($this->street) . ', ' . ucfirst($this->city);
     }
 }

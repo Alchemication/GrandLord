@@ -240,11 +240,11 @@ class UserModel extends AbstractModel
      * @param UserModel $user
      * @return array
      */
-    public function findUser(UserModel $user)
+    public function findUser()
     {
         return $this->find('*','username = :username AND password = :password',[
-            ':username' => $user->getUsername(), // bind username
-            ':password' => $user->getPassword()  // bind password
+            ':username' => $this->getUsername(), // bind username
+            ':password' => hash('sha512', $this->getPassword())  // bind password
         ]);
     }
 
@@ -271,13 +271,15 @@ class UserModel extends AbstractModel
     /**
      * Retrieve user data by username
      *
-     * @param UserModel $user
+     * @param string
      * @return array
      */
-    public function checkUserName(UserModel $user)
+    public function userExists($userName)
     {
         return $this->find("*",'username = :username', [
-            ':username' => $user->getUsername() // bind username
+            ':username' => $userName // bind username
         ]);
     }
+
+
 }
