@@ -45,7 +45,7 @@
 
                     <div class="form-group">
 
-                        <label for="rateLandlordApproach" class="col-sm-2 control-label">Landlord's approach</label>
+                        <label for="rate-Landlord-Approach" class="col-sm-2 control-label">Landlord's approach</label>
                         <div class="col-sm-2">
                             <input id="rateLandlordApproach" name="rateLandlordApproach" data-show-clear="false" data-show-caption="false"
                                    data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
