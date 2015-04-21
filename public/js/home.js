@@ -22,14 +22,14 @@
 
         console.log(tenancy);
 
-        return '<li class="event" data-date-from="' + tenancy.dateFrom + '" data-date-to="' + tenancy.dateTo + '">' +
+        return '<li class="event" data-date-from="' + tenancy.dateFrom + '" data-date-to="' + tenancy.dateTo + '" data-rate-neighbours="' + tenancy.rateNeighbours + '" data-rate-car-park-spaces="' + tenancy.rateCarParkSpaces + '">' +
                     '<h3>' +
                         '<input id="id_' + tenancy.id + '" name="rateUtilityCharges" data-show-clear="false" data-show-caption="false"' +
                             'data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">' +
                     '</h3>' +
                     '<h4>From ' + tenancy.dateFrom + ' to ' + tenancy.dateTo + '<i class="glyphicon glyphicon-comment"></i></h4>' +
                     '<p>' + tenancy.comment + '</p>' +
-                '</li>';
+                    '</li>';
     };
 
     var makeListElements = function (years, tenancy) {
@@ -56,13 +56,19 @@
         $(document).on('click', '.event', function () {
 
             var dateFrom = $(this).data('dateFrom'),
-                dateTo = $(this).data('dateTo');
+                dateTo = $(this).data('dateTo'),
+                rateNeighbours = $(this).data('rateNeighbours'),
+                rateParkingV = $(this).data('rateCarParkSpaces');
+
 
             $('#info-date-from').text(dateFrom);
             $('#info-date-to').text(dateTo);
+            $('#info-rate-neighbours').text(rateNeighbours);
+            $('#info-rate-parkingV').text(rateParkingV);
 
-            $('#info-rate-parking').rating('update', 4);
-            $('#info-neighbours').rating('update', 1);
+            $('#info-rate-parking').rating('update', rateParkingV);
+            $('#info-neighbours').rating('update', rateNeighbours);
+
 
 
 
