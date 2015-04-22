@@ -12,3 +12,21 @@ body {
 .btn-margin-left {
     margin-left: 4px;
 }
+
+.footerCenter {
+    text-align: center;
+}
+
+.pageTitle{
+    text-align: center;
+}
+
+#aboutContent{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+
+
+
+}

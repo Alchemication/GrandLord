@@ -1,6 +1,6 @@
 
     <div class="form-group">
-        <h2>Contact Us</h2>
+        <h2 class="pageTitle">Contact Us</h2>
     </div>
 
     <form class="form-horizontal">
