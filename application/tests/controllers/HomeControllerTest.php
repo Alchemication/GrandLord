@@ -6,7 +6,7 @@
  * Time: 12:31
  */
 
-class HomeControllerTest extends PHPUnit_Extensions_SeleniumTestCase
+class HomeControllerTest extends PHPUnit_Extensions_Selenium2TestCase
 {
     protected function setUp()
     {
@@ -17,13 +17,42 @@ class HomeControllerTest extends PHPUnit_Extensions_SeleniumTestCase
          * '*iehta' => Experimental Embedded IE
          * '*chrome' => Experimental Firefox profile
          */
-        $this->setBrowser('*chrome');
+        $this->setHost('localhost');
+        $this->setPort(4444);
+        $this->setBrowser('*firefox');
         $this->setBrowserUrl('http://localhost/Grandlord/'); // set website being tested
     }
 
     public function testTitle()
     {
-        $this->open('http://localhost/Grandlord/home/index'); // open the index page
-        $this->assertTitle('Grandlord');
+        $this->url('home/index'); // open the home page
+        $this->assertEquals('Grandlord', $this->title());
+    }
+
+    public function testCanSeeEmptySearchTextBox()
+    {
+        $this->url('home/index'); // open the home page
+
+        // find input box
+        $textBox = $this->byId('search-text-box');
+
+        // assert it's initially empty
+        $this->assertEquals('', $textBox->attribute('value'));
+    }
+
+    public function testCanFillOutSearchInputTextbox()
+    {
+        $this->url('home/index'); // open the home page
+
+        // fill out input box
+        $this->byId('search-text-box')->value('41 Douglas house');
+
+        // wait max 5 secs for results
+        $this->waitUntil(function () {
+            if ($this->byCssSelector('span.twitter-typeahead')) {
+                return true;
+            }
+            return false;
+        }, 5000);
     }
 }

@@ -153,26 +153,25 @@ insert into contacts (id, lastName, firstName, birthday) values (null, 'Napora',
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Jokiel', 'Greg', '1973-01-11 10:00:10');
 insert into contacts (id, lastName, firstName, birthday) values (null, 'Baran', 'Piotr', '1963-03-28 09:45:12');
 ```
+
 Selenium acceptance testing
 ===========================
 Set up Selenium (Mac, Linux ... should be similar on Windows boxes)
 * download selenium: http://docs.seleniumhq.org/download/
 * copy jar file somewhere safe cp ~/Downloads/chromedriver /usr/local/bin
-* download Chrome Web Driver: http://chromedriver.storage.googleapis.com/index.html?path=2.15/
-* copy driver somewhere safe cp ~/Downloads/chromedriver /usr/local/bin
-* start Selecium server:
+* start Selenium server:
 ```shell
-java -jar /usr/local/bin/selenium-server* -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
+java -jar /usr/local/bin/selenium-server* (use version downloaded)
 ```
 * execute PHP tests from the root of projects:
 ```shell
-php phpunit.phar
+php phpunit.phar -c .
 ```
 * sample test class:
 ```php
 
 <?php
-class HomeControllerTest extends PHPUnit_Extensions_SeleniumTestCase
+class HomeControllerTest extends PHPUnit_Extensions_Selenium2TestCase
 {
     protected function setUp()
     {
@@ -183,14 +182,27 @@ class HomeControllerTest extends PHPUnit_Extensions_SeleniumTestCase
          * '*iehta' => Experimental Embedded IE
          * '*chrome' => Experimental Firefox profile
          */
-        $this->setBrowser('*chrome');
+        $this->setHost('localhost');
+        $this->setPort(4444);
+        $this->setBrowser('*firefox');
         $this->setBrowserUrl('http://localhost/Grandlord/'); // set website being tested
     }
 
     public function testTitle()
     {
-        $this->open('http://localhost/Grandlord/home/index'); // open the index page
-        $this->assertTitle('Grandlord'); // make sure title matches expectation
+        $this->url('home/index'); // open the home page
+        $this->assertEquals('Grandlord', $this->title());
+    }
+
+    public function testCanSeeEmptySearchTextBox()
+    {
+        $this->url('home/index'); // open the home page
+
+        // find input box
+        $textBox = $this->byId('search-text-box');
+
+        // assert it's initially empty
+        $this->assertEquals('', $textBox->attribute('value'));
     }
 }
 ```
