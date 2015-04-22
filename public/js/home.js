@@ -22,7 +22,9 @@
 
         console.log(tenancy);
 
-        return '<li class="event" data-date-from="' + tenancy.dateFrom + '" data-date-to="' + tenancy.dateTo + '" data-rate-neighbours="' + tenancy.rateNeighbours + '" data-rate-car-park-spaces="' + tenancy.rateCarParkSpaces + '">' +
+        return '<li class="event" data-date-from="' + tenancy.dateFrom + '" data-date-to="' + tenancy.dateTo + '" data-rate-neighbours="' + tenancy.rateNeighbours + '" data-rate-car-park-spaces="' + tenancy.rateCarParkSpaces
+            + '" data-rate-landlord-approach="' + tenancy.rateLandlordApproach  + '" data-rate-quality-of-equipment="' + tenancy.rateQualityOfEquipment + '" data-rate-utility-charges="'
+            +   tenancy.rateUtilityCharges + '" data-rate-broadband-accessibility="' + tenancy.rateBroadbandAccessibility + '" data-comment="' + tenancy.comment +'">' +
                     '<h3>' +
                         '<input id="id_' + tenancy.id + '" name="rateUtilityCharges" data-show-clear="false" data-show-caption="false"' +
                             'data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">' +
@@ -58,19 +60,23 @@
             var dateFrom = $(this).data('dateFrom'),
                 dateTo = $(this).data('dateTo'),
                 rateNeighbours = $(this).data('rateNeighbours'),
-                rateParkingV = $(this).data('rateCarParkSpaces');
-
+                rateParkingV = $(this).data('rateCarParkSpaces'),
+                rateLandlordApproach = $(this).data('rateLandlordApproach'),
+                rateUtilityCharges = $(this).data('rateUtilityCharges'),
+                rateBroadbandAccessibility = $(this).data('rateBroadbandAccessibility'),
+                rateQualityOfEquipment = $(this).data('rateQualityOfEquipment'),
+                comment = $(this).data('comment');
 
             $('#info-date-from').text(dateFrom);
             $('#info-date-to').text(dateTo);
-            $('#info-rate-neighbours').text(rateNeighbours);
-            $('#info-rate-parkingV').text(rateParkingV);
 
             $('#info-rate-parking').rating('update', rateParkingV);
             $('#info-neighbours').rating('update', rateNeighbours);
-
-
-
+            $('#info-LandlordApproach').rating('update', rateLandlordApproach);
+            $('#info-QualityOfEquipment').rating('update', rateQualityOfEquipment);
+            $('#info-BroadbandAccessibility').rating('update', rateBroadbandAccessibility);
+            $('#info-UtilityCharges').rating('update', rateUtilityCharges);
+            $('#info-comment').text(comment);
 
             $('.show-tenancy-detail').modal();
 

@@ -37,7 +37,7 @@
             <form class="form-horizontal show-tenancy-detail-form" action="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Tenancy details for stay form   <text id="info-date-from"></text> to <text id="info-date-to"></text></h4>
+                    <h4 class="modal-title">Tenancy stay form   <text id="info-date-from"></text> to <text id="info-date-to"></text></h4>
                 </div>
                 <div class="modal-body" style="padding-right: 55px !important;">
 
@@ -45,22 +45,22 @@
 
                     <div class="form-group">
 
-                        <label for="rate-Landlord-Approach" class="col-sm-2 control-label">Landlord's approach</label>
+                        <label for="info-LandlordApproach" class="col-sm-2 control-label">Landlord's approach</label>
                         <div class="col-sm-2">
-                            <input id="rateLandlordApproach" name="rateLandlordApproach" data-show-clear="false" data-show-caption="false"
-                                   data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
+                            <input id="info-LandlordApproach" name="info-LandlordApproach" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
                         </div>
 
-                        <label for="rateQualityOfEquipment" class="col-sm-2 control-label">Quality of equipment</label>
+                        <label for="info-QualityOfEquipment" class="col-sm-2 control-label">Quality of equipment</label>
                         <div class="col-sm-2">
-                            <input id="rateQualityOfEquipment" name="rateQualityOfEquipment" data-show-clear="false" data-show-caption="false"
-                                   data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
+                            <input id="info-QualityOfEquipment" name="info-QualityOfEquipment" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
                         </div>
 
-                        <label for="rateUtilityCharges" class="col-sm-2 control-label">Utility charges</label>
+                        <label for="info-UtilityCharges" class="col-sm-2 control-label">Utility charges</label>
                         <div class="col-sm-2">
-                            <input id="rateUtilityCharges" name="rateUtilityCharges" data-show-clear="false" data-show-caption="false"
-                                   data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
+                            <input id="info-UtilityCharges" name="info-UtilityCharges" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
                         </div>
 
                     </div>
@@ -68,22 +68,22 @@
                     <div class="form-group">
 
 
-                        <label for="rateBroadbandAccessibility" class="col-sm-2 control-label">Broadband accessibility</label>
+                        <label for="info-BroadbandAccessibility" class="col-sm-2 control-label">Broadband accessibility</label>
                         <div class="col-sm-2">
-                            <input id="rateBroadbandAccessibility" name="rateBroadbandAccessibility" data-show-clear="false" data-show-caption="false"
-                                   data-size="xs" class="rating" data-min="0" data-max="5" data-step="1">
+                            <input id="info-BroadbandAccessibility" name="info-BroadbandAccessibility" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
                         </div>
 
                         <label for="info-neighbours" class="col-sm-2 control-label">Neighbours</label>
                         <div class="col-sm-2">
                             <input id="info-neighbours" name="info-neighbours" data-show-clear="false" data-show-caption="false"
-                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                                   data-size="xs" data-disabled="true" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
                         </div>
 
                         <label for="info-rate-parking" class="col-sm-2 control-label">CarPark spaces</label>
                         <div class="col-sm-2">
                             <input id="info-rate-parking" name="info-rate-parking" data-show-clear="false" data-show-caption="false"
-                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                                   data-size="xs" data-disabled="true" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
                         </div>
 
                     </div>
@@ -91,10 +91,10 @@
                     <div  class="form-group">
                         <label for="inputQuery3" class="col-sm-2 control-label">Comment</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="comment" name="comment" rows="3" ></textarea>
+                            <textarea readonly class="form-control" id="info-comment" name="info-comment" rows="3"  ></textarea>
                         </div>
                     </div>
-
+                    </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
