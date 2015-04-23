@@ -29,7 +29,7 @@
                         '<input id="id_' + tenancy.id + '" name="rateUtilityCharges" data-show-clear="false" data-show-caption="false"' +
                             'data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">' +
                     '</h3>' +
-                    '<h4>From ' + tenancy.dateFrom + ' to ' + tenancy.dateTo + '<i class="glyphicon glyphicon-comment"></i></h4>' +
+                    '<h4>From ' + tenancy.dateFrom + ' to ' + tenancy.dateTo + '</h4>' +
                     '<p>' + tenancy.comment + '</p>' +
                     '</li>';
     };
