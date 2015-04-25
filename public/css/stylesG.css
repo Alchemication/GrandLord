@@ -12,3 +12,40 @@ body {
 .btn-margin-left {
     margin-left: 4px;
 }
+
+.footerCenter {
+    text-align: center;
+}
+
+.pageTitle{
+    text-align: center;
+    color: #5e5e5e;
+
+}
+.btnSubmitCenter{
+    text-align: center;
+
+
+}
+
+#contactContact{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+#aboutContent{
+
+    text-align: center;
+    margin-left: auto;
+     margin-right: auto;
+     width: 70%;
+ }
+
+#aboutMedia{
+
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+
+}

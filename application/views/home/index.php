@@ -32,27 +32,70 @@
 
 
 <div class="modal fade show-tenancy-detail">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="form-horizontal remove-tenancy-form" action="post">
+            <form class="form-horizontal show-tenancy-detail-form" action="post">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Info</h4>
+                    <h4 class="modal-title">Tenancy stay form   <text id="info-date-from"></text> to <text id="info-date-to"></text></h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="padding-right: 55px !important;">
 
-                    <h3>Hello</h3>
 
-                    <h4 id="info-date-from"></h4>
-                    <h4 id="info-date-to"></h4>
 
-                    <input id="info-rate-parking" name="info-rate-parking" data-show-clear="false" data-show-caption="false"
-                        data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                    <div class="form-group">
 
-                    <input id="info-neighbours" name="info-neighbours" data-show-clear="false" data-show-caption="false"
-                           data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                        <label for="info-LandlordApproach" class="col-sm-2 control-label">Landlord's approach</label>
+                        <div class="col-sm-2">
+                            <input id="info-LandlordApproach" name="info-LandlordApproach" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                        </div>
 
-                </div>
+                        <label for="info-QualityOfEquipment" class="col-sm-2 control-label">Quality of equipment</label>
+                        <div class="col-sm-2">
+                            <input id="info-QualityOfEquipment" name="info-QualityOfEquipment" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                        </div>
+
+                        <label for="info-UtilityCharges" class="col-sm-2 control-label">Utility charges</label>
+                        <div class="col-sm-2">
+                            <input id="info-UtilityCharges" name="info-UtilityCharges" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+
+                        <label for="info-BroadbandAccessibility" class="col-sm-2 control-label">Broadband accessibility</label>
+                        <div class="col-sm-2">
+                            <input id="info-BroadbandAccessibility" name="info-BroadbandAccessibility" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                        </div>
+
+                        <label for="info-neighbours" class="col-sm-2 control-label">Neighbours</label>
+                        <div class="col-sm-2">
+                            <input id="info-neighbours" name="info-neighbours" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                        </div>
+
+                        <label for="info-rate-parking" class="col-sm-2 control-label">CarPark spaces</label>
+                        <div class="col-sm-2">
+                            <input id="info-rate-parking" name="info-rate-parking" data-show-clear="false" data-show-caption="false"
+                                   data-size="xs" data-disabled="true" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">
+                        </div>
+
+                    </div>
+
+                    <div  class="form-group">
+                        <label for="inputQuery3" class="col-sm-2 control-label">Comment</label>
+                        <div class="col-sm-10">
+                            <textarea readonly class="form-control" id="info-comment" name="info-comment" rows="3"  ></textarea>
+                        </div>
+                    </div>
+                    </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
                         Close

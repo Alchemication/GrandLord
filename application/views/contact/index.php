@@ -1,6 +1,6 @@
-
+<div id="contactContact">
     <div class="form-group">
-        <h2>Contact Us</h2>
+        <h2 class="pageTitle">Contact Us</h2>
     </div>
 
     <form class="form-horizontal">
@@ -21,6 +21,7 @@
         <div class="form-group">
             <label for="inputPhone3" class="col-sm-2 control-label">Your Phone Number</label>
             <div class="col-sm-10">
+
                 <input type="text" class="form-control" id="inputPhone3" placeholder="Phone Number">
             </div>
         </div>
@@ -33,8 +34,11 @@
         </div>
 
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
+
+            <div class="col-sm-offset-2 col-sm-10"  >
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
         </div>
+
     </form>
+</div>

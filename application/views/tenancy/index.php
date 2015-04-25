@@ -4,7 +4,7 @@
 <?php $newTenancyInfo = !count($tenancies) ? 'Your first' : 'New'; ?>
 
     <div class="form-group">
-        <h2>Add Tenancy</h2>
+        <h2 class="pageTitle">My Tenancies</h2>
     </div>
 
 <br/>

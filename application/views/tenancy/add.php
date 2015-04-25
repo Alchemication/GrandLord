@@ -82,7 +82,9 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
+                <div class="btnSubmitCenter">
                 <button type="submit" class="btn btn-success btn-add-tenancy">Submit</button>
+                </div>
             </div>
         </div>
     </form>

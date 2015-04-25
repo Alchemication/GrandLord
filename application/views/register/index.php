@@ -27,7 +27,7 @@
             </p>
 
             <p>
-                <label for="email" class="text-muted">Email</label>
+                <label for="email" class="text-muted">Your Email</label>
                 <input type="email" id="email" name="email"/>
             </p>
             <p>
@@ -51,7 +51,7 @@
             </p>
 
             <p>
-                <label for="email" class="text-muted">Email</label>
+                <label for="email" class="text-muted">Your Email</label>
                 <input type="email" id="email" name="email" value="<?php echo $user->getEmail() ?>"/>
             </p>
             <p>

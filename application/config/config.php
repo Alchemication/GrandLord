@@ -17,6 +17,7 @@ define('NOT_FOUND_DEFAULT_ROUTE', 'home/index');
 define('DB_NAME', 'grandlord');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
+
 define('DB_HOST', '127.0.0.1');
 
 // add app global constants here
@@ -27,3 +28,4 @@ define('MYSQL_TIME_FORMAT', 'H:i:s');
 // highly recommended to set to true,
 // global input sanitizing method
 define('GLOBAL_XSS_PROTECTION', true);
+

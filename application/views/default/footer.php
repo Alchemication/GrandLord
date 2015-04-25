@@ -2,7 +2,7 @@
 
 <!-- Site footer -->
 <footer class="footer">
-    <p>©Grandlord</p>
+    <div class="footerCenter"><p>©Grandlord - Software Project - CIT 2015</p></div>
 </footer>
 </div> <!-- /wrapper -->
 </div> <!-- /container -->
