@@ -87,7 +87,7 @@
     width: 45%;
     background-color: #fff;
     margin-bottom: 20px;
-    padding: 20px;
+    padding: 10px;
     position: relative;
     border-radius: 3px;
     -moz-border-radius: 3px;
@@ -104,6 +104,10 @@
     opacity: .5;
     right: 12px;
     top: 10px;
+}
+
+li.event {
+    cursor: pointer;
 }
 
 li.event:nth-child(odd) {
@@ -202,4 +206,40 @@ img{
 
 .event .star-rating, .event .rating-container {
     z-index: 99999999999 !important;
+}
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+    color: #777;
+}
+
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+
+blockquote p {
+    display: inline;
+}
+
+.recommended {
+    background-color: #abdba0;
+    color: #FFF;
+    padding: 2px 6px;
+    border-radius: 15px;
+    border: 1px solid #94c788;
+}
+
+.recommended:hover {
+    text-decoration: none;
+    background-color: #a0d094;
+    color: #EEE;
 }

@@ -4,6 +4,9 @@
 
 (function($, window) {
 
+    var MAX_COMMENT_CHARACTERS_TO_DISPLAY = 50,
+        RECOMMENDED_GRANDLORD_AVG_RATE    = 4;
+
     var yearsAppended = [];
 
     var addYearElement = function (year) {
@@ -20,18 +23,32 @@
 
     var addEventElement = function (tenancy) {
 
-        console.log(tenancy);
+        console.log(parseInt(tenancy.avgRate));
 
-        return '<li class="event" data-date-from="' + tenancy.dateFrom + '" data-date-to="' + tenancy.dateTo + '" data-rate-neighbours="' + tenancy.rateNeighbours + '" data-rate-car-park-spaces="' + tenancy.rateCarParkSpaces
-            + '" data-rate-landlord-approach="' + tenancy.rateLandlordApproach  + '" data-rate-quality-of-equipment="' + tenancy.rateQualityOfEquipment + '" data-rate-utility-charges="'
-            +   tenancy.rateUtilityCharges + '" data-rate-broadband-accessibility="' + tenancy.rateBroadbandAccessibility + '" data-comment="' + tenancy.comment +'">' +
+        // if average rate is greater or equals the RECOMMENDED_GRANDLORD_AVG_RATE
+        // place a tick symbol in the event box
+        var isRecommeded = parseInt(tenancy.avgRate) >= RECOMMENDED_GRANDLORD_AVG_RATE ?
+            '<a class="pull-left recommended" title="Recommended by GrandLord!">&#10004;</a>' : '';
+
+        // figure out comment length and truncate over 50 chars...
+        var comment = tenancy.comment.length > MAX_COMMENT_CHARACTERS_TO_DISPLAY ?
+            tenancy.comment.substr(0, tenancy.comment.length - MAX_COMMENT_CHARACTERS_TO_DISPLAY) + '...'  : tenancy.comment;
+
+        return '<li class="event" data-date-from="' + tenancy.dateFrom + '" data-date-to="' + tenancy.dateTo +
+                    '" data-rate-neighbours="' + tenancy.rateNeighbours + '" data-rate-car-park-spaces="' +
+                    tenancy.rateCarParkSpaces + '" data-rate-landlord-approach="' + tenancy.rateLandlordApproach  +
+                    '" data-rate-quality-of-equipment="' + tenancy.rateQualityOfEquipment + '" data-rate-utility-charges="'
+                    +   tenancy.rateUtilityCharges + '" data-rate-broadband-accessibility="' + tenancy.rateBroadbandAccessibility +
+                    '" data-comment="' + tenancy.comment +'">' +
+                    isRecommeded +
+                    '<span class="pull-right"><i class="glyphicon glyphicon-hand-right"></i> more ...</span>' +
                     '<h3>' +
                         '<input id="id_' + tenancy.id + '" name="rateUtilityCharges" data-show-clear="false" data-show-caption="false"' +
                             'data-size="xs" data-disabled="true" class="rating" data-min="0" data-max="5" data-step="1">' +
                     '</h3>' +
                     '<h4>From ' + tenancy.dateFrom + ' to ' + tenancy.dateTo + '</h4>' +
-                    '<p>' + tenancy.comment + '</p>' +
-                    '</li>';
+                    '<p>' + comment + '</p>' +
+                '</li>';
     };
 
     var makeListElements = function (years, tenancy) {

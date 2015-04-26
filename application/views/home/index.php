@@ -4,8 +4,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/search.css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/public/css/tl.css"/>
 
-
-
 <!-- Jumbotron -->
 <div class="jumbotron" xmlns="http://www.w3.org/1999/html">
 
@@ -88,12 +86,9 @@
 
                     </div>
 
-                    <div  class="form-group">
-                        <label for="inputQuery3" class="col-sm-2 control-label">Comment</label>
-                        <div class="col-sm-10">
-                            <textarea readonly class="form-control" id="info-comment" name="info-comment" rows="3"  ></textarea>
-                        </div>
-                    </div>
+                    <blockquote class="col-sm-12" id="info-comment">
+                    </blockquote>
+
                     </div>
 
                 <div class="modal-footer">
