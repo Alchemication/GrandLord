@@ -28,8 +28,14 @@ class HomeController extends AbstractController
         $term = isset($_GET['term']) && $_GET['term'] ? $_GET['term'] : '';
 
         // find properties
-        $propertyModel = new PropertyModel();
-        $properties    = $propertyModel->findByPartialAddress($term);
+        try {
+            $propertyModel = new PropertyModel();
+            $properties    = $propertyModel->findByPartialAddress($term);
+        } catch (\PDOException $e) {
+            $this->handleJsonError('Database error (' . $e->getMessage() . ')');
+        } catch (\Exception $e) {
+            $this->handleJsonError($e->getMessage());
+        }
 
         // send back response
         $this->sendJson($properties);

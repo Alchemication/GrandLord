@@ -23,8 +23,6 @@
 
     var addEventElement = function (tenancy) {
 
-        console.log(parseInt(tenancy.avgRate));
-
         // if average rate is greater or equals the RECOMMENDED_GRANDLORD_AVG_RATE
         // place a tick symbol in the event box
         var isRecommeded = parseInt(tenancy.avgRate) >= RECOMMENDED_GRANDLORD_AVG_RATE ?

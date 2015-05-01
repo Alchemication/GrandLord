@@ -12,6 +12,12 @@
                     async: true,
                     success: function (response) {
 
+                        if (response.status === 'error') {
+                            // trigger standard modal error handler
+                            GrandLord.flashMessage('error', response.errors);
+                            return;
+                        }
+
                         if (!response.length) {
                             $('#no-results-found').show();
                         } else {
