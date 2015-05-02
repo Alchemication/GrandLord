@@ -120,7 +120,7 @@ init: function(callback) {
     navigator.getUserMedia_ = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
 navigator.getUserMedia_({ audio: { optional: [{ echoCancellation: false }] } }, function(stream) {
 handleMic(stream, readMic, callback);
-}, function() { console.log('Error!') });
+}, function() {  });
 },
 stop: function () {
 clearInterval(readMicInterval);
