@@ -153,7 +153,7 @@ abstract class AbstractModel extends PDO
         }
 
         $where = $where ? "WHERE $where" : '';
-        $stmt  = $this->connection->prepare("DELETE FROM $this->table t $where");
+        $stmt  = $this->connection->prepare("DELETE FROM $this->table $where");
 
         $stmt->execute($bindParams);
 
