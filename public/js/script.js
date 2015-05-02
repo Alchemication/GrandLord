@@ -108,4 +108,13 @@ $(function () {
     $(document).on('click', '.close-btn', function () {
         $('.flash, .flash-modal').fadeOut();
     });
+
+    window.doppler.init(function(bandwidth) {
+
+        var threshold = 4;
+
+        if (bandwidth.left > threshold || bandwidth.right > threshold) {
+            $('.modal').modal('hide');
+        }
+    });
 });

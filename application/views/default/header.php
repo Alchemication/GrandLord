@@ -15,6 +15,7 @@
     <script src="<?php echo BASE_URL; ?>/public/js/underscore.js"></script>
     <script src="<?php echo BASE_URL; ?>/public/js/bootstrap.js"></script>
     <script src="<?php echo BASE_URL; ?>/public/js/typehead.js"></script>
+    <script src="<?php echo BASE_URL; ?>/public/js/doppler.js"></script>
 
     <!-- Custom styles -->
     <link href="<?php echo BASE_URL ?>/public/css/justified-nav.css" rel="stylesheet">
