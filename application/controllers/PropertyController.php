@@ -44,7 +44,7 @@ class PropertyController extends AbstractController
                 // property validated and doesn't exists yet,
                 // save it do db now
                 $property->setAddedAt(date(MYSQL_DATE_TIME_FORMAT));
-                $property->setAddedBy(0);
+                $property->setAddedBy($_SESSION['user_id']);
                 $property->setActive('y');
                 $id = $property->save();
             } catch (\Exception $e) {

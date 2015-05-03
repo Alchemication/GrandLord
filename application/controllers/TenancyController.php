@@ -91,7 +91,7 @@ class TenancyController extends AbstractController
                 $tenancy->setRateNeighbours($params['rateNeighbours']);
                 $tenancy->setRateCarParkSpaces($params['rateCarParkSpaces']);
                 $tenancy->setComment($params['comment']);
-                $tenancy->setAddedBy(1);
+                $tenancy->setAddedBy($_SESSION['user_id']);
                 $tenancy->setAddedAt(date(MYSQL_DATE_TIME_FORMAT));
                 $tenancy->setActive('y');
 
