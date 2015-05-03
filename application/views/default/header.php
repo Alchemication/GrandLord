@@ -38,8 +38,8 @@
                     <button type="submit" class="btn btn-success  pull-right btn-margin-left" onclick="location.href='<?php echo BASE_URL ?>/login/index'">Sign in</button>
                     <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/register/index'">Register</button>
                 <?php else: ?>
-                    <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/login/logout'">Log out</button>
-                    <p class="pull-right "> Hello <?php echo $_SESSION['first_name']; ?> &nbsp;</p>
+                    <button type="button" class="btn btn-default  pull-right btn-margin-left" onclick="location.href='<?php echo BASE_URL ?>/login/logout'">Log out</button>
+                    <span class="pull-right "> Hello <?php echo $_SESSION['first_name']; ?> &nbsp;</span>
                 <?php endif ?>
             </div>
         </div>
