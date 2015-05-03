@@ -18,26 +18,21 @@ class LoginController extends AbstractController
         // check if user already logged in
         if (isset($_SESSION['user_name'])) {
             // redirect to home page
-            $this->loadView('home/index');
+            $this->redirect('home/index');
         } else {
             // display login page
             $this->loadView('login/index',['message' => ""]);
         }
     }
 
-    /**
-     * Show thank you page
-     */
-    public function thankYouAction()
-    {
-        $this->loadView('login/thankYou');
-    }
 
     /**
      * Log user out
      */
     public function logoutAction() {
         unset($_SESSION['user_name']);
+        unset($_SESSION['first_name']);
+        unset($_SESSION['user_id']);
         session_unset();
         session_destroy();
         $this->loadView('login/index', ['message' => ""]);
@@ -69,10 +64,13 @@ class LoginController extends AbstractController
             try {
                 $userModel = new UserModel($username, $password);
                 // check with db if username and password match
-                if (($userModel->findUser())) {
+                if ($foundUser = $userModel->findUser()) {
                     // user logged in successfully
                     $_SESSION['user_name'] = $userModel->getUsername();
-                    $this->thankYouAction();
+                    $_SESSION['first_name'] = $foundUser[0]['firstName'];
+                    $_SESSION['user_id'] = $foundUser[0]['id'];
+                    // redirect to user tenancies
+                    $this->redirect("tenancy/index");
                 } else {
                     // display message
                     $message = "Incorrect details. Please try again.";

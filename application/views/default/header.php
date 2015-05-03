@@ -39,6 +39,7 @@
                     <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/register/index'">Register</button>
                 <?php else: ?>
                     <button type="button" class="btn btn-default  pull-right" onclick="location.href='<?php echo BASE_URL ?>/login/logout'">Log out</button>
+                    <p class="pull-right "> Hello <?php echo $_SESSION['first_name']; ?> &nbsp;</p>
                 <?php endif ?>
             </div>
         </div>

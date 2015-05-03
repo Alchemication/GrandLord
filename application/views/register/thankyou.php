@@ -12,5 +12,11 @@
 
     <h1>Thank You</h1>
     <p class="lead">You have successfully registered your details</p>
+    <?php
+    echo "values: ";
+    echo ($_SESSION['user_name']);
+    echo " ";
+    echo ($_SESSION['first_name']);
+    ?>
 
 </div>

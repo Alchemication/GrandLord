@@ -18,10 +18,10 @@ class TenancyController extends AbstractController
     public function indexAction()
     {
         // check if user already logged in
-        if (isset($_SESSION['user_name'])) {
+        if (isset($_SESSION['user_id'])) {
 
             // display user tenancies
-            $loggedInUserId = 1;
+            $loggedInUserId = $_SESSION['user_id'];
 
             try {
                 $tenancyModel = new TenancyModel();

@@ -17,18 +17,11 @@ class RegisterController extends AbstractController {
         // check if user already logged in
         if (isset($_SESSION['user_name'])) {
             // redirect to home page
-            $this->loadView('home/index');
+            $this->redirect('home/index');
         } else {
             // display register page
             $this->loadView('register/index',['user' => null,'message' => ""]);
         }
-    }
-
-    /**
-     * Show thank you page
-     */
-    public function thankYouAction() {
-        $this->loadView('register/thankYou');
     }
 
 
@@ -70,9 +63,12 @@ class RegisterController extends AbstractController {
                 // check with db if username is already in use
                 if (!($userModel->userExists($username))) {
                     // register new user
-                    if (($numberOfRowsAdded = $userModel->save()) >= 1) {
+                    if (($lastInsertId = $userModel->save()) > 0) {
                         $_SESSION['user_name'] = $userModel->getUsername();
-                        $this->thankYouAction();
+                        $_SESSION['first_name'] = $userModel->getFirstName();
+                        $_SESSION['user_id'] = $lastInsertId;
+                        // redirect to user tenancies
+                        $this->redirect("/tenancy/index");
                     }
                 } else {
                     // display message
