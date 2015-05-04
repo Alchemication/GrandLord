@@ -3,7 +3,11 @@
         <h2 class="pageTitle">Contact Us</h2>
     </div>
 
-    <form class="form-horizontal">
+    <?php if ($message !== ""): ?>
+        <p class="alert-warning"><?php echo $message ?></p>
+    <?php endif?>
+
+    <form class="form-horizontal"  method="post" action="<?php echo BASE_URL ?>/contact/validate">
         <div class="form-group">
             <label for="inputName3" class="col-sm-2 control-label">Your Name</label>
             <div class="col-sm-10">
@@ -14,7 +18,7 @@
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Your Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                <input type="email" class="form-control" id="inputEmail3"  name="inputEmail3" placeholder="Email">
             </div>
         </div>
 

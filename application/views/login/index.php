@@ -11,7 +11,7 @@
     <form  method="post" action="<?php echo BASE_URL ?>/login/validate" >
 
         <?php if ($message !== ""): ?>
-            <p class="lead"><?php echo $message ?></p>
+            <p class="alert-warning"><?php echo $message ?></p>
         <?php endif?>
 
         <p>
