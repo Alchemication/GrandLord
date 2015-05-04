@@ -7,7 +7,7 @@
  */
 -->
 
-<div class="pageTitle">
+<div class="alert-thankYou">
 
     <h1>Thank You</h1>
     <p class="lead">Your opinion is important for us!!!.</p>
