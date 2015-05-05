@@ -28,6 +28,21 @@ class ContactController extends AbstractController
 
         if (!empty($_POST['inputEmail3'])) {
             // if not empty, display thankyou page
+
+            //Email information
+            $admin_email = "admin@grandlord.com";
+            $subject = "Query From Grandlord Website";
+            $name = $_POST['inputName3'];
+            $email = $_POST['inputEmail3'];
+            $phone = $_POST['inputPhone3'];
+            $comment = $_POST['inputQuery3'];
+            $query = $comment . " Contact number: " . $phone;
+
+            //send email, this function will not work on local server
+            mail($admin_email, $subject, $name,  $query,   "From:" . $email);
+
+        echo "$query";
+
             $this->loadView('contact/thankyou');
 
         } else {

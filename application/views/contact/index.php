@@ -11,7 +11,7 @@
         <div class="form-group">
             <label for="inputName3" class="col-sm-2 control-label">Your Name</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputName3" placeholder="Name">
+                <input type="text" class="form-control" id="inputName3" name="inputName3" placeholder="Name">
             </div>
         </div>
 
@@ -26,14 +26,14 @@
             <label for="inputPhone3" class="col-sm-2 control-label">Your Phone Number</label>
             <div class="col-sm-10">
 
-                <input type="text" class="form-control" id="inputPhone3" placeholder="Phone Number">
+                <input type="text" class="form-control" id="inputPhone3" name="inputPhone3" placeholder="Phone Number">
             </div>
         </div>
 
         <div  class="form-group">
             <label for="inputQuery3" class="col-sm-2 control-label">Your Query</label>
             <div class="col-sm-10">
-            <textarea class="form-control" rows="3"></textarea>
+            <textarea class="form-control" rows="3" name="inputQuery3"></textarea>
                 </div>
         </div>
 
