@@ -41,7 +41,7 @@ class ContactController extends AbstractController
             //send email, this function will not work on local server
             mail($admin_email, $subject, $name,  $query,   "From:" . $email);
 
-        echo "$query";
+
 
             $this->loadView('contact/thankyou');
 
